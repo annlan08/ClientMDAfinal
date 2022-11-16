@@ -1,0 +1,88 @@
+﻿@using ClientMDA.ViewModels
+@model List<CAjaxCinemaTypeViewModel>
+@{
+    var q = Model;
+
+}
+
+@*選擇影廳*@
+
+<div class="form-group">
+    <div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 text-center">
+                <div class="versionList m-auto">
+                    @{
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            <div class="version VersionPicker" data="@i">@item.TypeName</div>
+                            i++;
+                        }
+                    }
+                    @{
+                        switch (Model.Count())
+                        {
+                            case 1:
+                                <div class="linebox "><div class="line" style="margin-left:300px" id="Blueline"></div></div>
+                                break;
+                            case 2:
+                                <div class="linebox "><div class="line" style="margin-left:220px" id="Blueline"></div></div>
+                                break;
+                            case 3:
+                                <div class="linebox "><div class="line" style="margin-left:150px" id="Blueline"></div></div>
+                                break;
+                            case 4:
+                                <div class="linebox "><div class="line" style="margin-left:73px" id="Blueline"></div></div>
+                                break;
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 text-center">
+            @{
+                int flag = 1;
+                int data = 0;
+                foreach (var item in Model)
+                {
+                    foreach (var screen in item.Info_list)
+                    {
+                        string seatstr = $"{screen.seatCount}";
+                        if (flag == 1)
+                        {
+
+                            <div class="screen ScreenPicker showscreen" data="@data" value="@screen.id">
+                                <i class="d-block pt-3 ">@screen.Start_time</i>
+                                <i class="d-block " style="font-size:10px;color:lightcyan">@seatstr</i>
+                                <i class="d-block " style="font-size:10px;color:lightcyan">剩餘座位</i>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="screen ScreenPicker" data="@data" value="@screen.id">
+                                <i class="d-block pt-3 ">@screen.Start_time</i>
+                                <i class="d-block " style="font-size:10px;color:lightcyan">@seatstr</i>
+                                <i class="d-block " style="font-size:10px;color:lightcyan">剩餘座位</i>
+                            </div>
+                        }
+                    }
+                    flag = 0;
+                    data++;
+                }
+            }
+
+        </div>
+    </div>
+
+</div>
+
+<br />
+<div class="bigline"></div>
+<br />

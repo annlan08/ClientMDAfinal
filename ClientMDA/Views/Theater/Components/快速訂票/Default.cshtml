@@ -1,0 +1,97 @@
+﻿@model ClientMDA.ViewModels.CTheater
+@{
+    ViewData["Title"] = "Default";
+}
+
+@{
+
+    int d = System.DateTime.Now.Day;
+    int m = System.DateTime.Now.Month;
+
+}
+
+    <div style="display:none" id="video" class="commonStyled__WrapperSampleNoContent-sc-kt5vy-9 MovieVideoWrapper--1y1ldiy exLSHN bbzzdC ">
+        <svg fill="currentColor" class="icon" id="close" height="1em" preserveAspectRatio="xMidYMid meet" style="vertical-align: middle;" viewBox="0 0 40 40" width="1em">
+            <g>
+                <path d="m31.6 10.7l-9.3 9.3 9.3 9.3-2.3 2.3-9.3-9.3-9.3 9.3-2.3-2.3 9.3-9.3-9.3-9.3 2.3-2.3 9.3 9.3 9.3-9.3z"></path>
+            </g>
+        </svg>
+        <div class="wrapper " style="height:50vh ;width:95vh">
+            @*<iframe class="" allowfullscreen frameborder="0" style="height:100%;width:100%" src="https://www.youtube.com/embed/ZSLke5a1K98"></iframe>*@
+            <iframe class="" allowfullscreen frameborder="0" style="height:100%;width:100%" src=@Model.預告片trailer></iframe>
+
+
+        </div>
+    </div>
+
+    <div class="StyledMovieInfoBox--8it7kj jKNYDk">
+        <div class="trailer_box">
+            <div class="video_icon" id="videostart" style="background-image: url(../../images/Theater/common/videoPlay.svg)">
+            </div>
+            <div class="trailer">
+                <iframe allowfullscreen frameborder="0" height="400" src=@Model.預告片trailer width="1980"></iframe>
+            </div>
+        </div>
+        
+  
+        <div class="info_box">
+
+
+            @{
+                string urlpic = "";
+                if (Model.MPimg.Count > 0)
+                    urlpic = "http://192.168.36.4:44383/images/MovieImage/" + Model.MPimg[0];
+                //urlpic = Model.MPimg[0];
+
+                else
+                {
+                    urlpic = "../../images/Theater/common/poster.png";
+                }
+                <div class="poster" style="background-image:url('@urlpic')">
+                    <div class="video_icon" style="background-image: url('../common/videoPlay.svg')"></div>
+                </div>
+
+
+
+            }
+
+
+
+            <div class="text_info">
+                <div class="grade">
+                    @Model.分級級數ratingLevel
+                </div>
+                <div class="movie_title">
+                    <div class="title_zh_tw">
+                        @Model.中文標題titleCht
+                        <input type="hidden" value="@Model.電影編號movieId" id="movidID">
+                    </div>
+                    <div class="title_en_us">
+                        @Model.英文標題titleEng
+                    </div>
+                </div><span class="rel_date">上映日期：<!-- -->@Model.上映日期releaseDate.Value.ToString("D")</span><span class="length">片長：<!-- -->@Model.片長runtime<!-- -->分鐘</span>
+            </div>
+            <div class="scores">
+                <div class="ez_score score">
+                    -
+                </div>
+                <div class="label">
+                    ez訂
+                </div>
+                <div class="imdb_score score">
+                    -
+                </div>
+                <div class="label">
+                    MDA
+                </div>
+                <div class="rt_score score">
+                    -
+                </div>
+                <div class="label">
+                    爛番茄
+                </div>
+            </div>
+        </div>
+    </div>
+
+   

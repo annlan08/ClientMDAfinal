@@ -1,0 +1,177 @@
+﻿.box {
+    background-color: rgba(20,20,78);
+}
+
+.info_box {
+    padding-top: 22px;
+    box-sizing: border-box;
+    width:100px;
+}
+
+.blur{
+    width:424px;
+    height:628px;
+}
+.info {
+    padding-top: 90px;
+    /*padding-top: 80px;*/
+    padding-bottom: 48px;
+    padding-left: 16px;
+    vertical-align: baseline;
+}
+#infolist {
+    padding-top: 60px;
+}
+    .info h5 {
+        font-size: 1.5rem;
+        color: whitesmoke;
+        text-align: left;
+    }
+
+.img-wrapper:hover > .content.fade {
+    opacity: 1;
+}
+
+.img-wrapper > .content.fade {
+    opacity: 0;
+}
+
+
+
+.content {
+    height: 30%;
+    vertical-align:bottom;
+}
+
+.img-wrapper:hover > .content.slide-down {
+    transform: translateY(230%);
+}
+
+.img-wrapper > .content.slide-down {
+    transform: translateY(700%);
+}
+
+.list li {
+    font-size: 1.5rem;
+}
+.img-wrapper:hover > img.c {
+    filter: blur(5px);
+}
+
+#fafastarchecked {
+    color: rgba(245,197,24);
+}
+
+#ToRE {
+    font-size: 22px;
+    color: rgba(245,197,24);
+}
+
+#fafastarcheckedE, #ToRE {
+    color: rgba(0,176,240);
+}
+
+.star {
+    position: absolute;
+    left: 15px;
+}
+
+.starRate {
+    color: whitesmoke;
+    padding-right: 40px;
+}
+
+#ToR {
+    font-size: 22px;
+    color: rgba(245,197,24);
+}
+
+    #ToR:hover {
+        font-size: 22px;
+        color: snow;
+    }
+
+.AddList {
+    justify-content: center;
+    align-items:center;
+}
+
+.AddListBtn{
+    border: 0;
+    border-radius: 10px;
+    background-color: rgba(44,44,44,0.6);
+    color: whitesmoke;
+    width: 180px;
+    height: 50px;
+}
+
+#plus {
+    font-size: 16px;
+    color: #FFF;
+   
+}
+
+.AddListBtn:hover {
+    background-color: rgba(60,60,60,0.6);
+}
+
+.AddList {
+    padding-bottom: 48px;
+}
+
+.ToRate {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 0;
+    width: 60px;
+    height: 35px;
+}
+
+    .ToRate:hover {
+        background-color: rgba(60,60,60,0.6);
+    }
+
+#addlistbtn, #browseBtn {
+    writing-mode: vertical-lr;
+    overflow: no-display;
+   /* align-items: center;*/
+}
+
+#swiper-paginationR {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    transition: .3s opacity;
+    transform: translate3d(0,0,0);
+    z-index: 10;
+}
+
+.buyBtn {
+    border: 0;
+    border-radius: 10px;
+    background-color: rgba(44,44,44,0.6);
+    color: whitesmoke;
+    width: 100px;
+    height: 50px;
+    vertical-align:middle;
+    align-items:center;
+    text-align:center;
+}
+    .buyBtn:hover {
+        background-color: rgba(60,60,60,0.6);
+    }
+
+#ratetip1, #ratetip2 {
+    display: none;
+}
+#openbtn:hover + #ratetip1, #openbtn0:hover + #ratetip1 {
+    display: block;
+}
+#openbtnE:hover + #ratetip2 {
+    display: block;
+}
+.showRate {
+    display: flex;
+    align-items: center
+}

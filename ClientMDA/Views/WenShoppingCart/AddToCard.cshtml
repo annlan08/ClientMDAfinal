@@ -1,0 +1,191 @@
+﻿@model IEnumerable<ClientMDA.Models.商品資料product>
+
+@{
+    ViewData["Title"] = "AddToCard";
+    Layout = "~/Views/Shared/_WenLayout.cshtml";
+}
+<style>
+    .text-6:hover {
+        /*box-shadow: 0 10px;*/
+        padding-bottom: 20px;
+        margin: 10px;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 5px #00ffff solid;
+    }
+
+    .text-6 {
+        /*box-shadow: 0 10px;*/
+        padding-bottom: 20px;
+        margin: 10px;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+        border-bottom: 2px #0094ff solid;
+    }
+</style>
+<div style="display:block;height:40px;"></div>
+<h4>我的購物車</h4>
+@*<h1>CardLayout</h1>
+    <div class="container">
+            <div class="card bg-white text-dark" style="width:20rem;">
+                <img class="card-img-top img-thumbnail p-4" src="~/images/0eb3302b-ae56-40e6-ab27-c888991b95f3.jpg" />
+                <div class="card-body">
+                    <h4 class="card-title">漢堡</h4>
+                    <p class="card-text">搭配時蔬與特製醬料</p>
+                    <a href="#" class="btn btn-outline-success">加入購物車</a>
+                </div>
+            </div>
+        </div>*@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <td class="col-2 text-white">&nbsp;</td>                       
+                        <td class="col-1 text-white">數量</td>
+                        <td class="col-3 text-white">描述</td>
+                        <td class="col-3 text-white">電影院</td>
+                        <td class="col-auto">  </td>
+                    </tr>
+                </thead>
+                <tbody class="text-white">
+                    <tr class="text-white">
+                        <td class="text-white">
+                            <div class="container">
+                                <div class="card bg-white text-black" style="width:8rem;">
+                                    <img class="card-img-top w-100 p-4" src="~/images/WenProduct/434d3ebf-c5e5-4d01-a9ff-4f6ca4f68a23.jpg" />
+                                    <div class="row justify-content-center card-header">
+                                        <p class="card-title">$120</p>
+                                        <p class="card-title">套餐1號</p>
+                                    </div>                                  
+                                </div>
+                            </div>
+                        </td>
+                       
+                        <td>
+                            <input style="width:50px" type="number" min="1" value="1" id="qty" name="quantity">
+                        </td>
+                        <td>這裡是產品描述、如產品內容</td>
+                        <td>
+                            <label name="TheaterName">基隆秀泰戲院</label>
+                        </td>
+                        <td><button class="btn btn-success mb-3" data-toggle="modal" data-target="#myModel"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal fade text-dark" id="myModel" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>您好，要移除商品嗎?</h4>
+                            <button class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>親愛的顧客您好，確定要移除此商品嗎?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal">關閉</button>
+                            <button class="btn btn-danger" data-dismiss="modal">移除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6">
+            <table class="table table-borderless text-success justify-content-end">
+                <tr>
+                    <td>小計</td>
+                    <td>$120</td>
+                </tr>
+                <tr>
+                    <td>優惠折扣</td>
+                    <td>$20</td>
+                </tr>
+                <tr>
+                    <td>含稅</td>
+                    <td>$20</td>
+                </tr>
+                <tr class="table-bordered">
+                    <td>共計</td>
+                    <td>$100</td>
+                </tr>
+            </table>
+            <button class="btn-success">訂單送出</button>
+        </div>
+    </div>
+</div>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.商品名稱productName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.商品價格productPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.商品圖片image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.商品圖片路徑imagePath)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.商品介紹introduce)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.類別category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.電影院編號theater)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.商品名稱productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.商品價格productPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.商品圖片image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.商品圖片路徑imagePath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.商品介紹introduce)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.類別category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.電影院編號theater.地址address)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.商品編號productId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.商品編號productId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.商品編號productId">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

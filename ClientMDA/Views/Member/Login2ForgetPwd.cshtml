@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Login2ForgetPwd";
+}
+
+@{
+    ViewData["Title"] = "Login2";
+}
+
+@section Styles{
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <style>
+        div.login__form::after {
+            content: none;
+        }
+
+        #temp {
+            content: none;
+        }
+
+        .login {
+            padding: 10px 0 120px 0;
+        }
+
+        .black {
+            color: black
+        }
+    </style>
+}
+
+<!-- Page Preloder -->
+<div id="preloder" style="display: none;">
+    <div class="loader" style="display: none;"></div>
+</div>
+
+<!-- Header End -->
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg" style="background-image: url(&quot;img/normal-breadcrumb.jpg&quot;);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Welcome to MDA</h2>
+                    <p>觀享時刻</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+<!-- Login Section Begin -->
+<section class="login spad">
+    <div style="display:flex;">
+        <div class="login__form" style="margin:auto;" id="temp">
+            <h3>忘記密碼驗證</h3>
+            <form method="post">
+                <div class="input__item">
+                    <input type="text" name="txtPhone" value="@ViewBag.phone" readonly>
+                    <span class="icon_mobile"></span>
+                </div>
+                <div class="input__item">
+                    <input type="text" name="txtPassword" placeholder="信箱驗證碼">
+                    <span class="icon_lock"></span>
+                </div>
+                @{
+                    if (ViewBag.txtError == false)
+                    {
+                        <div style="color:red">驗證碼錯誤</div>
+                    }
+                }
+                <button type="submit" class="site-btn">確認</button>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- Js Plugins -->
+@section Scripts{
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <script>
+
+
+    </script>
+}
+
+

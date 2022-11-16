@@ -1,0 +1,34 @@
+﻿@using ClientMDA.ViewModels
+@model CMovieViewModel
+
+@{
+    ViewData["Title"] = "電影劇照牆";
+}
+
+@section Styles{
+    <style>
+    </style>
+    <link href="~/css/fontawesome-free-6.2.0-web/all.css" rel="stylesheet" />
+    @*電影icon樣式*@
+    <script src="~/js/fontawesome-free-6.2.0-web/all.js"></script>
+    @*電影icon樣式*@
+}
+
+
+<br />
+<span style="font-size:33px"><i class="fa-solid fa-image"></i> @ViewData["Title"] </span><span style="font-size:25px"> Photo Gallery</span>
+<br />
+<a href="@Url.Action("電影介紹", "Movie", new { id = Model.電影編號movieId })">
+    <span style="font-size:20px;margin-top:5px;margin-left:45px">@Model.中文標題titleCht (@Model.上映年份releaseYear)</span>
+</a>
+<br />
+<br />
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="電影編號movieId" />
+<br />
+<br />
+
+<div class="card-columns">
+    @await Component.InvokeAsync("電影劇照牆list", new { id = Model.電影編號movieId })
+</div>
+<ul id="ul1"></ul>

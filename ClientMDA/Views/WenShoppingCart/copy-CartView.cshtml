@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ClientMDA.ViewModel.WenViewModel.WenCAddToCartItem>
+@{
+    ViewData["Title"] = "CartView";
+    Layout = "~/Views/Shared/_WenLayout.cshtml";
+}
+
+<h1>我的購物車</h1>
+
+<p>
+    <a asp-action="List">回購物清單</a>
+
+    <table class="table text-white">
+        <thead>
+            <tr>
+                <th>
+                    商品名稱
+                </th>
+                <th>
+                   商品價格
+                </th>
+                <th>
+                   商品編號
+                </th>
+                <th>
+                  商品圖片路徑
+                </th>
+                <th>
+                    商品介紹
+                </th>
+                <th>
+                    類別category
+                </th>
+                <th>
+                    電影院編號
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.商品名稱productName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.商品價格productPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.商品編號productId)
+                    </td>
+                    <td>
+                        <img src="~/images/WenProduct/@item.商品圖片路徑imagePath" width="180" height="140" />
+                       
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.商品介紹introduce)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.類別category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.電影院編號theaterId)
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>

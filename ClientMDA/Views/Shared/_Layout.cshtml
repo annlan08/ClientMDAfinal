@@ -1,0 +1,232 @@
+﻿<!-- #region 會員Session -->
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+}
+<!-- #endregion 會員Session -->
+
+<!DOCTYPE html>
+
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>M.D.A.觀享時刻</title>
+    <meta name="author" content="MSIT143 01陳苡錚 06王婷薇 11廖家毅 13李沛軒 16洪暐婷 18游曉雯 20鄭凱" />
+    <meta name="keywords" content="M.D.A.觀享時刻,M.D.A.,MDA,觀享時刻,電影訂票,電影評論,訂票,評論,電影,電視劇,影集,動畫,動畫電影" />
+    <meta name="date" content="2022/06/15" />
+    <meta name="description" content="M.D.A.為 Movie, Drama, Anime 的縮寫。擁有全台最方便快速的電影訂票系統，提供最完整的電影、電視劇、動畫資訊以及討論平台。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- #region Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- #endregion Google Font -->
+    <!-- #region Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/cyborg/css/fontawesome.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css"> @*Header+body icon樣式*@
+    <link href="~/css/Header-特效.css" rel="stylesheet" />
+    <link href="~/css/dropdown.css" rel="stylesheet" />
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <link href="~/css/fontawesome-free-6.2.0-web/all.css" rel="stylesheet" />
+    @*<script src="~/js/fontawesome-free-6.2.0-web/all.js"></script>*@
+    @*<link href="~/css/BOT/BOT.css" rel="stylesheet" />*@
+    <!-- #endregion Css Styles -->
+
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+
+<body class="text-white">
+
+    <!-- #region header Start -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a asp-controller="HomePage" asp-action="Index">
+                            <img src="~/images/MDA_LOGO.png" alt="" height="40">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li>
+                                    <a class="aBorder corHome" asp-area="" asp-controller="HomePage" asp-action="Index">電影首頁</a>
+                                </li>
+                                <li>
+                                    <a class="aBorder corTick" asp-area="" asp-controller="Ticketing" asp-action="SelectMovie">快速訂票</a>
+                                </li>
+                                <li>
+                                    <a class="aBorder corThea" text-white fs-2" asp-area="" asp-controller="Theater" asp-action="測試業面">電影時刻</a>
+                                </li>
+                                <li>
+                                    <a class="aBorder corRank" asp-area="" asp-controller="Movie" asp-action="Rank">電影排行</a>
+                                </li>
+                                <li>
+                                    <a class="aBorder corComm" asp-area="" asp-controller="Comment" asp-action="評論首頁">電影評論</a>
+                                </li>
+                                <li>
+                                    <a class="aBorder corCart" asp-area="" asp-controller="WenShoppingCart" asp-action="Index">商城</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="header__right">
+                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        @{
+                            if (mem == null)
+                            {
+                                <a href="~/Member/Login"><span class="icon_profile" title="登入"></span></a>
+                            }
+                            else
+                            {
+                                string img = "~/images/Member/noPerson.jpg";
+                                string title = "簡易會員";
+                                if (!string.IsNullOrEmpty(mem.會員照片image)) { img = "http://192.168.36.4:44383/images/Member/" + @mem.會員照片image; }
+                                if (!string.IsNullOrEmpty(mem.暱稱nickName)) { title = mem.暱稱nickName; }
+                                <div class="dropdown">
+                                    <a href="~/Member/MemberMain" class="dropbtn">
+                                        <img class="memImg" src="@img" title="@title">
+                                    </a>
+                                    <div class="dropdown-content">
+                                        <a asp-area="" asp-controller="Member" asp-action="MemberMain">會員管理</a>
+                                        <a asp-area="" asp-controller="Member" asp-action="Logout">登出</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!--#region menu Start -->
+            <div id="mobile-menu-wrap">
+                <div class="slicknav_menu">
+                    <a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn slicknav_collapsed"><span class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span></a><nav class="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style="display: none;">
+                        <ul>
+                            <li><a href="./index.html" role="menuitem">Homepage</a></li>
+                            <li class="slicknav_collapsed slicknav_parent">
+                                <a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row">
+                                    <a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                                    <span class="slicknav_arrow">►</span>
+                                </a><ul class="dropdown slicknav_hidden" role="menu" aria-hidden="true" style="display: none;">
+                                    <li><a href="./categories.html" role="menuitem" tabindex="-1">Categories</a></li>
+                                    <li><a href="./anime-details.html" role="menuitem" tabindex="-1">Anime Details</a></li>
+                                    <li><a href="./anime-watching.html" role="menuitem" tabindex="-1">Anime Watching</a></li>
+                                    <li><a href="./blog-details.html" role="menuitem" tabindex="-1">Blog Details</a></li>
+                                    <li><a href="./signup.html" role="menuitem" tabindex="-1">Sign Up</a></li>
+                                    <li><a href="./login.html" role="menuitem" tabindex="-1">Login</a></li>
+                                </ul>
+                                <link href="~/css/site.css" rel="stylesheet" />
+                            </li>
+                            <li class="active"><a href="./blog.html" role="menuitem">Our Blog</a></li>
+                            <li><a href="#" role="menuitem">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!--#endregion menu End -->
+
+        </div>
+    </header>
+    <!-- #endregion header End -->
+    <!-- #region Body Start -->
+    <div class="container body-content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        <hr />
+    </div>
+    <!-- #endregion Body End -->
+    <!-- #region footer Start -->
+    <footer class="footer text-center text-white" style="background-color: #070720">
+        <div class="page-up">
+            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        </div>
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://i.ibb.co/Xpt3rfC/GOWpr54.png" role="button">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://i.ibb.co/t4P59ny/Wj9ytuc.png" role="button">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <!-- Google -->
+                @*<a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-google"></i>
+                    </a>*@
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://i.ibb.co/JxRzvkB/fTphyFV.png" role="button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <!-- Linkedin -->
+                @*<a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>*@
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Yuka12948/MSIT143.ClientMDA" role="button">
+                    <i class="fab fa-github"></i>
+                </a>
+                <!-- FQA -->
+                <a class="btn btn-outline-light btn-floating m-1" href="/homepage/qanda" role="button">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" @*style="background-color: rgba(0, 0, 0, 0.2)*@>
+            Copyright &copy; <a class="text-white" href="https://mdbootstrap.com/">M.D.A.觀享時刻</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- #endregion footer End -->
+    <!-- #region 小幫手 -->
+    <figure class="幫幫忙" style=" float: right; position: fixed; right: 10px; width: 360px; margin-bottom: 5px; bottom: 10px; list-style-type: none; z-index: 999;">
+        <div style="width: 160px; float: right; margin-right: 5px; ">
+            <img class="hope" style="border-radius:45px" height="90" width="160" src="~/images/BOT.gif" />
+        </div>
+        <iframe class="小幫手" src='https://webchat.botframework.com/embed/mist143mda-bottest?s=IS5hhTwmb_M.z226WJMkd-d6O_AA3fBzg-F2RQKKSFb9fvIMk-BNveE' style='display:none; min-width: 200px; width: 360px; min-height: 450px; '></iframe>
+    </figure>
+    @*<figure class="幫幫忙" style="float:right; position: fixed;right: 0;top:95%;width:600px;margin-top: -2.5em;border-block: initial;list-style-type: none;z-index:999;">
+            <div style="width: 90px; float: right; margin-right: 5px; "><img class="hope" style="border-radius:45px" height="90" width="90" src="~/images/cat.png" /></div>
+            <iframe class="小幫手" src='https://webchat.botframework.com/embed/mist143mda-bottest?s=IS5hhTwmb_M.1HyvDvgAgNub3nFY5ULIfazgk3OL18_wTC1Xwls2JKU'  style='display:none; min-width: 200px; width: 600px; min-height: 500px;'></iframe>
+        </figure>*@
+    <!-- #endregion 小幫手 -->
+    <!-- #region JS樣式 -->
+    <script src="~/js/bot.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> @*footer樣式*@
+    <!-- #endregion JS樣式 -->
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

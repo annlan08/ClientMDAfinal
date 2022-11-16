@@ -1,0 +1,85 @@
+﻿*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.tab-contnet {
+    display: flex;
+    flex-direction: column;
+    /*margin: 20px auto;*/
+   /* max-width: 460px;*/
+    /*background-color: #3F5D45;*/
+    margin-bottom: 20px;
+    padding: 30px 40px;
+    position: relative;
+}
+
+.form-group {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+    .form-group label {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .form-group table {
+        /*display: block;*/
+        width: 100%;
+        -webkit-appearance: none;
+        /*background-color: #EAF0ED;*/
+        height: auto;
+        border: none;
+        padding: 17px 20px;
+        /*color: #8DA291;*/
+        font-size: 1rem;
+        line-height: 1.5;
+        
+    }
+    .form-group tr {
+        margin-bottom:10px;
+    }
+    .form-group  th{
+ /*       text-align:center;*/
+    }
+    .form-group td {
+        text-align: left;
+        vertical-align: baseline;
+    }
+
+.btn-group {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-btn {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+    .checkout-btn .btn {
+        width: 50%;
+        line-height: 56px;
+        padding: 0;
+        font-size: 20px;
+        /*background-color: #3F5D45;*/
+
+        /*color: #EAF0ED;*/
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .checkout-btn .active {
+        /*background-color: #EAF0ED;*/
+        /*color: #EAF0ED;*/
+        border-radius: 0;
+        border-bottom: 3px solid #E7008C;
+    }

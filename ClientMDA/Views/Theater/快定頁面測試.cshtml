@@ -1,0 +1,391 @@
+﻿@model ClientMDA.ViewModels.CTheater
+@{
+    ViewData["Title"] = "快定頁面測試";
+    string urlstr = "123";
+}
+<head>
+    <link href="~/css/Theater/電影院電影訂票用.css" rel="stylesheet" />
+    <style>
+
+        .ytp-cued-thumbnail-overlay-image {
+            width: 100%;
+        }
+        .iooi {
+            background-color: rgb(229, 10, 132);
+            box-shadow: rgb(0 0 0 / 50%) 0px 2px 4px 0px;
+        }
+    </style>
+</head>
+@{
+
+    int d = System.DateTime.Now.Day;
+    int m = System.DateTime.Now.Month;
+    int y = System.DateTime.Now.Year;
+
+
+    <div>
+        <input type="hidden" value="@Model.電影編號movieId" id="movidID">
+
+        <div class="MovieInfoWrapper--167fgjt gYTkop" style="background-color:white" id="videoID">
+            <div>
+                @await Component.InvokeAsync("快速訂票", new { datas = Model })
+            </div>
+            <div class="wrapper-title">
+                <div class="wrapper-content">
+                    <div class="movie-intro-title-wrapper">
+                        <div class="movie-intro-title choice">
+                            電影時刻
+                        </div>
+                        <div class="movie-intro-title">
+                            
+                            <a href="@Url.Action("電影介紹", "Movie", new { id = Model.電影編號movieId })">
+                                電影介紹
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="MovieTimeWrapper--77br0i cjKQBC">
+                        <div class="wrapper">
+                            <div class="location">
+                                <span id="地區名稱" style="color:black">全台</span><svg class="icon" id="地區" height="1em" preserveAspectRatio="xMidYMid meet" style="vertical-align: middle;" viewBox="0 0 40 40" width="1em">
+                                    <g>
+                                        <path d="m31.4 15.7q0 0.6-0.5 1l-10 10q-0.4 0.4-1 0.4t-1-0.4l-10-10q-0.4-0.4-0.4-1t0.4-1 1-0.4h20q0.6 0 1 0.4t0.5 1z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="locationList" style="display:none" id="地區選擇">
+                                <div class="list" id="no01">
+                                    北區
+                                </div>
+                                <div class="list" id="no02">
+                                    桃竹苗
+                                </div>
+                                <div class="list" id="no03">
+                                    中區
+                                </div>
+                                <div class="list" id="no04">
+                                    南區及離島
+                                </div>
+                            </div>
+                            <div class="datePart">
+                                <div class="dateHidden">
+                                    @{
+                                        DateTime dateValue = DateTime.Now.Date;
+                                        Console.WriteLine((int)dateValue.DayOfWeek);
+                                        <div class="datebox checked">
+
+                                            <input type="hidden" value="@y@m@d">
+                                            <div class="week">
+                                                @dateValue.AddDays(0).ToString("dddd")
+                                            </div>
+                                            <div class="date">
+                                                @(d+"日")
+                                            </div>
+                                            <div class="month">
+                                                @(m + "月")
+                                            </div>
+
+                                        </div>
+                                    }
+                                    @for (int x = 1; x < 7; x++)
+                                    {
+                                        DateTime date = DateTime.Now.Date;
+                                        Console.WriteLine((int)date.DayOfWeek);
+                                        <div class="datebox">
+                                            <input type="hidden" value="@y@m@(d+x)">
+
+                                            <div class="week">
+                                                @date.AddDays(x).ToString("dddd")
+                                            </div>
+                                            <div class="date">
+                                                @{if ((d + x) >= 32)
+                                                    {
+                                                        @((d + x - 31) + "日");
+                                                    }
+                                                    else if ((d + x) < 32)
+                                                    {
+                                                        @(d + x + "日");
+                                                    }
+
+                                                }
+                                            </div>
+                                            <div class="month">
+                                                @{if ((d + x) >= 32)
+                                                    { @( (m+1 + "月") );
+                                        }
+                                        else if ((d + x) < 32)
+                                        { @( (m  + "月") );
+                                        } }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            @*<div class="tipsbox">
+                                <div class="text status">
+                                    座位狀態
+                                </div>
+                                <div style="color:white">5.</div>
+                                <div class="text">
+                                    <span></span>充足
+                                </div>
+                                <div style="color:white">5.</div>
+                                <div class="text">
+                                    <span class="seat40"></span>緊張(低於40%)
+                                </div>
+                                <div style="color:white"> 5.</div>
+                                <div class="text">
+                                    <span class="seat5"></span>告急(低於5%)
+                                </div>
+                                <img src="~/images/Theater/common/nonono.svg" class="text icon" />
+
+                            </div>*@
+                            <div class="look">
+                                <div style="display:none" class="MovieTimeChoicePeopleWrapper--80gyip cVKeVY" id="新視窗">
+                                    <div class="box">
+                                        <svg class="closeIcon" id="關閉" height="1em" preserveAspectRatio="xMidYMid meet" style="fill:white;vertical-align: middle;" viewBox="0 0 40 40" width="1em">
+                                            <g>
+                                                <path style="color: white" d="m31.2 8.5c6.4 6.3 6.4 16.7 0 23s-16.6 6.3-22.9 0-6.4-16.7 0-23 16.6-6.3 22.9 0z m-0.9 22c5.8-5.7 5.8-15.3 0-21s-15.3-5.8-21.1 0-5.8 15.3 0 21 15.3 5.8 21.1 0z m-4-18l1 0.9-6.6 6.6 6.6 6.6-1 0.9-6.5-6.6-6.6 6.6-1-0.9 6.6-6.6-6.5-6.6 0.9-0.9 6.6 6.6z"></path>
+                                            </g>
+                                        </svg>
+                                        <div class="informationbox">
+                                            <div class="info name">
+                                                <div class="infoTitle">
+                                                    片名
+                                                </div>
+                                                <div class="infoText" id="片名">
+                                                    @Model.中文標題titleCht
+                                                </div>
+                                            </div>
+                                            <div class="info cinema">
+                                                <div class="infoTitle">
+                                                    影城
+                                                </div>
+                                                <div class="infoText" id="影城">
+
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                <div class="infoTitle">
+                                                    日期
+                                                </div>
+                                                <div class="infoText time" id="日期">
+
+                                                </div>
+                                            </div>
+                                            <div class="info version">
+                                                <div class="infoTitle">
+                                                    版本
+                                                </div>
+                                                <div class="infoText" id="版本">
+
+                                                </div>
+                                            </div>
+                                            <div class="info last">
+                                                <div class="infoTitle">
+                                                    時間
+                                                </div>
+                                                <div class="infoText time" id="時間">
+                                                    15:35
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="people">
+                                            人數
+                                        </div>
+                                        <div class="peoplebox">
+                                            <div class="numbox">
+                                                <div class="num">
+                                                    1
+                                                </div>
+                                                <div class="num">
+                                                    2
+                                                </div>
+                                                <div class="num">
+                                                    3
+                                                </div>
+                                                <div class="num">
+                                                    4
+                                                </div>
+                                                <div class="num">
+                                                    5
+                                                </div>
+                                                <div class="num">
+                                                    6
+                                                </div>
+                                            </div>
+                                            <div class="submit">
+                                                確定
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="backClickWrapper"></div>
+                                </div>
+
+
+
+                                <div class="MovieTimeCinemasWrapper--h6wg7n cqralC" style="background-color:white" id="北部">
+
+
+
+                                    <div class="timeWrapper" id="時刻表">
+
+
+
+                                        @await Component.InvokeAsync("時間", new { id = Model.電影編號movieId })
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" action="~/Ticketing/SeatMap" id="submitform">
+        <input type="hidden" name="ScreenID" id="ScreenID" value="" />
+        <input type="hidden" name="Count" id="Count" value="" />
+    </form>
+
+}
+<script src="~/js/Theater 改.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+@*footer樣式*@
+<script>
+    $("#地區").click(function () {
+        if (areaCH.style.display == "inline") { areaCH.style.display = "none" }
+        else
+            areaCH.style.display = "inline"
+    })
+            $("#no01").click(function () {
+             areaCH.style.display = "none"
+                document.querySelector("#地區名稱").innerHTML = "北區"
+                var 地區 = document.querySelector("#地區名稱").innerHTML
+                var 電影id = $("#movidID").val()
+                var 時間=$(".checked input").val()
+                console.log(電影id)
+                console.log(時間)
+                var url = "@Url.Content("~/Theater/area")"
+               
+                var id = `?id=${parseInt(電影id)}`
+                var params = `?keyword=${地區}&id=${parseInt(電影id)}&time=${parseInt(時間)}`
+                $("#時刻表").load(url + params)
+                $(".time span").attr("style", "background-color:rgb(0, 179, 65)")
+
+            })
+                $("#no02").click(function () {
+                    areaCH.style.display = "none"
+                    document.querySelector("#地區名稱").innerHTML = "桃竹苗"
+                    var 地區 = document.querySelector("#地區名稱").innerHTML
+                var 電影id = $("#movidID").val()
+                var 時間=$(".checked input").val()
+                console.log(電影id)
+                console.log(時間)
+                var url = "@Url.Content("~/Theater/area")"
+                var params = `?keyword=${地區}&id=${parseInt(電影id)}&time=${parseInt(時間)}`
+                $("#時刻表").load(url + params)
+                $(".time span").attr("style", "background-color:rgb(0, 179, 65)")
+
+                })
+                $("#no03").click(function () {
+                     areaCH.style.display = "none"
+                     document.querySelector("#地區名稱").innerHTML = "中區"
+               var 地區 = document.querySelector("#地區名稱").innerHTML
+                var 電影id = $("#movidID").val()
+                var 時間=$(".checked input").val()
+                console.log(電影id)
+                console.log(時間)
+                var url = "@Url.Content("~/Theater/area")"
+                var params = `?keyword=${地區}&id=${parseInt(電影id)}&time=${parseInt(時間)}`
+                $("#時刻表").load(url + params)
+                $(".time span").attr("style", "background-color:rgb(0, 179, 65)")
+                })
+                $("#no04").click(function () {
+             areaCH.style.display = "none"
+                    document.querySelector("#地區名稱").innerHTML = "南區及離島"
+               var 地區 = document.querySelector("#地區名稱").innerHTML
+                var 電影id = $("#movidID").val()
+                var 時間=$(".checked input").val()
+                console.log(電影id)
+                console.log(時間)
+                var url = "@Url.Content("~/Theater/area")"
+                var params = `?keyword=${地區}&id=${parseInt(電影id)}&time=${parseInt(時間)}`
+                $("#時刻表").load(url + params)
+                $(".time span").attr("style", "background-color:rgb(0, 179, 65)")
+                })
+   let ff=false
+    $(".numbox  .num").hover(function () {
+
+        $(this).removeClass("numChecked").siblings().removeClass("numChecked").end().addClass("numChecked");
+        },
+        function () {
+
+            $(this).prevAll().removeClass("numChecked").end().removeClass("numChecked");
+    });
+    $(".numbox .num").click(function () {
+        $(this).removeClass("iooi").siblings().removeClass("iooi").end().addClass("iooi");
+        $(".submit").addClass("iooi")
+        ff=true
+    })
+    document.querySelector("#關閉").addEventListener("click", () => {
+        document.querySelector("#新視窗").style.display = "none"
+    })
+    $(".submit").click(function () {
+        if (ff) {
+            var 場次 = $(".iooi input").val()
+            var 人數 = $("div .iooi").html()
+
+            screeniD.setAttribute('value', parseInt(場次))
+            Count.setAttribute('value', parseInt(人數))
+
+            let test =@urlstr;
+            console.log('para is')
+            console.log(screeniD.getAttribute('value'));
+            console.log(Count.getAttribute('value'));
+
+            form.submit();
+            console.log(場次)
+            let ToseatMapUrl = "~/Tciketing/SeatMap";
+            let ToseatParament = `?${場次}&${parseInt(人數)}`;
+            let Actionstr = ToseatMapUrl + ToseatParament;
+
+
+        }
+        else {
+            alert("請點選人數")
+
+        }
+    })
+
+
+    const form = document.getElementById('submitform');
+    const screeniD = document.getElementById('ScreenID');
+    const Count = document.getElementById('Count');
+    $(".dateHidden .datebox").click(function () {
+        $(this).removeClass("checked").siblings().removeClass("checked").end().addClass("checked");
+        var 地區 = document.querySelector("#地區名稱").innerHTML
+        
+                var 電影id = $("#movidID").val()
+                var 時間=$(".checked input").val()
+                console.log(電影id)
+                console.log(時間)
+                var url = "@Url.Content("~/Theater/area")"
+                var params = `?keyword=${地區}&id=${parseInt(電影id)}&time=${parseInt(時間)}`
+                $("#時刻表").load(url + params)
+                $(".time span").attr("style", "background-color:rgb(0, 179, 65)")
+
+
+
+
+
+    });
+
+
+
+</script>

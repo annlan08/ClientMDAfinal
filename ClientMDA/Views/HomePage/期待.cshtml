@@ -1,0 +1,422 @@
+﻿@model List<ClientMDA.ViewModels.CHomePageExpectViewModel>
+@using ClientMDA.ViewModels
+@{
+    ViewData["Title"] = "排行";
+}
+
+@section Styles{
+    <style data-styled="active" data-styled-version="5.3.5"></style>
+    <style>
+        .far .fas { /*星星*/
+            padding-right: 5px;
+            color: #ffc107 !important;
+        }
+
+        .divFlip {
+            margin: 20px 0 0 -15px;
+        }
+
+        .text-white span.btn-warning {
+            color: black !important;
+        }
+
+        div .btn-warning.select { /*頂部篩選器按鈕位置*/
+            margin: 60px 0 0 0 !important;
+            float:right;
+        }
+
+        .selectDIV {
+            margin: -25px 0 0 400px; /*頂部篩選器 篩選條件位置*/
+        }
+
+        .container a:hover{ @*header滑入不要有底線*@
+            text-decoration:none !important;
+        }
+
+        #rate { /*會員評分-撰寫評論按鈕*/
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        div .charts-list-span { /*排行-會員評分-評分水平置中*/
+            width: 100px;
+            text-align: center;
+        }
+
+        .dropdown-item-text { /*排行-會員評分-評分垂直置中*/
+            margin: auto 0 auto 0;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .btn.btn-warning.btn-sm { /*會員評分-評分按鈕大小調整*/
+            height: 23px;
+            padding-top: 0;
+        }
+
+        #rate { /*會員評分-評分-撰寫評論按鈕*/
+            height: 23px !important;
+            padding-top: 0;
+        }
+
+        .dropdown-menu.show {
+            line-height: 30px;
+        }
+
+        .dropdown-menu li{
+            width: 280px;
+        }
+            .dropdown-menu li span {
+                color: black;
+            }
+
+            .dropdown-menu li a {
+                color: black;
+            }
+        #title{
+            margin:1%;
+        }
+
+    </style>
+}
+
+<!-- #region CSS樣式 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/css/Movie/排行.css" rel="stylesheet" />
+<link href="~/css/Movie/排行-關注清單.css" rel="stylesheet" />
+<link href="~/css/Movie/排行-篩選器上收合.css" rel="stylesheet" />
+<link href="~/css/Movie/排行-Btn.css" rel="stylesheet" />
+<link href="~/css/Movie/排行-Rate.css" rel="stylesheet" />
+<link href="~/css/Theater/電影院用改.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="~/css/HomePage/viewcom1.css" rel="stylesheet" />
+<link href="~/css/HomePage/Rate.css" rel="stylesheet" />
+
+<body style="overflow: visible !important">
+    <div class="commonStyled__WrapperSampleNoContent-sc-kt5vy-9 MovieInfoContentWrapper--1tebbv1 exLSHN gYprgf" id="title" style="  overflow: auto">
+        <div class="wrapper" style="width:100% ;height:130px ">
+            <div id="新片" class="tab checked" onclick="window.location='排行';">
+                現正熱映
+            </div>
+            <div id="本周" class="tab" onclick="window.location='本周';">
+                本周新片
+            </div>
+            <div id="幹嘛" class="tab " onclick="window.location='期待';">
+                期待排行
+            </div>
+            @*<div class="underline">
+                    <div class="bar"></div>
+                </div>*@
+        </div>
+        <div class="commonStyled__WrapperSampleNoContent-sc-kt5vy-9 MovieInfoBoxWrapper--13nahzv exLSHN bYVeqc">
+
+
+            <div class="container" id="showlist">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <ul class="charts-list">
+                            <li class="charts-list-row--header d-none d-md-flex">
+                                <span class="charts-list-rank">序號</span>
+                                <span class="charts-list-poster">電影海報</span>
+                                <span class="charts-list-movietitle">電影資訊</span>
+                                <span class="charts-list-content"></span>
+                                <span class="charts-list-MDArate"> 介紹 </span>
+                                <span class="charts-list-MemRate"> 上映日期 </span>
+                                <span class="charts-list-movieDate"> 期待度 </span>
+                                <span class="charts-list-addList"> 加入片單 </span>
+                            </li>
+                            @{int count = 0;
+                                for (var i = 0; i < Model.Count; i++)
+                                {
+                                    count++;
+                                    <li class="charts-list-row">
+                                        <div class="divRow">
+                                            <span class="charts-list-rank">@count</span>
+                                            <div class="flipper">
+                                                <div class="flipper-item layer1" id="im">
+                                                    <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})>
+                                                        <img class="charts-list-cover" id="poster" alt="" title="@Model[i].中文標題Title_Cht" src="@Model[i].圖片雲端ImageIMDB">
+                                                    </a>
+                                                    <span class="charts-list-desc">
+                                                        <span class="charts-list-song" title="@Model[i].中文標題Title_Cht">
+                                                            <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})>@Html.DisplayFor(modelItem => Model[i].中文標題Title_Cht)</a>
+                                                        </span>
+                                                        <span class="charts-list-artist" title="@Model[i].電影英Movie_En">
+                                                            <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})>@Html.DisplayFor(modelItem => Model[i].電影英Movie_En)</a>
+                                                        </span>
+                                                    </span>
+                                                    <span class="charts-list-span" id="i">
+                                                        <button class="AddListBtn" id="addlistbtn" onclick="window.location.href='@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})'">
+                                                            電影介紹
+                                                        </button>
+                                                    </span>
+                                                    <span class="charts-list-span" id="ii2">@Model[i].上映日期Release_Date.Value.ToString("D")</span>
+                                                    <span class="charts-list-span" id="iii2"><i class='fa fa-star checked' id="ToRE"></i> &nbsp; @Model[i].期待度anticipation </span>
+                                                    <div class="charts-list-span" id="iiii">
+                                                        <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                                                            <svg class="ipc-watchlist-ribbon__bg" @*width="500px" height="500px*@ color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                                                                <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                                                                <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                                                                <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                                                            </svg>
+                                                            <div id="bookplusboard">
+                                                                <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="頁面切換3" class="box-wrapper" style="display:none;">
+        @*@await Component.InvokeAsync("期待排行", new { datas = Model })*@
+    </div>
+    <!--<div id="頁面切換1" class="box-wrapper" style="display:none;">-->
+    @*@await Component.InvokeAsync("新片排行", new { datas = Model })*@
+    <!--</div>-->
+    @*要用js加入移除或改中間字串*@
+
+    @*<div id="頁面切換2" class="box-wrapper" style="display:none;">
+            @await Component.InvokeAsync("本周新片", new { datas = Model })
+        </div>*@
+
+
+    @*評分*@
+    <div class="modalstE " id="modalstE">
+        <div class="fa fa-star " id="fafastarrateE">
+            <span id="rate-numberE">?</span>
+        </div>
+        <div class="modal-rating-headerE">
+            <div class="modal-rating-header-btnE">
+                <button class="modal-close-btnE" id="closebtnE">&times;</button>
+            </div>
+        </div>
+        <div class="modal-rating-bodyE" id="modal-rating-bodyE">
+            <div id="rating-titleE">
+                <span id="rating-itE">你有多期待</span>
+                <div id="in-rating-movieE">
+                    <span id="rating-movie-headerE"></span>
+                </div>
+            </div>
+            <div class="ratingE">
+                <input type="radio" name="rating1" value="5" id="5"><label for="5">☆</label>
+                <input type="radio" name="rating1" value="4" id="4"><label for="4">☆</label>
+                <input type="radio" name="rating1" value="3" id="3"><label for="3">☆</label>
+                <input type="radio" name="rating1" value="2" id="2"><label for="2">☆</label>
+                <input type="radio" name="rating1" value="1" id="1"><label for="1">☆</label>
+            </div>
+            <div style="visibility:hidden">
+
+                <input type="text" id="movienumE" value="" />
+            </div>
+            <div id="summitboxE">
+                <button class="sumitstarBtnE" id="summit">送出 </button>
+            </div>
+        </div>
+    </div>
+    <div id="overlayE" class="overlay"></div>
+
+    <form method="post" action="~/Api/checklogin4" id="dataSubmit" style="display:none">
+    </form>
+
+    <form method="post" action="" id="form3" style="display:none">
+        <input type="text" asp-for="@Model[0].會員編號Member_IDbook" id="會員編號Member_IDbook" />
+        <input type="text" asp-for="@Model[0].電影編號Movie_IDbook" id="電影編號Movie_IDbook" />
+        <input type="text" asp-for="@Model[0].片單總表編號MovieList_ID" id="片單總表編號MovieList_ID" />
+    </form>
+
+    <form method="post" action="" id="form4" style="display:none">
+        <input type="text" asp-for="@Model[0].我的片單MyMovieList_ID" id="我的片單MyMovieList_ID" />
+    </form>
+
+</body>
+
+
+@section Scripts{
+    <script>
+        const getmovienum = document.querySelectorAll('#i')
+        const bookmarkadd = document.querySelectorAll('#bookplusboardinner2');
+        const bookmarkbg = document.querySelectorAll('.ipc-watchlist-ribbon__bg-ribbon2');
+        async function rankposter() {
+            let ranknum = await fetch("@Url.Content("~/api/showranknum")")
+            let data3 = await ranknum.json();
+            for (let i = 0; i < getmovienum.length; i++) {
+                getmovienum[i].setAttribute('data', `${data3[i]}`);
+            }
+         let r = await fetch("@Url.Content("~/api/getmemID")")
+        let c = await r.json();
+        if (c != 0) {
+                let getmemmovieid = await fetch('@Url.Content("~/api/bookmarkget")')
+                let data4 = await getmemmovieid.json();
+                let listnum = await fetch("@Url.Content("~/api/ranknumlist")");
+            let data5 = await listnum.json();
+            console.log(data5)
+                for (let i = 0; i < getmovienum.length; i++) {
+                    if (data4.includes(data3[i]) == true) {
+                        let ok = data4.indexOf((data3[i]))
+                        bookmarkbg[i].classList.add('active');
+                        bookmarkadd[i].textContent = '✓';
+                        bookmarkbg[i].setAttribute('fill', ' rgba(245, 197, 24)');
+                        getmovienum[i].setAttribute('data-list', `${data5[ok]}`)
+                    }
+            }
+        }
+        }
+
+         $(window).on('load', async function () {
+            let response = await fetch("@Url.Content("~/api/getmemID")")
+             let data = await response.json()
+             $('#會員編號Member_IDbook').val(data)
+            let res = await fetch('@Url.Content("~/api/getmemlist")')
+            let data2 = await res.json();
+            $('#片單總表編號MovieList_ID').val(data2)
+            rankposter();
+    });
+
+
+        for (let i = 0; i < bookmarkadd.length; i++) {
+            bookmarkadd[i].addEventListener('click', event => {
+                if ($('#會員編號Member_IDbook').val() != 0) {
+                    if (bookmarkadd[i].textContent != '✓') {
+                        const p = getmovienum[i].getAttribute('data')
+                        document.getElementById('電影編號Movie_IDbook').value = p;
+                        console.log($('#form3'))
+                        $('#form3').submit()
+                    }
+                    else {
+                        const j = $(event.currentTarget).parents("#im").find("span")[3].getAttribute('data-list')
+                        document.getElementById('我的片單MyMovieList_ID').value = j;
+                        $('#form4').submit()
+                    }
+                }
+                else
+                    $('#dataSubmit').submit();
+            })
+        }
+    </script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+
+        幹嘛焦點()
+        function 本周焦點() {
+            $("#本周").css("fontSize", '1.8rem');
+            $("#本周").css("background-color", "rgba(62,62,66,.3)");
+            $("#新片").css("fontSize", '1.5rem');
+            $("#新片").css("background-color", "rgba(11,12,42)");
+            $("#幹嘛").css("fontSize", '1.5rem');
+            $("#幹嘛").css("background-color", "rgba(11,12,42)");
+            $('#頁面切換2').css('display', 'block');
+            $('#頁面切換').css('display', 'none');
+            $('#頁面切換3').css('display', 'none');
+
+        }
+        function 新片焦點() {
+            $("#新片").css("fontSize", '1.8rem');
+            $("#新片").css("background-color", "rgba(62,62,66,.3)");
+            $("#本周").css("fontSize", '1.5rem');
+            $("#本周").css("background-color", "rgba(11,12,42)");
+            $("#幹嘛").css("fontSize", '1.5rem');
+            $("#幹嘛").css("background-color", "rgba(11,12,42)");
+            $('#頁面切換1').css('display', 'block');
+            $('#頁面切換2').css('display', 'none');
+            $('#頁面切換3').css('display', 'none');
+        }
+        function 幹嘛焦點() {
+            $("#幹嘛").css("fontSize", '1.8rem');
+            $("#幹嘛").css("background-color", "rgba(62,62,66,.3)");
+            $("#新片").css("fontSize", '1.5rem');
+            $("#新片").css("background-color", "rgba(11,12,42)");
+            $("#本周").css("fontSize", '1.5rem');
+            $("#本周").css("background-color", "rgba(11,12,42)");
+            $('#頁面切換3').css('display', 'block');
+            $('#頁面切換2').css('display', 'none');
+            $('#頁面切換1').css('display', 'none');
+        }
+        $("#本周").click(function () {
+            本周焦點();
+                $("#頁面切換").load("@Url.Content("~/HomePage/本周")")
+        })
+
+
+        $("#新片").click(function () {
+            新片焦點();
+                $("#頁面切換").load("@Url.Content("~/HomePage/排行")")
+            })
+        $("#幹嘛").click(function () {
+            幹嘛焦點();
+                $("#頁面切換").load("@Url.Content("~/HomePage/期待")")
+            })
+
+
+        //modal2
+        const openModalButtons2 = document.querySelectorAll('#iii2')
+        const closeModalButtons2 = document.querySelector('#closebtnE')
+        const overlay2 = document.querySelector('#overlayE')
+        const headerofstar2 = document.getElementById("in-rating-movieE");
+        //const movienum = document.getElementById('movienum');
+
+        //function disableBtn() {
+        //    document.getElementById("submit").style.backgroundColor = "dimgrey";
+        //    document.getElementById("submit").disabled = true;
+        //}
+
+        function openModal2(modal2) {
+            if (modal2 == null) return
+            modal2.classList.add('active')
+            overlay2.classList.add('active')
+        }
+
+        function closeModal2(modal2) {
+            if (modal2 == null) return
+            modal2.classList.remove('active')
+            overlay2.classList.remove('active')
+
+            //disableBtn();
+            //$("#1").prop('checked', false);
+            //$("#2").prop('checked', false);
+            //$("#3").prop('checked', false);
+            //$("#4").prop('checked', false);
+            //$("#5").prop('checked', false);
+        }
+
+        for (let i = 0; i < openModalButtons2.length; i++) {
+            openModalButtons2[i].addEventListener('click', en => {
+                const modal2 = document.querySelector("#modalstE")
+                openModal2(modal2)
+                const f = $(event.currentTarget).parents(".box").find("h5")[0].textContent
+                headerofstar2.textContent = f
+                //const o = $(event.currentTarget).parents(".box").find("a")[1].getAttribute('data')
+                //document.getElementById('movienumE').value = o;
+            })
+        }
+
+        overlay2.addEventListener('click', () => {
+            const modals2 = document.querySelector('.modalstE.active')
+            closeModal2(modals2)
+        })
+
+        closeModalButtons2.addEventListener('click', () => {
+            const modals2 = document.querySelector('.modalstE.active')
+            closeModal2(modals2)
+        })
+
+
+    </script>
+}
+<script src="~/js/HomePage/排行.js"></script>
+
+
+
+
+

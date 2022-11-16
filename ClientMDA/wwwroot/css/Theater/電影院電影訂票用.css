@@ -1,0 +1,594 @@
+﻿.gYTkop {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black ;
+        overflow: auto;
+}
+.jKNYDk {
+    height: 500px;
+    color: rgb(255, 255, 255);
+    position: relative;
+    overflow: hidden;
+}
+    .jKNYDk .trailer_box {
+        width: 100%;
+        height: 400px;
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        z-index: 0;
+    }
+    .jKNYDk > div {
+        position: absolute;
+    }
+    .jKNYDk .trailer_box .video_icon {
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        left: 50%;
+        top: 35%;
+        transform: translateX(-50%);
+        background: 50% 50% / cover no-repeat transparent;
+        z-index: 1;
+        cursor: pointer;
+    }
+    .jKNYDk .trailer_box .trailer {
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        filter: blur(20px) opacity(0.8);
+        pointer-events: none;
+    }
+        .jKNYDk .trailer_box .trailer iframe {
+            width: 100%;
+            height: 100%;
+        }
+    .jKNYDk .info_box {
+        max-width: 975px;
+        width: 90%;
+        display: grid;
+        grid-template-areas:
+            "poster text text"
+            "poster scores share";
+        grid-auto-columns: max-content auto auto;
+        top: 30%;
+        left: 50%;
+        pointer-events: none;
+        transform: translateX(-50%);
+    }
+        .jKNYDk .info_box .poster {
+            width: 215px;
+            height: 315px;
+            margin-right: 20px;
+            grid-area: poster / poster / poster / poster;
+            background-size: cover;
+            background-position: center center;
+            border-bottom: 3px solid rgb(231, 0, 140);
+            z-index: 1;
+        }
+        .jKNYDk .info_box > div {
+            pointer-events: all;
+        }
+        .jKNYDk .info_box .text_info {
+            margin-top: 85px;
+            grid-area: text / text / text / text;
+            font-weight: 300;
+        }
+        .jKNYDk .info_box > div {
+            pointer-events: all;
+        }
+        .jKNYDk .info_box .text_info .grade {
+            width: 85px;
+            height: 22px;
+            margin-bottom: 5px;
+            border: 1px solid rgb(255, 255, 255);
+            border-radius: 30px;
+            font-size: 12px;
+            line-height: 22px;
+            text-align: center;
+        }
+        .jKNYDk .info_box .text_info .movie_title {
+            max-width: 650px;
+            width: 100%;
+            margin-top: 10px;
+        }
+            .jKNYDk .info_box .text_info .movie_title .title_zh_tw {
+                display: -webkit-box;
+                margin-bottom: 5px;
+                font-size: 28px;
+                line-height: 32px;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                white-space: initial;
+                overflow: hidden;
+            }
+            .jKNYDk .info_box .text_info .movie_title .title_en_us {
+                display: -webkit-box;
+                margin-bottom: 5px;
+                font-size: 14px;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                white-space: initial;
+                line-height: 16px;
+                overflow: hidden;
+            }
+        .jKNYDk .info_box .text_info .rel_date, .jKNYDk .info_box .text_info .length {
+            margin-right: 15px;
+            font-size: 12px;
+            font-weight: 300;
+        }
+div {
+    display: block;
+}
+        .jKNYDk .info_box .scores {
+            width: fit-content();
+            grid-area: scores / scores / scores / scores;
+            position: absolute;
+            bottom: 0px;
+            display: grid;
+            grid-template-areas:
+                "ez_score imdb_score rt_score"
+                "label_1 label_2 label_3";
+            grid-template-rows: 30px 20px;
+            column-gap: 40px;
+            text-align: center;
+            font-size: 28px;
+            color: rgb(157, 144, 230);
+        }
+            .jKNYDk .info_box .scores .score.ez_score {
+                grid-area: ez_score / ez_score / ez_score / ez_score;
+            }
+            .jKNYDk .info_box .scores .label {
+                font-size: 12px;
+                line-height: 24px;
+                color: rgb(150, 150, 150);
+                white-space: nowrap;
+            }
+            .jKNYDk .info_box .scores .score.imdb_score {
+                grid-area: imdb_score / imdb_score / imdb_score / imdb_score;
+            }
+            .jKNYDk .info_box .scores .score {
+                line-height: 30px;
+            }
+            .jKNYDk .info_box .scores .label {
+                font-size: 12px;
+                line-height: 24px;
+                color: rgb(150, 150, 150);
+                white-space: nowrap;
+            }
+            .jKNYDk .info_box .scores .score.rt_score {
+                grid-area: rt_score / rt_score / rt_score / rt_score;
+            }
+            .jKNYDk .info_box .scores .score {
+                line-height: 30px;
+            }
+            .jKNYDk .info_box .scores .label {
+                font-size: 12px;
+                line-height: 24px;
+                color: rgb(150, 150, 150);
+                white-space: nowrap;
+            }
+.gYTkop .wrapper-title {
+    width: 100%;
+}
+.gYTkop .wrapper-content {
+    width: 100%;
+    max-width: 1080px;
+    margin: auto;
+    box-sizing: border-box;
+}
+    .gYTkop .wrapper-content .movie-intro-title-wrapper {
+        width: 100%;
+        border-bottom: 1px solid rgb(238, 238, 238);
+        position: relative;
+        height: 49px;
+        margin: 50px 0px 23px;
+    }
+        .gYTkop .wrapper-content .movie-intro-title-wrapper .movie-intro-title {
+            text-align: center;
+            width: 100px;
+            height: 48px;
+            line-height: 48px;
+            border-bottom: 3px solid transparent;
+            color: rgb(158, 158, 158);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            font-size: 16px;
+            float: left;
+            cursor: pointer;
+            transition: all 0.2s ease 0s;
+        }
+
+.movie-intro-title a{
+    color:#9e9e9e;
+}
+.movie-intro-title a:hover{
+    color: #9e9e9e;
+}
+
+    .cjKQBC .wrapper {
+    width: 100%;
+    max-width: 1080px;
+    margin: auto;
+    box-sizing: border-box;
+    min-height: 500px;
+}
+    .cjKQBC .wrapper .location {
+        width: 150px;
+        height: 48px;
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 2px;
+        color: rgb(0, 0, 0);
+        line-height: 48px;
+        font-size: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+        padding-left: 10px;
+    }
+        .cjKQBC .wrapper .location .icon {
+            float: right;
+            width: 15px;
+            height: 15px;
+            margin: 16px 20px 16px 0px;
+        }
+    .cjKQBC .wrapper .datePart {
+        height: 100px;
+        width: 701px;
+        display: inline-flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+        .cjKQBC .wrapper .datePart .dateHidden {
+            width: 100%;
+            min-height: 100px;
+            display: inline-flex;
+            -webkit-box-pack: start;
+            justify-content: flex-start;
+            flex-flow: row wrap;
+            transform: translateY(0%);
+            transition: all 0.3s ease 0s;
+        }
+            .cjKQBC .wrapper .datePart .dateHidden .checked {
+                background-color: rgb(231, 0, 140);
+                border: 1px solid rgb(231, 0, 140);
+            }
+            .cjKQBC .wrapper .datePart .dateHidden .datebox {
+                width: 70px;
+                height: 70px;
+                margin: 15px 10px;
+                background-color: rgb(255, 255, 255);
+                border-radius: 50%;
+                border: 1px solid rgb(220, 220, 220);
+                cursor: pointer;
+            }
+        .cjKQBC .wrapper .datePart .dateHiddenRWD {
+            display: none;
+            width: 100%;
+            height: 100px;
+        }
+    .cjKQBC .wrapper .tipsbox {
+        width: 31.5%;
+        float: right;
+        height: 100px;
+        display: inline-flex;
+        align-items: flex-end;
+        -webkit-box-pack: justify;
+        position: relative;
+    }
+        .cjKQBC .wrapper .tipsbox .text {
+            font-size: 12px;
+            color: rgb(63, 63, 63);
+            height: 17px;
+        }
+            .cjKQBC .wrapper .tipsbox .text span {
+                display: block;
+                position: absolute;
+                margin: 2px 0px 0px -13px;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: rgb(0, 179, 65);
+            }
+            .cjKQBC .wrapper .tipsbox .text .seat40 {
+                background-color: rgb(255, 194, 0);
+            }
+            .cjKQBC .wrapper .tipsbox .text .seat5 {
+                background-color: rgb(218, 0, 0);
+            }
+.cqralC {
+    margin-top: 10px;
+    width: 100%;
+    min-height: 500px;
+    overflow: auto;
+}
+    .cqralC .timeWrapper .cinemabox {
+        width: 100%;
+        float: left;
+        box-sizing: border-box;
+        padding: 28px 16px;
+        border-top: 1px solid rgb(220, 220, 220);
+    }
+        .cqralC .timeWrapper .cinemabox .cinemaName {
+            font-size: 18px;
+            color: rgb(63, 63, 63);
+            cursor: pointer;
+        }
+            .cqralC .timeWrapper .cinemabox .cinemaName .cinemaIcon {
+                float: right;
+                color: rgb(220, 220, 220);
+                width: 20px;
+                height: 20px;
+                margin: 3px;
+            }
+        .cqralC .timeWrapper .cinemabox .sessionBox {
+            width: 100%;
+            margin: 20px 0px 0px;
+            float: left;
+        }
+            .cqralC .timeWrapper .cinemabox .sessionBox .version {
+                float: left;
+                width: 135px;
+                box-sizing: border-box;
+                margin-right: 10px;
+                background-color: rgba(0, 0, 0, 0.8);
+                border-radius: 3px;
+                text-align: center;
+                font-size: 16px;
+                color: rgb(255, 255, 255);
+                font-weight: 300;
+                height: 30px;
+                line-height: 30px;
+            }
+            .cqralC .timeWrapper .cinemabox .sessionBox .session {
+                width: 80%;
+                float: left;
+                display: inline-flex;
+                -webkit-box-pack: start;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+                .cqralC .timeWrapper .cinemabox .sessionBox .session .time {
+                    width: 90px;
+                    padding: 5px;
+                    border-radius: 2px;
+                    border: 2px solid rgb(247, 247, 247);
+                    text-align: center;
+                    margin: 0px 5px 5px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                }
+div {
+    display: block;
+}
+.cjKQBC .wrapper .datePart .dateHidden .checked {
+    background-color: rgb(231, 0, 140);
+    border: 1px solid rgb(231, 0, 140);
+    color:white
+}
+
+    .cjKQBC .wrapper .datePart .dateHidden .datebox .week {
+        text-align: center;
+        font-size: 12px;
+        color: rgb(158, 158, 158);
+        height: 22px;
+        line-height: 32px;
+    }
+    .cjKQBC .wrapper .datePart .dateHidden .datebox .date {
+        text-align: center;
+        font-size: 24px;
+        color: rgb(158, 158, 158);
+        height: 26px;
+        line-height: 28px;
+    }
+    .cjKQBC .wrapper .datePart .dateHidden .datebox .month {
+        text-align: center;
+        font-size: 12px;
+        color: rgb(158, 158, 158);
+        height: 20px;
+        line-height: 20px;
+    }
+.cjKQBC .wrapper .datePart .dateHidden .checked .week{
+    color:white
+}
+.cjKQBC .wrapper .datePart .dateHidden .checked .date {
+    color: white
+}
+.cjKQBC .wrapper .datePart .dateHidden .checked .month {
+    color: white
+}
+
+.over{
+
+    background-color:magenta;
+    color:white
+}
+.bbzzdC {
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 2000;
+}
+    .bbzzdC .icon {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        width: 60px;
+        height: 60px;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        background-color: black;
+        border-radius: 50%;
+    }
+.cjKQBC .wrapper .locationList {
+    width: 150px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 0px 0px 2px 2px;
+    box-sizing: border-box;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    z-index: 5;
+}
+.cjKQBC .wrapper .locationList .list {
+    height: 49px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 49px;
+    font-weight: 300;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+.gYTkop .wrapper-content .movie-intro-title-wrapper .choice {
+    color: rgb(0, 0, 0);
+    border-bottom: 3px solid rgb(231, 0, 140);
+}
+.cVKeVY {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+}
+    .cVKeVY .box {
+        z-index: 500;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 1080px;
+        width: 90%;
+        height: 480px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 2px;
+        box-shadow: rgb(0 0 0 / 50%) 0px 2px 4px 0px;
+    }
+    .cVKeVY .backClickWrapper {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .cVKeVY .box .closeIcon {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        width: 30px;
+        height: 30px;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        z-index: 1000;
+    }
+    .cVKeVY .box .informationbox {
+        width: 70%;
+        height: 200px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        box-sizing: border-box;
+        align-items: flex-end;
+        display: inline-flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+    }
+        .cVKeVY .box .informationbox .info {
+            max-width: 200px;
+            height: 75px;
+            border-right: 1px solid rgb(85, 85, 85);
+            box-sizing: border-box;
+            padding: 10px 25px 0px;
+        }
+            .cVKeVY .box .informationbox .info .infoTitle {
+                font-size: 12px;
+                color: rgb(173, 173, 173);
+                text-align: center;
+                height: 20px;
+                line-height: 20px;
+            }
+            .cVKeVY .box .informationbox .info .infoText {
+                font-size: 16px;
+                color: rgb(255, 255, 255);
+                text-align: center;
+                height: 36px;
+                font-weight: 300;
+                letter-spacing: 1.5px;
+            }
+            .cVKeVY .box .informationbox .info .time {
+                font-weight: 500;
+                font-size: 20px;
+            }
+            .cVKeVY .box .informationbox .info .infoText {
+                font-size: 16px;
+                color: rgb(255, 255, 255);
+                text-align: center;
+                height: 36px;
+                font-weight: 300;
+                letter-spacing: 1.5px;
+            }
+        .cVKeVY .box .informationbox .version {
+            width: 130px;
+        }
+        .cVKeVY .box .informationbox .last {
+            border: none;
+        }
+    .cVKeVY .box .people {
+        width: 100%;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        position: relative;
+        top: 47%;
+        font-size: 18px;
+        font-weight: 300;
+    }
+    .cVKeVY .box .peoplebox {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        top: 50%;
+        height: 115px;
+    }
+        .cVKeVY .box .peoplebox .numbox {
+            width: 390px;
+            height: 40px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-flex;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+        }
+        .cVKeVY .box .peoplebox .submit {
+            cursor: pointer;
+            width: 130px;
+            height: 45px;
+            border-radius: 2px;
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgb(255, 255, 255);
+            line-height: 45px;
+            letter-spacing: 1.5px;
+            font-weight: 300;
+            border: 1px solid rgb(229, 10, 132);
+            transition: all 0.3s ease 0s;
+        }
+        .cVKeVY .box .peoplebox .numbox .num {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease 0s;
+        }
+
+                .cVKeVY .box .peoplebox .numbox .numChecked {
+                    background-color: rgb(229, 10, 132);
+                    box-shadow: rgb(0 0 0 / 50%) 0px 2px 4px 0px;
+                }

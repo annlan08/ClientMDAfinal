@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ClientMDA.ViewModel.WenViewModel.CShoppingProd>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_WenLayout.cshtml";
+}
+
+<h1>購物清單</h1>
+
+<p>
+    <a asp-action="CartView">檢視購物車</a>
+</p>
+<table class="table text-white">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.商品名稱productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.商品價格productPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.商品圖片路徑imagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.商品介紹introduce)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.類別category)
+            </th>
+
+
+            <th>@Html.DisplayNameFor(model => model.電影院編號theaterId)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.商品名稱productName)
+            </td>
+            <td>
+                <label>@item.商品價格productPrice.ToString("0")</label>
+                
+            </td>
+
+            <td>
+                <img src="~/images/WenProduct/@item.商品圖片路徑imagePath" width="180" height="140" />
+                <br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.商品介紹introduce)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.類別category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.電影院編號theaterId)
+            </td>
+            <td>
+                @Html.ActionLink("加入購物車", "AddToCart", new { id = item.商品編號productId})
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

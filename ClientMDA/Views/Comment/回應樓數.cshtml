@@ -1,0 +1,62 @@
+﻿@model ClientMDA.Models.回覆樓數floor
+
+@{
+    ViewData["Title"] = "回應樓數";
+}
+
+<h1>回應樓數</h1>
+
+<h4>回覆樓數floor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="回應樓數">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="評論編號commentId" class="control-label"></label>
+                <select asp-for="評論編號commentId" class ="form-control" asp-items="ViewBag.評論編號commentId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="會員編號memberId" class="control-label"></label>
+                <input asp-for="會員編號memberId" class="form-control" />
+                <span asp-validation-for="會員編號memberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="回覆內容floors" class="control-label"></label>
+                <input asp-for="回覆內容floors" class="form-control" />
+                <span asp-validation-for="回覆內容floors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="發佈時間floorTime" class="control-label"></label>
+                <input asp-for="發佈時間floorTime" class="form-control" />
+                <span asp-validation-for="發佈時間floorTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="被按讚次數thumbsUp" class="control-label"></label>
+                <input asp-for="被按讚次數thumbsUp" class="form-control" />
+                <span asp-validation-for="被按讚次數thumbsUp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="被倒讚次數thumbsDown" class="control-label"></label>
+                <input asp-for="被倒讚次數thumbsDown" class="form-control" />
+                <span asp-validation-for="被倒讚次數thumbsDown" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="屏蔽invisible" class="control-label"></label>
+                <input asp-for="屏蔽invisible" class="form-control" />
+                <span asp-validation-for="屏蔽invisible" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

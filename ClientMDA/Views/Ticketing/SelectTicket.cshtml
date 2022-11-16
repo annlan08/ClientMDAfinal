@@ -1,0 +1,191 @@
+﻿@using ClientMDA.ViewModels
+@model CSelectTicketViewModel
+@{
+    int MAXcount = Model.ticketCount;
+    int screenID = Model.screenID;
+    int theaterID = Model.theaterID;
+    string seatInfo = Model.seatInfo;
+    string[] arr = Model.seatInfo.Split('#');
+    string Seatstring = "";
+    foreach (string item in arr)
+    {
+        string[] arr_seat = item.Split(':');
+        Seatstring += $"{arr_seat[0]}排{arr_seat[1]}列 | ";
+    }
+}
+
+<link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+
+<head>
+    <link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+    <link rel="stylesheet" href="~/cyborg/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <style>
+        .main-profile ul .seat {
+            border-bottom: none;
+        }
+
+        .item {
+            height: 400px;
+        }
+
+            .item img {
+                height: 300px;
+            }
+
+        .pay {
+            text-align: center;
+        }
+
+        body {
+            background-color: #070720;
+        }
+
+        .TicketCounter span {
+            font-size: 22px;
+        }
+
+        .TicketCounter .fa-solid {
+            cursor: pointer;
+        }
+
+            .TicketCounter .fa-solid:hover {
+                color: #0080FF;
+            }
+
+        .TicketCounter .count-value {
+        }
+
+        .Ticket {
+        }
+
+        .plus {
+        }
+
+        .sub {
+        }
+    </style>
+</head>
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div class="pt-4">
+    <div class="main-profile pt-4">
+        <div class="row">
+            <div class="col-lg-8 align-self-lg-start">
+                @{
+
+                    foreach (var item in Model.ALLticketInfo)
+                    {
+                        string name = item.TicketName票種名稱;
+                        string price = $"NT${item.TicketPrice票價.ToString("0.#")}元";
+                        int id = item.TicketID票價明細;
+                        <div class="border border-5 border-light p-3 m-3">
+                            <div class="row Ticket">
+                                <input type="hidden" value="@id" />
+                                <div class="col-3 ml-3"><h4>@name</h4></div>
+                                <div class="col-3 ml-3 text-center"><h4>@price</h4></div>
+                                <div class="col-5 TicketCounter text-right"><label class="btn btn-secondary plus"><span class="fa-solid fa-plus"></span></label> <span class="pr-3 pl-3 count-value"> 0 </span> <label class="btn btn-secondary sub"><span class="fa-solid fa-subtract"></span></label></div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-lg-4 align-self-center">
+                <ul>
+                    <li>影城名稱<span>@Model.theaterName</span></li>
+                    <li>場次日期<span>@Model.Date</span></li>
+                    <li>場次時間<span>@Model.Time</span></li>
+                    <li>張數<span>@MAXcount</span></li>
+                    <li class="seat">座位<span>@Seatstring</span></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <form form method="post" action="~/Ticketing/PaymentWeb">
+            <div class="pay">
+                <div class="col-lg-12">
+                    <div class="main-button">
+                        <input type="hidden" name="MovieCode" id="MovieCode" value="@Model.movieCode" />
+                        <input type="hidden" name="MovieID" id="MovieID" value="@Model.movieID" />
+                        <input type="hidden" name="Time" id="Time" value="@Model.Time" />
+                        <input type="hidden" name="Data" id="Data" value="@Model.Date" />
+                        <input type="hidden" name="count" id="count" value="@MAXcount" />
+                        <input type="hidden" name="seatInfo" id="seatInfo" value="@seatInfo" />
+                        <input type="hidden" name="screenID" id="screenID" value="@screenID" />
+                        <input type="hidden" name="theaterID" id="theaterID" value="@theaterID" />
+                        <input type="hidden" name="Ticketstring" id="Ticketstring" value="" />
+                        <button type="submit" class="btn-outline-primary" id="submitBTN">前往付款</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+@section Scripts{
+    <script>
+    (function ($) {
+        $(window).on('load', function () {
+            $(".loader").fadeOut();
+            $("#preloder").delay(20).fadeOut("slow");
+
+
+        });
+    })(jQuery);
+
+    const maxcount =@MAXcount;
+    let currentValue = 0;
+
+    $('.plus').click(function () {
+        let text = $(event.currentTarget).parents('.TicketCounter').find('span')[1].textContent;
+        let value = parseInt(text);
+        if (value == maxcount) {
+            return;
+        }
+        if (currentValue < maxcount) {
+            currentValue = currentValue + 1;
+            $(event.currentTarget).parents('.TicketCounter').find('span')[1].textContent = (value + 1);
+        }
+    })
+
+    $('.sub').click(function () {
+        let text = $(event.currentTarget).parents('.TicketCounter').find('span')[1].textContent;
+        let value = parseInt(text);
+        if (value == 0) {
+            return;
+        }
+        if (currentValue > 0) {
+            currentValue = currentValue - 1;
+            $(event.currentTarget).parents('.TicketCounter').find('span')[1].textContent = (value - 1);
+        }
+    })
+
+    let Allticket = document.getElementsByClassName('Ticket');
+    let strValue = document.getElementById('Ticketstring');
+    $("#submitBTN").click(function () {
+        if (currentValue != maxcount) {
+            event.preventDefault();
+            window.alert("請選擇正確數量的票券")
+            return;
+        }
+        else {
+            let str = "";
+            for (let item of Allticket) {
+                let id = $(item).find('input')[0].value;
+                let count = $(item).find('span')[1].textContent;
+                if (count != 0) {
+                    str += `${id}:${count}#`;
+                }
+            }
+            strValue.value = str;
+        }
+    })
+    </script>
+}
+
+

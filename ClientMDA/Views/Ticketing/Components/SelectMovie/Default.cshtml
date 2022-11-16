@@ -1,0 +1,48 @@
+﻿@using ClientMDA.ViewModels
+@model List<CAjaxMovieCodeViewModel>
+@{
+
+}
+
+@*選擇電影頁面+電影資訊*@
+
+<section class="container-xl pt-2">
+    <div class="row" style="min-height:30vh">
+        <div class="col-1"><div class="swiper-button-prev" style="background-color:#070720" id="pic-prev"></div></div>
+        <div class="col-10 bg-opacity-25">
+            <div class="swiper myPic">
+                <div class="swiper-wrapper">
+                    @{
+                        foreach(var item in Model)
+                        {
+                            string name = $"{item.MovieName}({item.MovieVersion})版";
+                            <div class="swiper-slide pr-2 MoviePicker" data="@item.MovieCode">
+                                <br />
+                                <img src="@item.MovieOnlineUrl " alt="無圖片" />
+                                <p>@item.MovieName</p>
+
+                            </div>
+                        }
+
+
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-1"><div class="swiper-button-next" style="background-color:#070720" id="pic-next"></div></div>
+    </div>
+    <div class="row justify-content-center pt-4">
+        <button type="button" class="btn btn-secondary btn-sm" id="InfoBtn">電影資訊</button>
+    </div>
+    <div class="row text-center">
+        <div class="col-3"></div>
+        <div class="col-6 MovieInfoBox" id="MovieInfotext">
+            @*@await Component.InvokeAsync("MovieInfo")*@
+        </div>
+        <div class="col-3"></div>
+        </div>
+</section>
+
+<br />
+<div class="bigline"></div>
+<br />

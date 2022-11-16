@@ -1,0 +1,3076 @@
+﻿
+@model ClientMDA.ViewModels.CHomepageViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@section styles{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/HomePage/banner.css" rel="stylesheet" />
+    <link href="~/css/HomePage/heroA.css" rel="stylesheet" />
+    <link href="~/css/HomePage/Rate.css" rel="stylesheet" />
+    <link href="~/css/HomePage/board.css" rel="stylesheet" />
+    <link href="~/css/HomePage/swiper.css" rel="stylesheet" />
+
+    <style>
+        .corHome {
+            background-color: #00b0f0 !important;
+            color: white !important;
+            font-size: 16px !important;
+            transition: opacity .5s ease-in-out !important;
+        }
+    </style>
+
+}
+
+
+<!-- banner -->
+<div id="setbanner">
+    <figure style="float:left; position: fixed;left: 40px;top:50%;width:600px;margin-top: -2.5em;border-block: initial;list-style-type: none;z-index:999;">
+        <img height="200" src="~/images/unknown.png" />
+    </figure>
+    <div class="swiper mySwiper" id="banner-active">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://movies.yahoo.com.tw/x/r/w800/i/o/production/movie-photos/September2022/TjhmAYv1RFTS1nhI1Mg6-1918x1080.jpg" alt="劇場版 歌之☆王子殿下♪ 真愛ST☆RISH TOURS">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=AQSXtGWIInU" id="bannertrailer">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/September2022/YS1ruZsEq5xTgaYEEmGq-1080x1573.jpg" alt="劇場版 歌之☆王子殿下♪ 真愛ST☆RISH TOURS">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=AQSXtGWIInU';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            @*最少20字*@
+                            <li> 來吧！與ST☆RISH一起踏上旅程，在全世界散播愛吧！</li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNWQyNzc4MTQtMmRlNC00MzIxLThhNTctMjE2NDhhNzE2YTAyXkEyXkFqcGdeQXVyMTU2MzcxNDc4._V1_.jpg" alt="黑豹2：瓦干達萬歲">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=U1a66EWCvv4">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/October2022/juLzKPALOMMaC8k14PBJ-1080x1522.jpg" alt="黑豹2：瓦干達萬歲">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=U1a66EWCvv4';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            <li> 王者永存  英雄傳成</li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://movies.yahoo.com.tw/x/r/w800/i/o/production/movie-photos/October2022/7q9ijk9JYvX2MeA9DM9Q-2578x1080.jpg" alt="黑亞當">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=ujhryX8GkHE">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/September2022/F90ayjIO6pdW6sxSMW2X-1080x1560.jpg" alt="黑亞當">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=ujhryX8GkHE';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            <li> 這世界有英雄，有惡人，還有 #黑亞當</li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://movies.yahoo.com.tw/x/r/w800/i/o/production/movie-photos/September2022/v37iuqxjqAfAWL4DsSuX-1620x1080.jpg" alt="幽靜的山荷葉">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=1qnD4GrelsY&t=3s">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/September2022/LoIW74orhjo3xqu51PaS-1080x1543.jpg" alt="幽靜的山荷葉">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=1qnD4GrelsY&t=3s';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            <li>
+                                ❝即使在與人互動交流中偶爾會受傷…❞
+                            </li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://movies.yahoo.com.tw/x/r/w800/i/o/production/movie-photos/September2022/wjXn4swSBtI6SaPcrFiF-2579x1080.jpg" alt="鬼禱">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=jgq01cXZVao">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/September2022/cRNL4zu2a19D2sCaJVAl-1080x1544.JPG" alt="鬼禱">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=jgq01cXZVao';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            <li> 《最後大法師》導演顛覆傳統驅魔電影力作</li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://movies.yahoo.com.tw/x/r/w800/i/o/production/movie-photos/October2022/wzzV7HZp2Vuul7mnDg3d-1619x1080.jpg" alt="一家子兒咕咕叫">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=BpMo1c4tsAk">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/October2022/d38qvlAP9TlY6H9vQnAg-1080x1542.jpg" alt="一家子兒咕咕叫">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=BpMo1c4tsAk';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            <li>因兒子失蹤、經濟壓力和青春躁動，逐漸壓垮彼此身心…</li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="img-wrapper">
+                <div id="imgbox">
+                    <img src="https://movies.yahoo.com.tw/x/r/w800/i/o/production/movie-photos/October2022/NAuV5mQAuMFhRZFNiP4F-1280x720.jpg" alt="星夢性快感">
+                </div>
+                <div class="hangposter">
+                    <a href="https://www.youtube.com/watch?v=dv0fe01ySsw">
+                        <img class="" src="https://movies.yahoo.com.tw/i/o/production/movies/October2022/STMq3eAwwRlmRxcmxrUw-1080x1542.jpg" alt="星夢性快感">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmark" data="">
+                        <svg class="ipc-watchlist-ribbon__bg" width="48px" height="48px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmark">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon" fill="rgb(35, 35,37,.6)0" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmark"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmark"></polygon>
+                        </svg>
+                        <div id="bookplus">
+                            <span class="glyphicon" id="bookmarkpluss" style="font-size: 1.35rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-banner" id="content" onclick="location.href='https://www.youtube.com/watch?v=dv0fe01ySsw';">
+                    <span class="fa fa-play-circle" id="play"></span>
+                    <div id="box-banner">
+                        <ul class="listb">
+                            <li> 帶你一窺成人電影界的活色生香和勾心鬥角！</li>
+                            <li>觀看預告片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="swiper-button-next" id="right">
+            @*<span class="arrow_carrot-right"></span>*@
+
+        </button>
+        <button class="swiper-button-prev" id="left">@*<span class="arrow_carrot-left"></span>*@</button>
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+</div>
+
+<!-- Rate Top 10-->
+<div class="region">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h4>現正熱映</h4>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="btn__all">
+
+                <a href="/HomePage/排行" class="primary-btn">View All  <span class="arrow_right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper mySwiperRATE">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="newtrailer">
+                        <img class="blur" src="" alt="" id="rankposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon1" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner1" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="ranktitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="newbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="newintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="swiper-paginationR" id="swiper-paginationR"></div>
+</div>
+
+<!-- new 8-->
+<div class="region">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h4>本週新片</h4>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="btn__all">
+                <a href="/HomePage/本周" class="primary-btn">View All <span class="arrow_right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper mySwiperRATE">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                                <span class="" id="ratetip1">評分</span>
+                            </button>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="weektrailer">
+                        <img class="blur" src="" alt="" id="newestposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar2"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="newestmovie" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="weekbuy">
+
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="weekintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-paginationR" id="swiper-paginationR"></div>
+</div>
+
+@*anticipation*@
+<div class="region">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h4>期待排行</h4>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="btn__all">
+                <a href="/HomePage/期待" class="primary-btn">View All <span class="arrow_right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="swiper mySwiperRATE">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="exptrailer">
+                        <img class="blur" src="" alt="" id="expposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon3" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner3" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="rankstar2">-&emsp;</span>
+                            <button class="ToRate" id="openbtn0" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarcheckedE"></span>
+                            <span class="starRate" id="eepstar3"></span>
+                            <button class="ToRate" id="openbtnE">
+                                <i class='far fa-star' id="ToRE"></i>
+                            </button>
+                            <span class="" id="ratetip2">期待</span>
+                        </div>
+                    </div>
+                    <div class="star">
+                    </div>
+                </div>
+                <div class="info">
+                    <h5 class="title titleofmovie"><a href="" id="exptitle" data-number="" data-list=""></a></h5>
+                </div>
+                <div class="AddList">
+                    <button class="buyBtn" id="expbuy">
+                        <div class="" id="plus"> 購票</div>
+                    </button> &emsp;
+                    <button class="buyBtn" id="expintro">
+                        <div class="" id="plus">電影介紹</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-paginationR" id="swiper-paginationR"></div>
+</div>
+
+@*recommend*@
+<div class="region">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h4>本日推薦</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="swipercon">
+    <div class="swiper mySwipersw" id="swipersw">
+        <div class="swiper-wrapper" id="swiper-wrappersw">
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE" data="">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide" data="">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE" data="">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide" data="">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE" data="">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper mySwipersw" id="swipersw">
+        <div class="swiper-wrapper" id="swiper-wrappersw">
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="swipersw-slide">
+                <a href="" id="remtrailer">
+                    <img class="blur" src="" alt="" id="imggrab" style=" width: 280px; height: 414px;" data="">
+                </a>
+                <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkRE">
+                    <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkRE">
+                        <polygon class="ipc-watchlist-ribbon__bg-ribbon4" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkRE"></polygon>
+                        <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkRE"></polygon>
+                    </svg>
+                    <div id="bookplusRE">
+                        <span class="glyphicon" id="bookplusREy" style="font-size: 2.15rem;">&#x2b;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Mylist*@
+<div class="region">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h4>我的片單</h4>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="btn__all">
+                <a href="/Theater" class="primary-btn" id="mylistview">View All <span class="arrow_right"></span></a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div @*class="swiper mySwipermyList"*@ id="mylist">
+    <div id="loginlist">
+        <div> <span id="addmylist">快來新增你的專屬片單吧!</span></div>
+        <div id="pluslist">
+            <button class="AddListBtn" id="addlistbtn" onclick="window.location.href='/Member/Login'">
+                新增片單
+            </button>
+            <button class="AddListBtn" id="browsebtn" onclick="window.location.href='/Theater/測試業面'" style="display:none">
+                瀏覽熱門電影
+            </button>
+
+        </div>
+    </div>
+</div>
+<div class="swiper mySwiperRATE" id="mylistdiv" style="display:none">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" id="list1" style="display:none">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="listtrailer">
+                        <img class="blur" src="" alt="" id="listposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon5" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner5" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="listofstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info" id="infolist">
+                    <h5 class="title titleofmovie"><a href="" id="listtitle" data=""></a></h5>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="list2" style="display:none">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="listtrailer">
+                        <img class="blur" src="" alt="" id="listposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon5" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner5" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="listofstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info" id="infolist">
+                    <h5 class="title titleofmovie"><a href="" id="listtitle" data=""></a></h5>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="list3" style="display:none">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="listtrailer">
+                        <img class="blur" src="" alt="" id="listposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon5" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner5" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="listofstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info" id="infolist">
+                    <h5 class="title titleofmovie"><a href="" id="listtitle" data=""></a></h5>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="list4" style="display:none">
+            <div class="box">
+                <div class="img-wrapper" id="imgposter">
+                    <a href="" id="listtrailer">
+                        <img class="blur" src="" alt="" id="listposter" style="width:263px;height:379px;">
+                    </a>
+                    <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                        <svg class="ipc-watchlist-ribbon__bg" width="68px" height="68px" color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                            <polygon class="ipc-watchlist-ribbon__bg-ribbon5" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                            <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                        </svg>
+                        <div id="bookplusboard">
+                            <span class="glyphicon" id="bookplusboardinner5" style="font-size: 2.15rem;">&#x2b;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_box">
+                    <div class="star">
+                        <div class="showRate">
+                            <span class="fa fa-star checked" id="fafastarchecked"></span>
+                            <span class="starRate" id="listofstar"></span>
+                            <button class="ToRate" id="openbtn" data-modal-target="#modal">
+                                <i class='far fa-star' id="ToR"></i>
+                            </button>
+                            <span class="" id="ratetip1">評分</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info" id="infolist">
+                    <h5 class="title titleofmovie"><a href="" id="listtitle" data=""></a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-paginationR" id="swiper-paginationR"></div>
+</div>
+
+@*rating star*@
+<div class="modalst " id="modal">
+    <div class="fa fa-star " id="fafastarrate">
+        <span id="rate-number">?</span>
+    </div>
+    <div class="modal-rating-header">
+        <div class="modal-rating-header-btn">
+            <button class="modal-close-btn" id="closebtn" data-close-button>&times;</button>
+        </div>
+    </div>
+    <div class="modal-rating-body" id="modal-rating-body">
+        <div id="rating-title">
+            <span id="rating-it">評分它</span>
+            <div id="in-rating-movie">
+                <span id="rating-movie-header"></span>
+            </div>
+        </div>
+        <div class="rating">
+            <input type="radio" name="rating" value="5" id="5" class="inputstar"><label for="5" id="label">☆</label>
+            <input type="radio" name="rating" value="4" id="4" class="inputstar"><label for="4" id="label">☆</label>
+            <input type="radio" name="rating" value="3" id="3" class="inputstar"><label for="3" id="label">☆</label>
+            <input type="radio" name="rating" value="2" id="2" class="inputstar"><label for="2" id="label">☆</label>
+            <input type="radio" name="rating" value="1" id="1" class="inputstar"><label for="1" id="label">☆</label>
+        </div>
+        <div style="display:none">
+
+            <input type="text" id="movienum" value="" />
+            <input type="text" id="memrankid" value="" />
+            <input type="text" id="scorenumber" value="" />
+        </div>
+        <div id="summitbox">
+            <button class="sumitstarBtn" id="submit">送出 </button>
+            <button class="sumitstarBtn1" id="deletestar" style="border: 0; border-radius: 10px; background-color: dimgrey; color: whitesmoke; width: 180px; height: 40px; font-size: 1.25rem; ">移除評分 </button>
+        </div>
+
+
+    </div>
+</div>
+<div id="overlay" class="overlay" data-close-layout></div>
+
+@*期待度*@
+<div class="modalstE " id="modalstE">
+    <div class="fa fa-star " id="fafastarrateE">
+        <span id="rate-numberE">?</span>
+    </div>
+    <div class="modal-rating-headerE">
+        <div class="modal-rating-header-btnE">
+            <button class="modal-close-btnE" id="closebtnE">&times;</button>
+        </div>
+    </div>
+    <div class="modal-rating-bodyE" id="modal-rating-bodyE">
+        <div id="rating-titleE">
+            <span id="rating-itE">你有多期待</span>
+            <div id="in-rating-movieE">
+                <span id="rating-movie-headerE"></span>
+            </div>
+        </div>
+        <div class="ratingE">
+            <input type="radio" name="rating1" value="5" id="5"><label for="5">☆</label>
+            <input type="radio" name="rating1" value="4" id="4"><label for="4">☆</label>
+            <input type="radio" name="rating1" value="3" id="3"><label for="3">☆</label>
+            <input type="radio" name="rating1" value="2" id="2"><label for="2">☆</label>
+            <input type="radio" name="rating1" value="1" id="1"><label for="1">☆</label>
+        </div>
+        <div style="visibility:hidden">
+
+            <input type="text" id="movienumE" value="" />
+        </div>
+        <div id="summitboxE">
+            <button class="sumitstarBtnE" id="summit">送出 </button>
+        </div>
+    </div>
+</div>
+<div id="overlayE" class="overlay"></div>
+
+<form method="post" action="~/Api/checklogin" id="dataSubmit" style="display:none">
+</form>
+
+<form method="post" action="" id="form1" style="display:none">
+    <input type="text" asp-for="會員編號Member_ID" id="會員編號Member_ID" />
+    <input type="text" asp-for="電影編號Movie_ID" id="電影編號Movie_ID" />
+    <input type="text" asp-for="評分Rate" id="評分Rate" />
+</form>
+
+<form method="post" action="" id="form3" style="display:none">
+
+    <input type="text" asp-for="會員編號Member_IDbook" id="會員編號Member_IDbook" />
+    <input type="text" asp-for="電影編號Movie_IDbook" id="電影編號Movie_IDbook" />
+    <input type="text" asp-for="片單總表編號MovieList_ID" id="片單總表編號MovieList_ID" />
+</form>
+
+<form method="post" action="" id="form4" style="display:none">
+
+    <input type="text" asp-for="我的片單MyMovieList_ID" id="我的片單MyMovieList_ID" />
+</form>
+
+<form method="post" action="" id="form5" style="display:none">
+
+    <input type="text" asp-for="評論編號Comment_ID" id="評論編號Comment_ID" />
+</form>
+
+
+@section Scripts{
+    <script>
+        const bannermovieid = document.querySelectorAll("#imgbox");
+        const poster = document.querySelectorAll("#rankposter");
+        const ranktitle = document.querySelectorAll("#ranktitle");
+        const rankbook = document.querySelectorAll("#bookplusboardinner1")
+        const rankbookmark = document.querySelectorAll('.ipc-watchlist-ribbon__bg-ribbon1')
+        const newtitle = document.querySelectorAll("#newestmovie");
+        const newposters = document.querySelectorAll("#newestposter");
+        const newbook = document.querySelectorAll("#bookplusboardinner2")
+        const newbookmark = document.querySelectorAll('.ipc-watchlist-ribbon__bg-ribbon2')
+        const recommendposters = document.querySelectorAll("#imggrab");
+        const exbook = document.querySelectorAll("#bookplusboardinner3")
+        const exbookmark = document.querySelectorAll('.ipc-watchlist-ribbon__bg-ribbon3')
+        const recbook = document.querySelectorAll("#bookplusREy")
+        const recbookmark = document.querySelectorAll('.ipc-watchlist-ribbon__bg-ribbon4')
+        const listtitle = document.querySelectorAll("#listtitle");
+        const listtposters = document.querySelectorAll("#listposter");
+        const listbook = document.querySelectorAll("#bookplusboardinner5")
+        const listbookmark = document.querySelectorAll('.ipc-watchlist-ribbon__bg-ribbon5')
+        const excstar = document.querySelectorAll('#eepstar')
+        const rankstar = document.querySelectorAll('#rankstar')
+        const rnewstar = document.querySelectorAll('#rankstar2')
+        const excnewstar = document.querySelectorAll('#eepstar2')
+        const exptitle = document.querySelectorAll('#exptitle')
+        const expposter = document.querySelectorAll('#expposter')
+        const tnewstar = document.querySelectorAll('#rankstar3')
+        const tcnewstar = document.querySelectorAll('#eepstar3')
+        const exprateall = document.querySelectorAll('#openbtn0')
+        const listofstar = document.querySelectorAll('#listofstar')
+        const newtrailer = document.querySelectorAll('#newtrailer')
+        const newintro = document.querySelectorAll('#newintro')
+        const newbuy = document.querySelectorAll('#newbuy')
+        const weektrailer = document.querySelectorAll('#weektrailer')
+        const weekintro = document.querySelectorAll('#weekintro')
+        const weekbuy = document.querySelectorAll('#weekbuy')
+        const exptrailer = document.querySelectorAll('#exptrailer')
+        const expintro = document.querySelectorAll('#expintro')
+        const expbuy = document.querySelectorAll('#expbuy')
+        const remtrailer = document.querySelectorAll('#remtrailer')
+        const listtrailer = document.querySelectorAll('#listtrailer')
+        const rm = document.getElementById('rate-number')
+        const ee = document.getElementById('scorenumber')
+
+        //還沒設定資料banner目前不抓電影編號
+        async function bannermovie() {
+        let bannernum = await fetch("@Url.Content("~/api/shownewnum")");
+        let data3 = await bannernum.json();
+        for (let i = 0; i < imgbox.length; i++) {
+            imgbox[i].setAttribute('data', `${data3[i]}`);
+            }
+        }
+
+        //新片排行
+        async function rankposter() {
+            //抓海報
+            let rankimg = await fetch("@Url.Content("~/api/showrankposter")");
+            let data = await rankimg.json();
+            console.log(data)
+            for (let i = 0; i < poster.length; i++) {
+                poster[i].setAttribute('src', `${data[i]}`);
+            }
+            //期待度
+            let excstars = await fetch("@Url.Content("~/api/getrankex")");
+            let data6 = await excstars.json();
+            for (let i = 0; i < 10; i++) {
+                excstar[i].innerText = data6[i]
+            }
+            //評分
+            let acstars = await fetch("@Url.Content("~/api/getrankac")");
+            let data8 = await acstars.json();
+            for (let i = 0; i < rankstar.length; i++) {
+                rankstar[i].innerText = data8[i]
+                }
+            //片名+電影編號+全部超連結+電影標題fontsize
+            let ranktit = await fetch("@Url.Content("~/api/showrankmovie")")
+            let data2 = await ranktit.json();
+            let ranknum = await fetch("@Url.Content("~/api/showranknum")")
+            let data3 = await ranknum.json();
+            for (let i = 0; i < ranktitle.length; i++) {
+                ranktitle[i].innerText = data2[i];
+                poster[i].setAttribute('alt', `${data2[i]}`);
+                ranktitle[i].setAttribute('data', `${data3[i]}`);
+                ranktitle[i].setAttribute('href', '/Movie/電影介紹/' + `${data3[i]}`)
+                newtrailer[i].setAttribute('href', '/Theater/快定頁面測試/' + `${data3[i]}`)
+                newintro[i].setAttribute("onclick", `location.href='/Movie/電影介紹/${data3[i]}'`)
+                newbuy[i].setAttribute("onclick", `location.href='/Theater/快定頁面測試/${data3[i]}'`)
+                if (data2[i].length >= 9 && data2[i].length < 15) {
+                    ranktitle[i].style.fontSize = "1.13rem";
+                }
+                else if (data2[i].length >= 15 && data2[i].length < 20) {
+                    ranktitle[i].style.fontSize = "0.98rem";
+                }
+                else if (data2[i].length >= 20 ) {
+                    ranktitle[i].style.fontSize = "2pt";
+                }
+
+            }
+            //判斷有沒有登錄，片單中的電影發亮+片單編號
+            let r = await fetch("@Url.Content("~/api/getmemID")")
+            let c = await r.json();
+            if (c != 0) {
+                let commentid = await fetch('@Url.Content("~/api/getComment")')
+                let cid = await commentid.json()
+                let commentmovieid = await fetch('@Url.Content("~/api/getCommentMovie")')
+                let mid = await commentmovieid.json()
+                let commentrank = await fetch('@Url.Content("~/api/getCommenRank")')
+                let crank = await commentrank.json()
+                let getmemmovieid = await fetch('@Url.Content("~/api/bookmarkget")')
+                let data4 = await getmemmovieid.json();
+                let listnum = await fetch("@Url.Content("~/api/ranknumlist")");
+                let data5 = await listnum.json();
+                for (let i = 0; i < ranktitle.length; i++) {
+                    ranktitle[i].setAttribute('data-rank', "")
+                    ranktitle[i].setAttribute('data-rate', "")
+                    if (data4.includes(data3[i]) == true) {
+                        let ok = data4.indexOf((data3[i]))
+                        rankbookmark[i].classList.add('active');
+                        rankbook[i].textContent = '✓';
+                        rankbookmark[i].setAttribute('fill', ' rgba(245, 197, 24)');
+                        ranktitle[i].setAttribute('data-list', `${data5[ok]}`)
+                    }
+                    if (mid.includes(data3[i]) == true) {
+                        let indexv = mid.indexOf((data3[i]))
+                        ranktitle[i].setAttribute('data-rank', `${cid[indexv]}`)
+                        ranktitle[i].setAttribute('data-rate', `${crank[indexv]}`)
+                    }
+                }
+            }
+
+        }
+
+        //本周新片
+        //篩選電影那邊看要不要過濾尚未上映的
+        async function newmovie() {
+            //片名+電影編號+電影標題fontsize
+            let newmovie = await fetch("@Url.Content("~/api/shownewmovie")")
+            let data = await newmovie.json();
+            let newtit = await fetch("@Url.Content("~/api/shownewnum")");
+            let data3 = await newtit.json();
+            for (let i = 0; i < newtitle.length; i++) {
+                newtitle[i].innerText = data[i]
+                newposters[i].setAttribute('alt', `${data[i]}`);
+                newtitle[i].setAttribute('data', `${data3[i]}`);
+                newtitle[i].setAttribute('href', '/Movie/電影介紹/' + `${data3[i]}`)
+                weektrailer[i].setAttribute('href', '/Theater/快定頁面測試/' + `${data3[i]}`)
+                weekintro[i].setAttribute("onclick", `location.href='/Movie/電影介紹/${data3[i]}'`)
+                weekbuy[i].setAttribute("onclick", `location.href='/Theater/快定頁面測試/${data3[i]}'`)
+                if (data[i].length >= 9 && data[i].length < 15) {
+                    newtitle[i].style.fontSize = "1.13rem";
+                }
+                else if (data[i].length >= 15 && data[i].length < 20) {
+                    newtitle[i].style.fontSize = "0.98rem";
+                }
+                else if (data[i].length >= 20 ) {
+                    newtitle[i].style.fontSize = "2pt";
+                }
+
+            }
+            //海報
+            let newimg = await fetch("@Url.Content("~/api/shownewposter")");
+            let data2 = await newimg.json();
+            for (let i = 0; i < newposters.length; i++) {
+                 newposters[i].setAttribute('src', `${data2[i]}`);
+            }
+            //期待度
+            let newstar = await fetch("@Url.Content("~/api/getnewex")");
+            let data6 = await newstar.json();
+            for (let i = 0; i < excnewstar.length; i++) {
+                excnewstar[i].innerText = data6[i];
+            }
+            //評分
+            let newstara = await fetch("@Url.Content("~/api/getnewac")");
+            let data7 = await newstara.json();
+            for (let i = 0; i < excnewstar.length; i++) {
+                rnewstar[i].innerText = data7[i];
+            }
+            //判斷有沒有登錄，片單中的電影發亮+片單編號
+            let r = await fetch("@Url.Content("~/api/getmemID")")
+            let c = await r.json();
+            if (c != 0) {
+                let commentid = await fetch('@Url.Content("~/api/getComment")')
+                let cid = await commentid.json()
+                let commentmovieid = await fetch('@Url.Content("~/api/getCommentMovie")')
+                let mid = await commentmovieid.json()
+                let commentrank = await fetch('@Url.Content("~/api/getCommenRank")')
+                let crank = await commentrank.json()
+                let getmemmovieid = await fetch('@Url.Content("~/api/bookmarkget")')
+                let data4 = await getmemmovieid.json();
+                let listnum = await fetch("@Url.Content("~/api/ranknumlist")");
+                let data5 = await listnum.json();
+                for (let i = 0; i < newtitle.length; i++) {
+                    newtitle[i].setAttribute('data-rank', "")
+                    newtitle[i].setAttribute('data-rate', "")
+                    if (data4.includes(data3[i]) == true) {
+                        let ok = data4.indexOf((data3[i]))
+                        newbook[i].textContent = '✓';
+                        newbookmark[i].setAttribute('fill', ' rgba(245, 197, 24)');
+                        newtitle[i].setAttribute('data-list', `${data5[ok]}`)
+                    }
+                    if (mid.includes(data3[i]) == true) {
+                        let indexv = mid.indexOf((data3[i]))
+                        newtitle[i].setAttribute('data-rank', `${cid[indexv]}`)
+                        newtitle[i].setAttribute('data-rate', `${crank[indexv]}`)
+                    }
+                 }
+            }
+        }
+
+        //期待排行
+        async function expmovieall() {
+            //片名+電影編號+電影標題fontsize
+            let expmovies = await fetch("@Url.Content("~/api/showexrankmovie")")
+            let data = await expmovies.json()
+            let getmemmovieid = await fetch('@Url.Content("~/api/showexrankmovienuber")')
+            let data3 = await getmemmovieid.json();
+            for (let i = 0; i < exptitle.length; i++) {
+                exptitle[i].innerText = data[i]
+                expposter[i].setAttribute('alt', `${data[i]}`);
+                exptitle[i].setAttribute('data', `${data3[i]}`);
+                exptitle[i].setAttribute('href', '/Movie/電影介紹/' + `${data3[i]}`)
+                exptrailer[i].setAttribute('href', '/Theater/快定頁面測試/' + `${data3[i]}`)
+                expintro[i].setAttribute("onclick", `location.href='/Movie/電影介紹/${data3[i]}'`)
+                expbuy[i].setAttribute("onclick", `location.href='/Theater/快定頁面測試/${data3[i]}'`)
+                if (data[i].length >= 9 && data[i].length < 15) {
+                    exptitle[i].style.fontSize = "1.13rem";
+                }
+                else if (data[i].length >= 15 && data[i].length < 20) {
+                    exptitle[i].style.fontSize = "0.98rem";
+                }
+                else if (data[i].length >= 20) {
+                    exptitle[i].style.fontSize = "2pt";
+                }
+            }
+            //關掉評分按鈕+抓海報
+            let listimg = await fetch("@Url.Content("~/api/showexrankposter")");
+            let data2 = await listimg.json();
+            for (let i = 0; i < expposter.length; i++) {
+                expposter[i].setAttribute('src', `${data2[i]}`);
+                exprateall[i].setAttribute('disabled', '')
+            }
+            //期待度
+            let listimg9 = await fetch("@Url.Content("~/api/getreeex")");
+            let data5 = await listimg9.json();
+            for (let i = 0; i < tcnewstar.length; i++) {
+                tcnewstar[i].innerText = data5[i]
+            }
+            //判斷有沒有登錄，片單中的電影發亮+片單編號
+            let r = await fetch("@Url.Content("~/api/getmemID")")
+            let c = await r.json();
+            if (c != 0) {
+                let getmemmovieid = await fetch('@Url.Content("~/api/bookmarkget")')
+                let data4 = await getmemmovieid.json();
+                let listnum = await fetch("@Url.Content("~/api/ranknumlist")");
+                let data5 = await listnum.json();
+                for (let i = 0; i < exptitle.length; i++) {
+                    if (data4.includes(data3[i]) == true) {
+                        let ok = data4.indexOf((data3[i]))
+                        exbook[i].textContent = '✓';
+                        exbookmark[i].setAttribute('fill', ' rgba(245, 197, 24)');
+                        exptitle[i].setAttribute('data-list', `${data5[ok]}`)
+                    }
+                }
+                if (mid.includes(data3[i]) == true) {
+                    let indexv = mid.indexOf((data3[i]))
+                    exptitle[i].setAttribute('data-rank', `${cid[indexv]}`)
+                    exptitle[i].setAttribute('data-rate', `${crank[indexv]}`)
+                }
+            }
+        }
+
+        //本日推薦
+        async function recommendposter() {
+            //海報+電影編號
+            //data前面20網址，後面編號
+            let response = await fetch("@Url.Content("~/api/showrecommendposter")");
+            let data = await response.json()
+            var result = data.slice(20)
+            for (let i = 0; i < recommendposters.length; i++) {
+                recommendposters[i].setAttribute('src', `${data[i]}`);
+                recommendposters[i].setAttribute('data', `${result[i]}`);
+                remtrailer[i].setAttribute('href', '/Movie/電影介紹/' + `${result[i]}`)
+            }
+            //判斷有沒有登錄，有在片單中的電影發亮+片單編號
+            //無法加入片單編號
+            let r = await fetch("@Url.Content("~/api/getmemID")")
+            let c = await r.json();
+            if (c != 0) {
+                let getmemmovieid = await fetch('@Url.Content("~/api/bookmarkget")')
+                let data2 = await getmemmovieid.json();
+                let listnum = await fetch("@Url.Content("~/api/ranknumlist")");
+                let data5 = await listnum.json();
+                for (let i = 0; i < recommendposters.length; i++) {
+                    //這邊用includes全部回傳fales
+                    if (data2.filter(element => element == result[i]).length != 0) {
+                        recbook[i].textContent = '✓';
+                        recbookmark[i].setAttribute('fill', ' rgba(245, 197, 24)');
+                        //這邊用indexOf全部回傳-1
+                        //let ok = data2.indexOf((result[i]))
+                        //recommendposters[i].setAttribute('data-list', `${data5[ok]}`)
+                    }
+                }
+            }
+        }
+
+        //我的清單
+        async function listmovie() {
+            //電影標題+電影編號+電影標題fontsize
+            let listmovie = await fetch("@Url.Content("~/api/showlistmovie")")
+            let data = await listmovie.json();
+            let listmoviem = await fetch("@Url.Content("~/api/showlistmovienem")")
+            let data6 = await listmoviem.json();
+            for (let i = 0; i < listtitle.length; i++) {
+                listtitle[i].innerText = data[i]
+                listtposters[i].setAttribute('alt', `${data[i]}`);
+                listtitle[i].setAttribute('data', `${data6[i]}`)
+                listtitle[i].setAttribute('href', '/Movie/電影介紹/' + `${data6[i]}`)
+                listtrailer[i].setAttribute('href', '/Movie/電影介紹/' + `${data6[i]}`)
+                if (data[i] != null) {
+                    if (data[i].length >= 9 && data[i].length < 15) {
+                        listtitle[i].style.fontSize = "1.13rem";
+                    }
+                    else if (data[i].length >= 15 && data[i].length < 20) {
+                        listtitle[i].style.fontSize = "0.98rem";
+                    }
+                    else if (data[i].length >= 20 && data[i].length < 25) {
+                        newtitle[i].style.fontSize = "0.77rem";
+                    }
+                    else if (data[i].length >= 25) {
+                        exptitle[i].style.fontSize = "0.5rem";
+                    }
+                }
+            }
+            //電影海報
+            let listimg = await fetch("@Url.Content("~/api/showlistposter")");
+            let data2 = await listimg.json();
+            for (let i = 0; i < listtposters.length; i++) {
+                listtposters[i].setAttribute('src', `${data2[i]}`);
+            }
+            //在片單中的電影發亮+片單編號
+            let r = await fetch("@Url.Content("~/api/getmemID")")
+            let c = await r.json();
+            if (c != 0) {
+                let commentid = await fetch('@Url.Content("~/api/getComment")')
+                let cid = await commentid.json()
+                let commentmovieid = await fetch('@Url.Content("~/api/getCommentMovie")')
+                let mid = await commentmovieid.json()
+                let commentrank = await fetch('@Url.Content("~/api/getCommenRank")')
+                let crank = await commentrank.json()
+                let getmemmovieid = await fetch('@Url.Content("~/api/bookmarkget")')
+                let data4 = await getmemmovieid.json();
+                let listnum = await fetch("@Url.Content("~/api/ranknumlist")");
+                let data5 = await listnum.json();
+                for (let i = 0; i < exptitle.length; i++) {
+                    listtitle[i].setAttribute('data-rank', "")
+                    listtitle[i].setAttribute('data-rate', "")
+                    if (data4.includes(data6[i]) == true) {
+                        let ok = data4.indexOf((data6[i]))
+                        listbook[i].textContent = '✓';
+                        listbookmark[i].setAttribute('fill', ' rgba(245, 197, 24)');
+                        listtitle[i].setAttribute('data-list', `${data5[ok]}`)
+                    }
+                    if (mid.includes(data6[i]) == true) {
+                        let indexv = mid.indexOf((data6[i]))
+                        listtitle[i].setAttribute('data-rank', `${cid[indexv]}`)
+                        listtitle[i].setAttribute('data-rate', `${crank[indexv]}`)
+                    }
+                }
+            }
+            //評分
+            let liststar = await fetch("@Url.Content("~/api/getliststar")");
+            let data7 = await liststar.json();
+            for (let i = 0; i < listofstar.length; i++) {
+                listofstar[i].innerText = data7[i];
+            }
+         }
+
+        //Loading要幹嘛
+        $(window).on('load', async function () {
+            //會員有沒有登入
+            let response = await fetch("@Url.Content("~/api/getmemID")")
+            let data = await response.json()
+            //提交表單抓會員編號
+            $('#會員編號Member_ID').val(data)
+            $('#會員編號Member_IDbook').val($('#會員編號Member_ID').val())
+            //提交表單抓片單總表編號
+            let res = await fetch('@Url.Content("~/api/getmemlist")')
+            let data2 = await res.json();
+            $('#片單總表編號MovieList_ID').val(data2)
+            //會員登入:顯示我的清單
+            if (data != 0) {
+                $("#addlistbtn").css('display', 'none');
+                $("#browsebtn").css('display', 'inline');
+                $('#loginlist').css('text-align', 'center')
+                listmovie()
+                $('#mylistview').attr('href','/Member/WatchList')
+            }
+            else {
+                $("#addlistbtn").css('display', 'inline');
+                $("#browsebtn").css('display', 'none');
+                $('#loginlist').css('text-align', 'center')
+                $('#mylistview').attr('href', '/Member/login')
+                /* 確認登出後session有沒有清空，清空後還是跳書籤下面東西各寫一個迴圈*/
+            }
+            //我的片單顯示方式
+            mylistshow()
+            rankposter();
+            newmovie();
+            recommendposter();
+            disableBtn();
+            bannermovie();
+            expmovieall()
+            //console.log($(ranktitle)[0])
+        });
+
+        //顯示我的清單
+        async function mylistshow() {
+            let getmylistmovie = await fetch('@Url.Content("~/api/bookmarkget")')
+            let d = await getmylistmovie.json();
+            if (d != 0) {
+                $("#mylist").remove();
+                $("#mylist").css('display', 'none');
+                $("#mylistdiv").css('display', 'block');
+            }
+            if (d.length == 1) {
+                $("#list1").css('display', 'block');
+            }
+            else if (d.length == 2) {
+                $("#list1").css('display', 'block');
+                $("#list2").css('display', 'block');
+            }
+            else if (d.length == 3) {
+                $("#list1").css('display', 'block');
+                $("#list2").css('display', 'block');
+                $("#list3").css('display', 'block');
+            }
+            else if (d.length >= 4) {
+                $("#list1").css('display', 'block');
+                $("#list2").css('display', 'block');
+                $("#list3").css('display', 'block');
+                $("#list4").css('display', 'block');
+            }
+            else {
+                $("#mylist").css('display', 'block');
+                $("mylistdiv").css('display', 'none');
+            }
+        }
+
+        //評分表單
+        //評分表單的送出按鈕
+        function disableBtn() {
+            document.getElementById("submit").style.backgroundColor = "dimgrey";
+            document.getElementById("submit").disabled = true;
+        }
+        function enableBtn() {
+            document.getElementById("submit").disabled = false;
+            document.getElementById("submit").style.backgroundColor = "#708090";
+        }
+
+        //亂源
+        //評分
+        const starmovieid = document.getElementById('movienum')
+        const starcommiteid = document.getElementById('memrankid')
+        const starrate = document.getElementById('scorenumber')
+
+        let dd="";
+        let aa="";
+        let bb = "";
+        let cc = ""
+        let yy=""
+        //改變星星
+        $('input[type=radio]').click((event) => {
+            bb = starmovieid.value
+            aa = $('#會員編號Member_ID').val()
+            yy = $('#movienum').val()
+            enableBtn();
+            if ($('#會員編號Member_ID').val() != 0) {
+                dd = event.target.value;
+                rm.innerText = event.target.value;
+            }
+            else if ($('#會員編號Member_ID').val() == 0) {
+                rm.innerText = $('input:radio:checked').val()
+                $('#submit').click(function () {
+                    $('#dataSubmit').submit();
+                })
+            }
+        })
+
+        //新增修改評分
+        const modal = document.querySelector("#modal")
+            $('#submit').click(async function () {
+                //修改評分
+                if (ee.value == 1 || ee.value == 2 || ee.value == 3 || ee.value == 4 || ee.value == 5) {
+                    cc = document.getElementById('memrankid').value
+                    let url1 = "@Url.Content("~/api/RateEdit")"
+                    let par = `?Comment_ID=${cc}&Rate=${dd}&Member_ID=${aa}&Movie_ID=${yy}`
+                    let res = await fetch(url1 + par);
+                    let data = await res.text();
+                    if (data == "1") {
+                        closeModal(modal);
+                        rankposter();
+                        newmovie();
+                        listmovie()
+                        aa.value = ""
+                        bb.value = ""
+                        dd.value = ""
+                        cc.value = ""
+                    }
+                }
+                //新增評分
+                else {
+                     let url1 = "@Url.Content("~/api/RateSubmit")"
+                    let par = `?Member_ID=${aa}&Movie_ID=${bb}&Rate=${dd}`
+                    let res = await fetch(url1 + par);
+                    let data = await res.text();
+                    if (data == "1") {
+                        closeModal(modal);
+                        rankposter();
+                        newmovie();
+                        listmovie()
+                        aa.value = ""
+                        bb.value = ""
+                        dd.value = ""
+                    }
+                }
+
+            })
+
+        //刪除評分
+        $('#deletestar').click(async function () {
+            cc = document.getElementById('memrankid').value
+            let url1 = "@Url.Content("~/api/RateDelete")"
+            let par = `?Comment_ID=${cc}&Rate=${dd}&&Movie_ID=${yy}`
+            let res = await fetch(url1 + par);
+            let data = await res.text();
+            rankposter();
+            newmovie();
+            listmovie();
+            if (data == "1") {
+                closeModal(modal);
+                rankposter();
+                newmovie();
+                listmovie();
+                dd.value = ""
+                cc.value = ""
+                resetmodel()
+            }
+            rankposter();
+            newmovie();
+            listmovie();
+         })
+
+        //亂源
+        //書籤加入片單
+        let memberid = "";
+        let movieid = "";
+        let movielistid = "";
+        let listid = "";
+        //banner書籤
+        for (let i = 0; i < bookmarkpluss.length; i++) {
+            bookmarkpluss[i].addEventListener('click', event => {
+                $('#dataSubmit').submit();
+            })
+        }
+
+        //新片排行書籤
+        for (let i = 0; i < rankbook.length; i++) {
+            rankbook[i].addEventListener('click', async function a () {
+                if ($('#會員編號Member_IDbook').val() != 0) {
+                    if (rankbook[i].textContent != '✓') {
+
+                        @*const p = ranktitle[i].getAttribute('data');
+                        memberid = $('#會員編號Member_ID').val();
+                        movielistid=$('#片單總表編號MovieList_ID').val();
+                        movieid = p;
+                        let url1 = "@Url.Content("~/api/bookSubmit")"
+                        let par = `?memberid=${memberid}&movieid=${movieid}&movielistid=${movielistid}`
+                        let res = await fetch(url1 + par);
+                        let data = await res.text();
+                        if (data == "1") {
+                            //closeModal(modal);
+                            rankposter();
+                            newmovie();
+                            listmovie()
+                            memberid.value = ""
+                            movielistid.value = ""
+                            movieid.value = ""
+                            mylistshow()
+                            a.preventDefault();
+                        }*@
+
+                        const p = ranktitle[i].getAttribute('data')
+                        document.getElementById('電影編號Movie_IDbook').value = p;
+                        $("#mylist").remove();
+                        $('#form3').submit()
+                    }
+                    else {
+                        @*const j = ranktitle[i].getAttribute('data-list')
+                        listid = j;
+                        let url1 = "@Url.Content("~/api/bookdelete")"
+                        let par = `?listid=${listid}`
+                        let res = await fetch(url1 + par);
+                        let data = await res.text();
+                        if (data == "1") {
+                            //closeModal(modal);
+                            rankposter();
+                            newmovie();
+                            listmovie()
+                            listid.value = ""
+                            mylistshow()
+                            a.preventDefault();
+                        }*@
+
+                            const j = ranktitle[i].getAttribute('data-list')
+                            document.getElementById('我的片單MyMovieList_ID').value = j;
+                            $('#form4').submit()
+
+                    }
+                }
+                else
+                    $('#dataSubmit').submit();
+            })
+
+        }
+
+        //本周新片書籤
+        for (let i = 0; i < newbook.length; i++) {
+            newbook[i].addEventListener('click', event => {
+                if ($('#會員編號Member_IDbook').val() != 0) {
+                    if (newbook[i].textContent != '✓') {
+                        const p = newtitle[i].getAttribute('data')
+                        document.getElementById('電影編號Movie_IDbook').value = p;
+                        $("#mylist").remove();
+                        $('#form3').submit()
+                    }
+                    else {
+                        const j = newtitle[i].getAttribute('data-list')
+                        document.getElementById('我的片單MyMovieList_ID').value = j;
+                        $('#form4').submit()
+                    }
+                }
+                else
+                    $('#dataSubmit').submit();
+            })
+        }
+
+        //期待排行書籤
+        for (let i = 0; i < exbook.length; i++) {
+            exbook[i].addEventListener('click', event => {
+                if ($('#會員編號Member_IDbook').val() != 0) {
+                    if (exbook[i].textContent != '✓') {
+                        const p = exptitle[i].getAttribute('data')
+                        document.getElementById('電影編號Movie_IDbook').value = p;
+                        $("#mylist").remove();
+                        $('#form3').submit()
+                    }
+                    else {
+                        const j = exptitle[i].getAttribute('data-list')
+                        document.getElementById('我的片單MyMovieList_ID').value = j;
+                        $('#form4').submit()
+                    }
+                }
+                else
+                    $('#dataSubmit').submit();
+            })
+        }
+
+        //推薦書籤 remove死了
+        for (let i = 0; i < recbook.length; i++) {
+            recbook[i].addEventListener('click', event => {
+                if ($('#會員編號Member_IDbook').val() != 0) {
+                    if (recbook[i].textContent != '✓') {
+                        const p = recommendposters[i].getAttribute('data')
+                        document.getElementById('電影編號Movie_IDbook').value = p;
+                        $("#mylist").remove();
+                        $('#form3').submit()
+                    }
+                    else {
+                        const j = recommendposters[i].getAttribute('data-list')
+                        document.getElementById('我的片單MyMovieList_ID').value = j;
+                        $('#form4').submit()
+                    }
+                }
+                else
+                    $('#dataSubmit').submit();
+            })
+        }
+
+        //我的片單
+        for (let i = 0; i < listbook.length; i++) {
+            listbook[i].addEventListener('click', event => {
+                if ($('#會員編號Member_IDbook').val() != 0) {
+                    const j = listtitle[i].getAttribute('data-list')
+                        document.getElementById('我的片單MyMovieList_ID').value = j;
+                        $('#form4').submit()
+                }
+                else
+                    $('#dataSubmit').submit();
+            })
+        }
+    </script>
+
+}
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> @*footer樣式*@
+<script src="~/js/HomePage/banner.js"></script>

@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "SearchKeyword";
+    Layout = "~/Views/Shared/_WenLayout.cshtml";
+}
+<style>
+    .text-6:hover {
+        /*box-shadow: 0 10px;*/
+        padding-bottom: 20px;
+        margin: 10px;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 5px #00ffff solid;
+    }
+
+    .text-6 {
+        /*box-shadow: 0 10px;*/
+        padding-bottom: 20px;
+        margin: 10px;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: darkgreen;
+        /*border-bottom: 2px #0094ff solid;*/
+    }
+</style>
+<div style="display:block;height:40px;"></div>
+
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+
+        @*<span class="h5"><i class="fa-solid fa-magnifying-glass"></i> &nbsp;搜尋關鍵字</span><br />*@
+        <button type="button" id="mysearch" class="btn-primary"><i class="fa-solid fa-magnifying-glass"></i>搜尋關鍵字</button>
+        <input type="text" class="form-control" id="mykeyword">
+
+    </div>
+    <div class="col-2"></div>
+</div>
+
+<br />
+@*<h4>CardLayout</h4>*@
+
+<div class="container">
+    <div class="card-columns">
+
+    </div>
+</div>
+@section Scripts{
+    <script>
+     const inputText = document.querySelector("#mykeyword")
+     const Mysearch = document.querySelector("#mysearch")
+     const Mydiv1 = document.querySelector("#mydiv")
+     const MylistData = document.querySelector(".container")
+
+     inputText.addEventListener("input", async () => {
+         const keyword = inputText.value
+         //console.log(keyword)
+         let response = await fetch("@Url.Content("~/WenShoppingCart/TestSearchKeyword")" + `?keyword=${keyword}`)
+         // console.log(response)
+         let result = await response.json() //["Chai","Chang","Chartreuse verte"]
+         //console.log(result.length)
+         console.log(result)
+
+         result.forEach(item => {
+             //console.log(item.商品名稱productName)
+             //console.log(item.商品價格productPrice)
+             //console.log(item.商品介紹introduce)
+             //console.log(item.商品圖片路徑imagePath)
+             //console.log(item.電影院名稱theaterName)
+             //console.log(item.商品編號productId)
+
+         })
+         let b = result.map(item => {
+
+             return (
+                 `<div class="container">
+<div class="col-md-4">
+                 <div typeof="hidden" value="${item.商品編號productId}"></div>
+                 <div class="card bg-white text-dark" style="width: 20rem; height:33rem;" >
+                 <img class="card-img-top img-thumbnail p-4" src="/images/WenProduct/${item.商品圖片路徑imagePath}" />
+                 <div class="card-body">
+                 <h5 class="card-title">品名: ${item.商品名稱productName}<br/><small>[${item.電影院名稱theaterName}]<small></h5>
+                 <p class="card-text">類別: ${item.類別category}</br>價格: ${item.商品價格productPrice}</br>描述: ${item.商品介紹introduce}</p>
+                 <a href="AddToCart/?id=${item.商品編號productId}" class="btn btn-outline-success">加入購物車</a>
+                </div>
+</div>
+                </div>
+</div>`
+                 )
+         })
+         document.querySelector(".card-columns").innerHTML = b.join("")
+
+         })
+
+    </script>
+}

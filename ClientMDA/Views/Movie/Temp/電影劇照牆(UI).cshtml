@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "電影劇照牆";
+}
+
+@section Styles{
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <base href="https://xieranmaya.github.io/images/cats/">
+    <style>
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+            section::after {
+                content: '';
+                flex-grow: 999999999;
+            }
+
+        .divPhoto {
+            margin: 2px;
+            position: relative;
+        }
+        i {
+            display: block;
+        }
+
+        .divPhoto img {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            vertical-align: bottom;
+        }
+    </style>
+}
+
+<br />
+<span style="font-size:33px">@ViewData["Title"] </span><span style="font-size:25px"> Photo Gallery</span>
+<br />
+<span style="font-size:15px">電影標題 (上映年份)</span>
+<br /><br />
+
+
+<html ng-app="App">
+<body ng-controller="ImageLayout">
+    <section>
+
+        <div class="divPhoto" ng-repeat="img in imgs" style="width:{{img.width*200/img.height}}px;flex-grow:{{img.width*200/img.height}}">
+            <i style="padding-bottom:{{img.height/img.width*100}}%"></i>
+            <a asp-controller="Comment" asp-action="電影評論">
+                <img src="{{img.url}}" alt="">
+            </a>
+        </div>
+    </section>
+</body>
+</html>
+
+@section Scripts{
+<script>
+    angular.module('App', [])
+        .controller('ImageLayout', ImageLayout)
+
+    function ImageLayout($scope, $http) {
+        $http.get('https://xieranmaya.github.io/images/cats/cats.json').success(function (imgs) {
+            $scope.imgs = imgs
+        })
+    }
+</script>
+
+}

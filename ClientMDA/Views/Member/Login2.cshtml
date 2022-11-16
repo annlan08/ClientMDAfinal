@@ -1,0 +1,187 @@
+﻿@model ClientMDA.ViewModels.CLogin2ViewModel
+@{
+    ViewData["Title"] = "Login2";
+}
+
+@section Styles{
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <style>
+        div.login__form::after {
+            content: none;
+        }
+
+        #temp {
+            content: none;
+        }
+
+        .login {
+            padding: 10px 0 120px 0;
+        }
+
+        .black {
+            color: black
+        }
+    </style>
+}
+
+<!-- Page Preloder -->
+<div id="preloder" style="display: none;">
+    <div class="loader" style="display: none;"></div>
+</div>
+
+<!-- Header End -->
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg" style="background-image: url(&quot;img/normal-breadcrumb.jpg&quot;);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Welcome to MDA</h2>
+                    <p>觀享時刻</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+<!-- Login Section Begin -->
+<section class="login spad">
+    <div style="display:flex;">
+        <div class="login__form" style="margin:auto;" id="temp">
+            <h3>登入</h3>
+            <form method="post">
+                <div class="input__item">
+                    <input type="text" name="txtPhone" value="@ViewBag.phone" readonly>
+                    <span class="icon_mobile"></span>
+                </div>
+                <div class="input__item">
+                    <input type="password" name="txtPassword" id="txt" placeholder="密碼">
+                    <span class="icon_lock"></span>
+                </div>
+                @{
+                    if (ViewBag.txtError == false)
+                    {
+                        <div style="color:red">密碼錯誤</div>
+                    }
+                }
+                <button type="submit" class="site-btn">登入</button>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#Modal" id="foreget">忘記密碼</button>
+                <div>
+                    <button type="button" class="site-btn" id="demo1">demo_1</button>
+                </div>
+            </form>
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="color:black" id="exampleModalLabel">圖形驗證</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @*<form method="GET" id="form1" action="~/Member/Login2ForgetPwd" class="black">*@
+                        <div class="modal-body " style="color:black">
+                            <input type="hidden" name="txtPhone" value="@ViewBag.phone" />
+                            <div>
+                                驗證信將寄至您註冊時的Email: <input id="inputEmail" value="" readonly />
+                            </div>
+                            <div class="code">
+                                <label>請輸入圖形驗證碼</label>
+                                <input type="text" id="inputPic" autocomplete="off" />
+                                <img id="code" src='@Url.Action("GetValidatePic","Member")' />
+                            </div>
+                            <div>
+                                @*<button type="button" id="chkPic" class="btn btn-secondary">驗證</button>*@
+                                <i id="msg" style="color:red"></i>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="sendMail" disabled>確認發送驗證信</button>
+                        </div>
+                        @*</form>*@
+                    </div>
+                </div>
+            </div>
+            <!-- Modal end-->
+        </div>
+    </div>
+
+</section>
+<!-- Login Section End -->
+<!-- Js Plugins -->
+@section Scripts{
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <script>
+        const msg = document.querySelector("#msg")
+        const btnChkPic = document.querySelector("#chkPic")
+        const inputPic = document.querySelector("#inputPic")
+        const inputEmail = document.querySelector("#inputEmail")
+        const btnSendMail = document.querySelector("#sendMail")
+        const btnForeget = document.querySelector("#foreget")
+        inputPic.addEventListener("input", async () => {
+            const url = "@Url.Content("~/member/checkValidatePic")"
+            const params = `?code=${inputPic.value}`
+            let response = await fetch(url+params)  //resolve->response, reject
+            let data = await response.text()
+            if (data == 'T') {
+                msg.textContent = "驗證碼正確"
+                btnSendMail.disabled = false
+            }
+            else {
+                btnSendMail.disabled = true
+                msg.textContent = "驗證碼錯誤"
+            }
+        })
+        btnForeget.addEventListener('click', async() => {
+            let response = await fetch('@Url.Content("~/member/queryEmail")')
+            let data = await response.text()
+            inputEmail.value = data
+        })
+        btnSendMail.addEventListener('click', () => {
+            location.href='@Url.Content("~/member/Login2ForgetPwd")'
+        })
+
+    </script>
+    <script>
+        const demo1 = document.querySelector("#demo1")
+        const txt = document.querySelector("#txt")
+        demo1.addEventListener("click", () => {
+            txt.value = "1111"
+        })
+    </script>
+}
+

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Activity";
+    Layout = "~/Views/Shared/_WenLayout.cshtml";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 style="color:coral">天天領取</h1>        
+        <img src="~/images/WenProduct/wenpoint.jpg" class="w-75"/>
+        <input type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" value="優惠卷" />
+    </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h3 style="color:coral; text-align:center" class="modal-title">複製優惠碼，立即折扣50元</h3>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <p id="text" style="color:coral; text-align:center" class="h1">Mdanew100</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btn" class="btn btn-warning">Copy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        const select = (DOM) => document.querySelector(DOM);
+
+        select('#btn').addEventListener('click', (e) => {
+            // 建立 Range 物件
+            const range = document.createRange();
+            const texts = select('#text');
+            range.selectNode(texts);
+            // 取得 Selection 物件
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand("copy");
+            selection.removeAllRanges();
+        })
+    </script>
+
+}

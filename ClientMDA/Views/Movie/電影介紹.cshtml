@@ -1,0 +1,406 @@
+﻿@model ClientMDA.ViewModels.CMovieViewModel
+<!-- #region 會員session -->
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+}
+<!-- #endregion 會員session -->
+
+@{
+    ViewData["Title"] = "電影介紹";
+}
+
+@section Styles{
+    <style>
+        .anime__details__form {
+            /* width: 100%;*/
+        }
+
+        .txtarea {
+            /*width: 100%;*/ /*評論寬度*/
+        }
+
+        .mem_rate {
+            float: right;
+        }
+
+        .see-more {
+            float: right;
+        }
+
+        .anime__details__pic { /*電影海報*/
+            height: 520px;
+        }
+
+            .anime__details__pic .view { /*瀏覽人數*/
+                top: 10px;
+                left: 0;
+                /*bottom: 10px;*/
+                background: rgba(0,0,0,0);
+            }
+
+            .anime__details__pic .comment { /*評論數量*/
+                bottom: 10px;
+                /*right: 10px;
+                left: auto;*/
+                background: rgba(0,0,0,.5);
+            }
+
+        anime__details__btn {
+            vertical-align: bottom;
+        }
+
+        .MoviePlot {
+            overflow: hidden !important; /*溢位*/
+            text-overflow: ellipsis !important; /*文字溢位ellipsis... */
+            display: -webkit-box;
+            -webkit-line-clamp: 12; /*限制元素顯示文字行數*/
+            -webkit-box-orient: vertical; /*垂直排列*/
+            word-break: break-all;
+        }
+
+        .mComment-text {
+            overflow: hidden !important; /*溢位*/
+            text-overflow: ellipsis !important; /*文字溢位ellipsis... */
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /*限制元素顯示文字行數*/
+            -webkit-box-orient: vertical; /*垂直排列*/
+            word-break: break-all;
+        }
+
+        .anime__details__rating span { /*評分分數位置*/
+            display: inline;
+        }
+
+        .set-bg h3 { /*電影海報-觀看劇照文字效果*/
+            opacity: 0;
+            text-align: center;
+            font-weight: 900;
+            color: rgba(255,255,255,.8);
+            background-color: rgba(0,0,0,.35);
+            /*background: linear-gradient(top,#0b0c2a,rgba(51,51,51,0));*/
+            padding: 242px 0 242px 0;
+        }
+
+        .set-bg:hover { /*電影海報-滑入效果*/
+            /*-webkit-filter: opacity(65%);*/ /* Safari */
+            /*filter: opacity(65%);
+            text-decoration: none;
+            transition: all .4s linear;*/
+        }
+
+            .set-bg:hover h3 { /*電影海報-觀看劇照文字效果*/
+                opacity: 1;
+                transition: opacity .5s ease-in-out;
+            }
+
+        .memImg-Circle { /*會員大頭貼*/
+            clip-path: circle(45% at 50% 50%);
+            height: 50px;
+        }
+
+        input, select, textarea { /*留言版型跑版*/
+            max-width: none !important;
+        }
+        .btn-warning { /*撰寫評論文字顏色*/
+            color: #212529 !important;
+        }
+    </style>
+    <link href="~/css/fontawesome-free-6.2.0-web/all.css" rel="stylesheet" />
+    @*電影icon樣式*@
+    <script src="~/js/fontawesome-free-6.2.0-web/all.js"></script>
+    @*電影icon樣式*@
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+}
+@*<form asp-action="List" enctype="multipart/form-data">*@
+
+    <!-- Page Preloder -->
+    <div id="preloder" style="display: none;">
+        <div class="loader" style="display: none;"></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="電影編號movieId" />
+    </div>
+
+    <!-- #region 電影介紹 -->
+    <section class="anime-details spad">
+        <div class="container">
+            <div class="anime__details__content">
+                <div class="row">
+                    <div class="col-lg-4">
+
+                        @{                        
+                            string urlpic = "";
+
+                            //電影分級圖片
+
+                            urlpic = "http://192.168.36.4:44383/images/MovieImage/" + @Model.mPoster[0].movieImage; /*Model.mImgFrList[0] //IMDB路徑*/
+
+
+                        }
+
+                        <!-- 電影劇照牆  --> 
+                        <a href="@Url.Action("電影劇照牆", "Movie", new { id = Model.電影編號movieId })">
+
+                            <!-- 電影海報  -->
+                            @{if (urlpic != null)
+                                {
+                                    <div title="@Model.中文標題titleCht" class="anime__details__pic set-bg" data-setbg="@urlpic" style="background-image:url('@urlpic')">
+                                        <H3>觀看劇照</H3>
+                                        <div class="view"><img height="35" src="@Url.Action("ShowPhoto", "Movie", new { id = @Model.電影分級編號ratingId })" /></div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div title="@Model.中文標題titleCht 劇照" class="anime__details__pic set-bg" data-setbg="~/images/Movie/poster_none1.png"
+                                         style="background-image: url('~/images/Movie/poster_none1.png')">
+                                        <div class="view"><img height="35" src="@Url.Action("ShowPhoto", "Movie", new { id = @Model.電影分級編號ratingId })" /></div>
+                                    </div>
+                                }}
+                        </a>
+                    </div>
+                    <!--#region 電影介紹-->
+                    <div class="col-lg-8">
+
+                        <div class="anime__details__text">
+                            <div class="anime__details__title">
+                                <h3><i class="fa-solid fa-film"></i> @Model.中文標題titleCht</h3>
+                                <span> @Model.英文標題titleEng</span>
+                            </div>
+                            <div class="anime__details__rating">
+                                <!--#region 電影評分-->
+                                @{
+                                    decimal? 預設mRate = Model.評分rate;
+                                    decimal? 原始總評分 = 0;
+                                    decimal? 平均評分 = 0;
+                                    decimal 平均評分ToDecimal = 0;
+                                    decimal 平均mRate = 0;
+
+                                    string 平均評分ToString = "";
+                                    if (Model.mRateList.Count() != 0)
+                                    {
+                                        for (int a = 0; a < Model.mRateList.Count(); a++)
+                                        { 原始總評分 += Model.mRateList[a]; }
+                                        平均評分 = 原始總評分 / Model.mRateList.Count();
+                                        平均評分ToString = 平均評分.ToString(); //轉字串
+                                        平均評分ToDecimal = decimal.Parse(平均評分ToString); //轉小數
+                                        平均mRate = decimal.Round(平均評分ToDecimal, 1); //取小數點
+                                    }
+                                    if (Model.mRateList.Count() != 0)
+                                    {
+                                        <div class="rating">
+                                            <h4><i class="fa fa-star" style="color:#ffc107;"></i><span class="fs-4"> @平均mRate</span></h4>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="rating">
+                                            <h4><i class="fa fa-star" style="color:#ffc107;"></i><span class="fs-4"> @預設mRate</span></h4>
+                                        </div>
+                                    }
+                                }
+                                <!--#endregion 電影評分-->
+                            </div>
+                            <p class="MoviePlot">
+                                @Model.劇情大綱plot
+                            </p>
+                        </div>
+                        <div class="anime__details__btn">
+                            @*@Html.ActionLink("追蹤會員", "follow會員", new { followMid = 1 }, new { @class = "btn btn-info btn-sm" })*@
+                            @if (mem == null) /*非會員*/
+                            {
+                                @Html.ActionLink("訂票去", "快定頁面測試", "Theater", new { id = Model.電影編號movieId }, new { @class = "btn btn-info btn-sm", id = "ticketing", @style = "margin-right:10px" })
+                                <button class="btn btn-info btn-sm" id="myList" style="margin-right:10px">加入片單</button>
+                                @*@Html.ActionLink("加入片單", "checkLogin", new { id = Model.電影編號movieId }, new { @class = "btn btn-info btn-sm", id = "myList", @style = "margin-right:10px" })*@
+                                <button class="btn btn-warning btn-sm" id="toRate" style="margin-right:10px">評分</button>
+                                @*@Html.ActionLink("評分", "checkLogin", new { id = Model.電影編號movieId }, new { @class = "btn btn-warning btn-sm", id = "toRate", @style = "margin-right:10px" })*@
+                                @Html.ActionLink("撰寫評論", "checkLogin", new { page = "電影介紹", id = Model.電影編號movieId }, new { @class = "btn btn-warning btn-sm", id = "WriteComment" })
+
+                            }
+                            else /*會員*/
+                            {
+                                @Html.ActionLink("訂票去", "快定頁面測試", "Theater", new { id = Model.電影編號movieId }, new { @class = "btn btn-info btn-sm", id = "ticketing", @style = "margin-right:10px" })
+                                <button class="btn btn-info btn-sm" id="myList" style="margin-right:10px">加入片單</button>
+                                <button class="btn btn-warning btn-sm" id="toRate" style="margin-right:10px">評分</button>
+                                @Html.ActionLink("撰寫評論", "WriteComment", "Member", new { id = Model.電影編號movieId }, new { @class = "btn btn-warning btn-sm", id = "WriteComment" })
+                            }
+                        </div>
+                    </div>
+                    <!--#endregion 電影介紹-->
+                </div>
+            </div>
+
+            <div class="row"></div>
+
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+
+                    @*@await Component.InvokeAsync("演員list", new { id = Model.電影編號movieId })
+        <br />*@
+
+                    <!-- #region 評論 -->
+                    <!-- 你的評論 -->
+                    <div class="col-lg-11 col-md-8">
+                        <!-- #region 你的評論 -->
+                        <form asp-action="電影介紹">
+                            <div class="blog__details__form">
+                                <div class="section-title">
+                                    <h5>你的評論</h5>
+                                </div>
+                                @*<form action="#">*@
+                                @*<div class="row">*@
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" class="form-control" name="電影編號movieId" value="@Model.電影編號movieId" />
+                                    @*會員編號評分評論標題評論內容發布內容*@
+                                    @if (mem == null) /*非會員*/
+                                    {
+                                        <div class="d-flex flex-row">
+                                            <div>
+                                                <input type="text" placeholder="Name" readonly="readonly" class="form-control" style="margin-bottom:10px;width:308px">
+                                            </div>
+                                            <div class="ml-2">
+                                                <input type="number" placeholder="評分" readonly="readonly" class="form-control" style="margin-bottom:10px;width:308px">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="text" placeholder="Title" readonly="readonly" class="form-control" style="margin-bottom:10px;width:624px">
+                                        </div>
+                                    }
+                                    else /*會員*/
+                                    {
+                                        <div class="d-flex flex-row">
+                                            <div>
+                                                <input type="hidden" class="form-control" name="會員編號memberId" value="@mem.會員編號memberId" required />
+                                                <input type="hidden" class="form-control" name="電影編號movieId" value="@Model.電影編號movieId" required />
+                                                <input type="text" placeholder="Name" readonly="readonly" class="form-control" style="margin-bottom:10px;width:308px"
+                                                       name="暱稱nickName" value="@mem.暱稱nickName"/>
+                                            </div>
+                                            <div class="ml-2">
+                                                <input type="number" placeholder="評分" class="form-control" style="margin-bottom:10px;width:308px"
+                                                       min="1" max="5" id="" value="" name="評分rate" required>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <input type="text" placeholder="Title" class="form-control" style="margin-bottom:10px;width:624px"
+                                                   id="" value="" name="評論標題commentTitle" required>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-lg-12">
+                                    @if (mem == null) /*非會員*/
+                                    {
+                                        <textarea placeholder="Message" readonly="readonly" class="form-control" style="margin-bottom:10px;width:624px"></textarea>
+                                        @Html.ActionLink("登入評論", "checkLogin", new { page = "電影介紹", id = Model.電影編號movieId }, new { @class = "btn btn-info btn-sm", @style = "float:right;margin-right:-15px" })
+                                    }
+                                    else /*會員*/
+                                    {
+                                        <textarea placeholder="Message" class="form-control" style="margin-bottom:10px;width:624px"
+                                                  name="評論內容comments" value="" required></textarea>
+                                        <button type="submit" style="float:right;margin-right:-15px" class="btn btn-info btn-sm" id="save">送出</button>
+                                        <button type="button" style="float:right; margin-right:5px" class="btn btn-secondary btn-sm" id="demo">DEMO</button>
+
+                                    }
+                                </div>
+                                @*</div>*@
+                                @*</form>*@
+                            </div>
+                            <!-- #endregion 你的評論 -->
+                        </form>
+                    </div>
+                    <br /><br /><br /><br />
+                    <!-- 會員評論 -->
+
+                    @await Component.InvokeAsync("電影評論list", new { id = Model.電影編號movieId })
+
+                    <!-- #endregion 評論 -->
+                </div>
+                <!-- #region 電影資訊 -->
+                <div class="col-lg-4 col-md-4">
+                    <div class="anime__details__sidebar">
+                        <div class="section-title">
+                            <h5>電影資訊</h5>
+                        </div>
+                        <div class="anime__details__widget">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <ul>
+                                        <li><span>系列電影:</span> @Model.系列名稱seriesName</li>
+                                        <li><span>上映年份:</span> @Model.上映年份releaseYear</li>
+                                        <li>
+                                            <span>上映日期:</span>
+                                            @Html.DisplayFor(model => model.上映日期releaseDate)
+                                        </li>
+                                        <li>
+                                            <span>導　　演:</span>
+                                            @foreach (var item in Model.mDirectorList)
+                                            {
+                                                <label title="@item.directorEngName">@item.directorChtName </label>
+                                                @*<img class="" height="20" src="http://192.168.36.4:44383/images/Director/@item.directorImg" alt="">*@
+                                            }
+                                        </li>
+                                        <li>
+                                            <span>演　　員:</span>
+                                            <!-- #region 控制演員顯示數量 -->
+                                            @*@for (int i = 0; i < 10; i++)
+                                                {<label>@Model.mActorList[i].ActorChtName (@Model.mActorList[i].ActorEngName)</label>}
+                                                <img class="" height="20" src="http://192.168.36.4:44383/images/Actor/@item.ActorImg" alt="">*@
+                                            <!-- #endregion 控制演員顯示數量 -->
+                                            <!-- #region 演員全部列出 -->
+                                            @foreach (var item in Model.mActorList)
+                                            {
+                                                <label title="@item.ActorEngName">@item.ActorChtName (@item.ActorEngName)</label>
+                                                @*<img class="" height="20" src="http://192.168.36.4:44383/images/Actor/@item.ActorImg" alt="">*@
+                                            }
+                                        </li>
+                                        <!-- #endregion 演員全部列出 -->
+                                        <li><span>電影分級:</span> @Model.分級級數ratingLevel</li>
+                                        <li>
+                                            <span>電影產地:</span>
+                                            @foreach (var item in Model.mCountryList)
+                                            {
+                                                <label>@item.countryName</label>
+                                                <img class="" height="20" src="http://192.168.36.4:44383/images/Country/@item.countryImage" alt="">
+                                                <label> </label>
+                                            }
+                                        </li>
+                                        <li><span>片　　長:</span> @Model.片長runtime 分鐘</li>
+                                        <li>
+                                            <span>片　　種:</span>
+                                            @foreach (var item in Model.mTypeList)
+                                            {
+                                                <label>@item.mType </label>
+                                            }
+                                        </li>
+                                        <li><span>票　　房:</span> @Model.票房boxOffice 億美元</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion 電影資訊 -->
+            </div>
+        </div>
+    </section>
+    <!-- #endregion 電影介紹 -->
+    <!-- #region Js 樣式 -->
+@section Scripts{ 
+<script>
+    //短評DEMO
+    const demo = document.querySelector("#demo")
+    demo.addEventListener('click', () => {
+        document.querySelector('[name="評論標題commentTitle"]').value = "好看又無聊的一部電影"
+        document.querySelector('[name="評分rate"]').value = 3
+        document.querySelector('[name="評論內容comments"]').value = "巨石的片真的幾乎都是看的當下覺得還不錯，走出戲院會突然有種我剛剛到底看了什麼，但又不會覺得浪費錢的奇妙感覺。"
+    })
+</script>
+}
+    <!-- #endregion Js 樣式 -->
+@*</form>*@

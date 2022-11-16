@@ -1,0 +1,44 @@
+﻿<link href="~/css/OPayLoader.css" rel="stylesheet" />
+<style>
+    .loader2 {
+        position:absolute!important;
+        top:45%!important;
+        left:48%!important;
+    }
+</style>
+<form id="formCVS" method="post" accept-charset="UTF-8" action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
+    <input type="hidden" name="MerchantID" value="2000132" />
+    <input type="hidden" name="MerchantTradeNo" value="@ViewBag.tradeNo" />
+    <input type="hidden" name="MerchantTradeDate" value="@ViewBag.timenow" />
+    <input type="hidden" name="PaymentType" value="aio" />
+    <input type="hidden" name="TotalAmount" value="@ViewBag.Total" />
+    <input type="hidden" name="TradeDesc" value="建立信用卡測試訂單" />
+    <input type="hidden" name="ItemName" value="@ViewBag.ItemName" />
+    <input type="hidden" name="ReturnURL" value="https://developers.opay.tw/AioMock/MerchantReturnUrl" />
+    <input type="hidden" name="ChoosePayment" value="Credit" />
+    <input type="hidden" name="StoreID" value="" />
+    <input type="hidden" name="ClientBackURL" value="@ViewBag.ClientBackURL" />
+    <input type="hidden" name="CreditInstallment" value="" />
+    <input type="hidden" name="InstallmentAmount" value="" />
+    <input type="hidden" name="Redeem" value="" />
+    <input type="hidden" name="EncryptType" value="1" />
+    <input type="hidden" name="CheckMacValue" value="@ViewBag.checkMacValue" />
+</form>
+
+
+
+<div id="preloder">
+    <div class="loader2"></div>
+</div>
+
+<script>
+    (function ($) {
+        $(window).on('load', function () {
+            $('header').hide();
+            $('footer').hide();
+            setTimeout(() => {
+                $('#formCVS').submit();
+            },2000)
+        });
+    })(jQuery);
+</script>

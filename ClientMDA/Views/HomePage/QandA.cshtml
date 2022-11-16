@@ -1,0 +1,104 @@
+﻿@model List<ClientMDA.ViewModels.CQANDAViewModel>
+
+@{
+    ViewData["Title"] = "QandA";
+}
+
+@section styles{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/HomePage/QandA.css" rel="stylesheet" />
+    <style>
+        #box1, #box2 {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            background-color: rgba(44,44,44,0.6);
+            color: whitesmoke;
+            width: 160px;
+            height: 50px;
+            vertical-align: middle;
+            align-items: center;
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 1%;
+        }
+
+            button:hover {
+                background-color: rgba(255, 191, 0,0.6);
+            }
+    </style>
+}
+
+<h2>FQA專區</h2>
+
+<div id="boxtoutside">
+    <div id="box1">
+        <button id="一般資訊">一般資訊</button>
+        <button id="會員問題">會員問題</button>
+        <button id="評分問題">評分問題</button>
+        <button id="評論問題">評論問題</button>
+        <button id="加入片單">加入片單</button>
+    </div>
+    <div id="box2">
+        <button id="訂票問題">訂票問題</button>
+        <button id="取票問題">取票問題</button>
+        <button id="退票問題">退票問題</button>
+        <button id="優惠券">優惠紅利</button>
+        <button id="購物問題">購物問題</button>
+    </div>
+
+    <div id="頁面切換">
+        @await Component.InvokeAsync("一般資訊", new { datas = Model })
+    </div>
+    <div class="support-button text-center d-flex align-items-center justify-content-center mt-4 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;" id="contenctus">
+        <i class="lni-emoji-sad"></i>
+        <p class="mb-0 px-2" style="font-size:1.25rem;">找不到你要的答案？</p>
+        <a href="mailto:ilovemdaofficial@gmail.com" style="color:palegreen;font-size:1.25rem;"> 聯絡我們</a>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+    $('#會員問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/memQa")')
+    })
+    $('#一般資訊').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/GeneraInfor")')
+    })
+    $('#評分問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/rateQa")')
+    })
+    $('#評論問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/commentQa")')
+    })
+    $('#加入片單').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/addlistQa")')
+    })
+    $('#訂票問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/orderticketQa")')
+    })
+    $('#取票問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/taketicketQa")')
+    })
+    $('#退票問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/refundQa")')
+    })
+    $('#優惠券').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/couponQa")')
+    })
+    $('#購物問題').click(function () {
+        $('#頁面切換').load('@Url.Content("~/HomePage/shopQa")')
+    })
+
+      
+    </script>
+}
+
+

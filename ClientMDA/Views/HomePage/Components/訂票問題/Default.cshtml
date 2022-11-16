@@ -1,0 +1,24 @@
+﻿@model List<ClientMDA.ViewModels.CQANDAViewModel>
+@{
+    ViewData["Title"] = "Default"; @*訂票問題*@
+}
+
+<div id="Qbox">
+    <div class="accordion" id="accordionExample">
+        @foreach (var q in Model.First().訂票問題orderticketQa)
+        {
+            <div class="card" id="Qcard">
+                <div class="card-header" id='heading_@q.訂票問題orderticketQaId'>
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse_@q.訂票問題orderticketQaId " aria-expanded="false" aria-controls="collapse_@q.訂票問題orderticketQaId" id="Qbtn">@q.問題question</button>
+                    </h2>
+                </div>
+
+                <div id="collapse_@q.訂票問題orderticketQaId" class="collapse" aria-labelledby="heading_@q.訂票問題orderticketQaId" data-parent="#accordionExample">
+                    <div class="card-body">@Html.Raw(@q.答案answer)</div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

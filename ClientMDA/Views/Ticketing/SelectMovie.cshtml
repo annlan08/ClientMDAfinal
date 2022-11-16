@@ -1,0 +1,73 @@
+﻿@{
+
+}
+<link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+<link href="~/assets/css/main.css" rel="stylesheet">
+<style>
+    .col-md-4:hover {
+        color: #6C6C6C;
+        font-size: 105%;
+    }
+
+    .corTick {
+        background-color: #00b0f0 !important;
+        color: white !important;
+        font-size: 16px !important;
+        transition: opacity .5s ease-in-out !important;
+    }
+</style>
+
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+<figure style="float:left; position: fixed;left: 40px;top:50%;width:600px;margin-top: -2.5em;border-block: initial;list-style-type: none;z-index:999;">
+    <img height="200" src="~/images/unknown.png" />
+</figure>
+<section class="container m-auto pb-1" style="padding-top:5%">
+    <div class="row mb-3 justify-content-center">
+        <div class="col-md-4 themed-grid-col font-weight-bolder" style="font-size: 50px; text-align: center; cursor: pointer;" id="SelectMovie">選擇電影</div>
+        <div class="col-md-4 themed-grid-col font-weight-bolder" style="font-size: 50px; text-align: center; cursor: pointer;" id="SelectTheater">選擇影院</div>
+    </div>
+
+    <div class="container-sm m-auto pt-0" id="partialView">
+
+    </div>
+</section>
+
+
+<script>
+    (function ($) {
+        $(window).on('load', function () {
+            $(".loader").fadeOut();
+            $("#preloder").delay(20).fadeOut("slow");
+        });
+    })(jQuery);
+
+    const preloader = document.querySelector('#preloader');
+    (function ($) {
+        $(window).on('load', async function () {
+            setTimeout(() => {
+                preloader.classList.add('loaded');
+            }, 1000);
+            setTimeout(() => {
+                preloader.remove();
+            }, 2000);
+
+        });
+    })(jQuery);
+
+    $('#partialView').load('@Url.Action("MoviePartialView")')
+    let selectMovie = document.querySelector("#SelectMovie")
+    let selectTheater = document.querySelector("#SelectTheater")
+    selectTheater.addEventListener("click", () => {
+        $('#partialView').load('@Url.Action("TheaterPartialView")')
+    })
+
+    selectMovie.addEventListener("click", () => {
+        $('#partialView').load('@Url.Action("MoviePartialView")')
+    })
+</script>
+
+<script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="~/assets/js/main.js"></script>
+

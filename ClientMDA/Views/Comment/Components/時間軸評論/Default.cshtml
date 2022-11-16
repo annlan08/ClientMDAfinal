@@ -1,0 +1,84 @@
+﻿@model List<ClientMDA.ViewModels.CCommentViewModel>
+@{
+    ViewData["Title"] = "Default"; @*時間軸評論*@
+}
+
+@{
+
+        for (var i = 0; i < Model.Count; i++)
+        {
+            int c = i + 1;
+        <!-- #region 左側文章 start-->
+        <dd class="pos-left clearfix">
+            @*<dd class="pos-right clearfix">*@
+            <div class="circ"></div>
+            <div class="time">
+                <!-- 填入日期 -->
+                @Model[i].發佈時間commentTime.ToString("yyyy") <br /> @Model[i].發佈時間commentTime.ToString("MMMM", new System.Globalization.CultureInfo("en-us")).Substring(0, 3) @Model[i].發佈時間commentTime.ToString("dd")
+            </div>
+
+            <div class="events"id="comment_@c">
+                <div class="events-header"><h5>@Model[i].評論標題commentTitle</h5></div><!--填入標題-->
+                <div class="events-body">
+                    <div @*class="row"*@>
+                        <div class="pull-left">
+                            <img class="events-object img-responsive img-rounded" src="" /><!--填入圖片網址-->
+                        </div>
+                        <br />
+                        <div class="events-desc">
+                            @Html.Raw(Model[i].評論內容comments)
+                        </div>
+                        <br />
+
+                        <!--填入描述-->
+                    </div>
+                </div>
+                <div class="events-footer" style="padding:5px 5px 4px 0;float:right">
+                    <a style="padding-right:10px;" href="@Url.Action("電影評論", "Comment", new { id = Model[i].評論編號commentId })">
+                        繼續閱讀 >>
+                    </a>
+                </div><!--可填底部標題 或刪除-->
+            </div>
+        </dd>
+        <!--#endregion 左側文章 end-->
+        <!-- #region 右側文章 start -->
+        @*<dd class="pos-right clearfix">
+                <div class="circ"></div>
+                <div class="time">Feb 13</div>
+                填入日期
+                <div class="events">
+                    <div class="events-header">刻骨銘心的悲傷序曲</div>
+                    填入標題
+                    <div class="events-body">
+                        <div class="pull-left">
+                            <img class="events-object img-responsive img-rounded" src="https://m.media-amazon.com/images/M/MV5BMjAzMzQ4MjE0Nl5BMl5BanBnXkFtZTgwNDAyMTI1MDI@@._V1_.jpg" />
+                            填入圖片網址
+                        </div>
+                        <div class="events-desc">
+                            怪獸與牠們的產地這部電影最神奇的地方是，雖然是繼哈利波特系列後的第二個全新系列，
+                            但每個環節絲毫不馬虎，帶回影迷觀看首集哈利波特當初那股感動。......
+                        </div>
+                        填入描述
+                    </div>
+                    <div class="events-footer"><a asp-area="" asp-controller="Comment" asp-action="電影評論">繼續閱讀</a></div>
+                    可填底部標題 或刪除
+                </div>
+            </dd>*@
+        <!--#endregion 右側文章 end-->
+    }
+}
+
+<script>
+    let clearfix = document.querySelectorAll(".clearfix");
+    for (var i = 0; i < clearfix.length; i++) {
+        if (i % 2 == 0)//偶數
+        {
+            clearfix[i].classList.remove("pos-left");
+            clearfix[i].classList.add("pos-left");
+        }
+        else {
+            clearfix[i].classList.remove("pos-left");
+            clearfix[i].classList.add("pos-right");
+        }
+    }
+</script>

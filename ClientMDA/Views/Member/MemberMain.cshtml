@@ -1,0 +1,86 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@{
+    ViewData["Title"] = "MemberMain";
+}
+
+@section Styles{
+    <link href="~/css/Member/MemberMain.css" rel="stylesheet" />
+    <style>
+        .white {
+            color: white;
+            text-align: center
+        }
+    </style>
+    <style>
+        .collapsing {
+            width: 0;
+            transition-property: width;
+            white-space: nowrap;
+            height: 100%;
+        }
+    </style>
+}
+<div class="member_id">
+    <span class="member_hello">HELLO!</span>
+    @{
+        if (mem.暱稱nickName != null)
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">@mem.暱稱nickName</a></span>
+        }
+        else
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">簡易會員</a></span>
+
+        }
+    }
+</div>
+
+<div class="row">
+    <div class="member_menu">
+        @{
+            if (mem.正式會員formal == true)
+            {
+                <a id="watchlist" href="../Member/WatchList" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/CommentList" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/wishlist" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+            else
+            {
+                <a id="watchlist" href="../Member/NotFormal" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/NotFormal" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/NotFormal" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+        }
+
+        <a id="orderlist" href="../Member/orderlist" title="訂單查詢" class="member_link">訂單查詢</a>
+        @*<a id="memberbonuslist" href="../Member/memberbonuslist" title="我的紅利金" class="member_link">我的紅利金</a>*@
+        <a id="memberdiscount" href="../Member/memberdiscount" title="我的抵用券" class="member_link">我的抵用券</a>
+
+        <a id="memberpassword" href="../Member/PasswordEdit" title="密碼修改" class="member_link">密碼修改</a>
+        <a id="MemberEdit" href="../Member/MemberEdit" title="資料修改" class="member_link ">資料修改</a>
+        <a href="../Member/logout" class="member_link" title="登出">登出</a>
+    </div>
+    <div class="member_main">
+        <div class="member_area">
+            <!--content-->
+            <h2 class="white">歡迎使用會員管理</h2>
+
+            <!--end content-->
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+}

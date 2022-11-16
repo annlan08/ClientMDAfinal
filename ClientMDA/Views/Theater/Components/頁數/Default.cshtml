@@ -1,0 +1,150 @@
+﻿@model List<ClientMDA.ViewModels.CTheater>
+@{
+    ViewData["Title"] = "Default";
+}
+<style>
+
+    .ffVUQI .why {
+        border-color: rgb(180, 180, 180);
+        border-radius: 50%;
+    }
+</style>
+    <div class="commonStyled__ChangePagesWrapper-sc-kt5vy-7 ffVUQI">
+        <div class="circle nowIndex1" id="toppage"><img src="~/images/Theater/common/changepage-icon0.svg" /></div>
+        <div class="circle nowIndex1" id="lastpage"><img src="~/images/Theater/common/changepage-icon1.svg" /></div>
+        <div id="page1" class="circle numIndex add">1</div>
+        <div class="circle numIndex">2</div>
+        <div class="circle numIndex">3</div>
+        <div class="circle numIndex">4</div>
+        <div id="page5" class="circle numIndex">5</div>
+        <div class="circle " id="nextpage">
+            <img src="~/images/Theater/common/changepage-icon.svg">
+        </div>
+        <div class="circle" id="downpage">
+            <img src="~/images/Theater/common/caret-up.svg">
+        </div>
+    </div>
+
+
+    <script>
+    var 第一頁 = document.querySelector("#toppage")
+    var 上一頁 = document.querySelector("#lastpage")
+    var 下一頁 = document.querySelector("#nextpage")
+    var 最後一頁 = document.querySelector("#downpage")
+
+    $(".numIndex").click(function () {
+        $(this).removeClass("add").siblings().removeClass("add").end().addClass("add");
+        var 現在頁數 = document.querySelector(".add").innerHTML
+        if (parseInt(現在頁數) == 1) {
+            $("#toppage").addClass("nowIndex1")
+            $("#lastpage").addClass("nowIndex1")
+        }
+        else if (parseInt(現在頁數) != 1) {
+            $("#toppage").removeClass("nowIndex1")
+            $("#lastpage").removeClass("nowIndex1")
+        }
+        if (parseInt(現在頁數) == 5) {
+            $("#nextpage").addClass("nowIndex1")
+            $("#downpage").addClass("nowIndex1")
+        }
+        else if (parseInt(現在頁數) != 5) {
+            $("#nextpage").removeClass("nowIndex1")
+            $("#downpage").removeClass("nowIndex1")
+        }
+        var url = "@Url.Content("~/Theater/nowpage")"
+        var params = `?num=${parseInt(現在頁數)}`
+        $(".iyFFWC #頁面切換").load(url + params)
+                var urls = "@Url.Content("~/Theater/hotpage")"
+        $(".gYprgf #頁面切換").load(urls + params)
+    });
+        $(".circle.numIndex").hover(function () {
+
+            $(this).removeClass("why").siblings().removeClass("why").end().addClass("why");
+        },
+            function () {
+
+                $(this).prevAll().removeClass("why").end().removeClass("why");
+            });
+
+    $("#toppage").click(function () {
+        $(".add").removeClass("add")
+        $("#page1").addClass("add")
+        $("#toppage").addClass("nowIndex1")
+        $("#lastpage").addClass("nowIndex1")
+        $("#nextpage").removeClass("nowIndex1")
+        $("#downpage").removeClass("nowIndex1")
+        var 現在頁數 = document.querySelector(".add").innerHTML
+        var url = "@Url.Content("~/Theater/nowpage")"
+        var params = `?num=${parseInt(現在頁數)}`
+        $(".iyFFWC #頁面切換").load(url + params)
+        var urls = "@Url.Content("~/Theater/hotpage")"
+        $(".gYprgf #頁面切換").load(urls + params)
+    })
+    $("#downpage").click(function () {
+        $(".add").removeClass("add")
+        $("#page5").addClass("add")
+        $("#nextpage").addClass("nowIndex1")
+        $("#downpage").addClass("nowIndex1")
+        $("#toppage").removeClass("nowIndex1")
+        $("#lastpage").removeClass("nowIndex1")
+        var 現在頁數 = document.querySelector(".add").innerHTML
+        var url = "@Url.Content("~/Theater/nowpage")"
+        var params = `?num=${parseInt(現在頁數)}`
+        $(".iyFFWC #頁面切換").load(url + params)
+                var urls = "@Url.Content("~/Theater/hotpage")"
+        $(".gYprgf #頁面切換").load(urls + params)
+    })
+    $("#lastpage").click(function () {
+        var 現在頁數 = document.querySelector(".add").innerHTML
+        if (parseInt(現在頁數) == 5) {
+            $("#nextpage").addClass("nowIndex1")
+            $("#downpage").addClass("nowIndex1")
+        }
+        else if (parseInt(現在頁數) != 5) {
+            $("#nextpage").removeClass("nowIndex1")
+            $("#downpage").removeClass("nowIndex1")
+        }
+
+        if (parseInt(現在頁數) != 1) {
+            $("#toppage").removeClass("nowIndex1")
+            $("#lastpage").removeClass("nowIndex1")
+        }
+        if (parseInt(現在頁數) == 1) {
+            return
+        }
+        $(".add").prev().addClass("add").nextAll().removeClass("add")
+        if (parseInt(現在頁數) - 1 == 1) {
+            $("#toppage").addClass("nowIndex1")
+            $("#lastpage").addClass("nowIndex1")
+        }
+        var url = "@Url.Content("~/Theater/nowpage")"
+        var params = `?num=${parseInt(document.querySelector(".add").innerHTML)}`
+        $(".iyFFWC #頁面切換").load(url + params)
+                var urls = "@Url.Content("~/Theater/hotpage")"
+        $(".gYprgf #頁面切換").load(urls + params)
+
+    })
+    $("#nextpage").click(function () {
+        var 現在頁數 = document.querySelector(".add").innerHTML
+        console.log(現在頁數)
+        if (parseInt(現在頁數) == 5) {
+            $("#nextpage").addClass("nowIndex1")
+            $("#downpage").addClass("nowIndex1")
+            return
+        }
+        $(".add").next().addClass("add").prevAll().removeClass("add")
+        $("#toppage").removeClass("nowIndex1")
+        $("#lastpage").removeClass("nowIndex1")
+        if (parseInt(現在頁數) + 1 == 5) {
+            $("#nextpage").addClass("nowIndex1")
+            $("#downpage").addClass("nowIndex1")
+        }
+        var url = "@Url.Content("~/Theater/nowpage")"
+        var params = `?num=${parseInt(document.querySelector(".add").innerHTML)}`
+        $(".iyFFWC #頁面切換").load(url + params)
+                var urls = "@Url.Content("~/Theater/hotpage")"
+        $(".gYprgf #頁面切換").load(urls + params)
+    })
+
+
+    </script>

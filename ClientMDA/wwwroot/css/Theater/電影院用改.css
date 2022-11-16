@@ -1,0 +1,261 @@
+﻿
+div {
+    display: block;
+}
+.gYprgf {
+    padding-top: 100px;
+
+}
+.gYprgf {
+    padding-top: 100px;
+    background-color: rgb(63, 63, 63);
+}
+.exLSHN {
+    width: 100%;
+
+}
+
+.gYprgf .wrapper {
+    width: 100%;
+    height: 130px;
+}
+.exLSHN .wrapper {
+    margin: auto;
+    text-align: center;
+}
+.gYprgf .wrapper .tab:hover, .gYprgf .wrapper .tab.checked {
+    color: rgb(255, 255, 255);
+}
+.gYprgf .wrapper .tab {
+    width: 150px;
+    height: 48px;
+    line-height: 48px;
+    display: inline-block;
+    margin: 40px 0px 0px;
+    color: rgb(202, 202, 202);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.gYprgf .wrapper .underline {
+    width: 300px;
+    text-align: center;
+    margin: 3px auto 40px;
+    height: 2px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+    .gYprgf .wrapper .underline .bar {
+        width: 50%;
+        height: 2px;
+        margin-bottom: -2px;
+        background-color: rgb(231, 0, 140);
+        transition: all 0.3s ease 0s;
+        transform: translate(0%);
+    }
+.bYVeqc {
+    min-height: 100vh;
+}
+.bYVeqc .box-wrapper {
+        width: 100%;
+    }
+.bYVeqc .box-wrapper {
+        max-width: 100%;
+    }
+.bYVeqc .box-wrapper {
+        max-width: 1200px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+.bYVeqc .box-wrapper .post-box {
+            width: calc(33.3333% - 10px);
+            height: 500px;
+            max-height: 500px;
+        }
+.bYVeqc .box-wrapper .post-box {
+            width: calc(25% - 10px);
+            height: 530px;
+            max-height: 45vw;
+            margin: 5px;
+            float: left;
+        }
+.bYVeqc .box-wrapper .post-box .post {
+                width: 90%;
+                height: 43vw;
+                max-height: 380px;
+            }
+.bYVeqc .box-wrapper .post-box .post {
+                width: 209px;
+                height: 310px;
+            }
+.bYVeqc .box-wrapper .post-box .post {
+                background: 50% 50% / cover no-repeat rgb(35, 35, 35);
+                width: 90%;
+                height: 373px;
+                max-height: 32vw;
+                margin: auto;
+                cursor: pointer;
+            }
+.ijuViJ {
+    width: 100px;
+    height: 15px;
+    text-align: center;
+    margin: 13px auto 0px;
+  
+}
+    .ijuViJ .star {
+        width: 15px;
+        height: 15px;
+        float: left;
+        margin: 0px 2.5%;
+        background: 50% 50% / cover no-repeat rgb(64, 64, 64);
+    }
+.bYVeqc .box-wrapper .post-box .title {
+    font-size: 18px;
+}
+.bYVeqc .box-wrapper .post-box .title {
+    width: 90%;
+    height: 27px;
+    margin: 7px auto 0px;
+    line-height: 27px;
+    overflow: hidden;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.bYVeqc .box-wrapper .post-box .en {
+    font-size: 14px;
+    color: rgb(158, 158, 158);
+    height: 19px;
+    line-height: 19px;
+    text-align: center;
+    font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+    margin: auto;
+}
+.bYVeqc .box-wrapper .post-box .en {
+    font-size: 12px;
+}
+.bYVeqc .box-wrapper .post-box .grade {
+    width: 85px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 12px;
+    border-radius: 12.5px;
+    border: 1px solid rgb(85, 85, 85);
+    text-align: center;
+    color: rgb(158, 158, 158);
+    margin: 5px auto;
+}
+.bYVeqc .page {
+    width: 100%;
+    height: 100px;
+    margin: 30px auto 0px;
+    text-align: center;
+    display: inline-block;
+}
+.ffVUQI {
+    margin: auto;
+    text-align: center;
+}
+    .ffVUQI .nowIndex1 {
+        opacity: 0;
+        cursor: default;
+    }
+    .ffVUQI .circle {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        line-height: 34px;
+        color: rgb(180, 180, 180);
+        text-align: center;
+        display: inline-block;
+        margin: 0px 5px;
+        cursor: pointer;
+        border: 1px solid transparent;
+    }
+    .ffVUQI .add {
+        background-color: rgb(231, 0, 140);
+        border-radius: 50%;
+        color: rgb(255, 255, 255);
+    }
+.iyFFWC .wrapper .tab {
+    width: 150px;
+    height: 48px;
+    line-height: 48px;
+    display: inline-block;
+    margin: 40px 0px 0px;
+    color: rgb(202, 202, 202);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.iyFFWC .wrapper .tab {
+    width: 150px;
+    height: 48px;
+    line-height: 48px;
+    display: inline-block;
+    margin: 40px 0px 0px;
+    color: rgb(202, 202, 202);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+    .iyFFWC .wrapper .tab.checked {
+        color: rgb(255, 255, 255);
+    }
+.iyFFWC .wrapper .underline {
+    width: 300px;
+    text-align: center;
+    margin: 3px auto 40px;
+    height: 2px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.iyFFWC .wrapper .underline .bar {
+        width: 50%;
+        height: 2px;
+        margin-bottom: -2px;
+        background-color: rgb(231, 0, 140);
+        transition: all 0.3s ease 0s;
+        transform: translate(100%);
+    }
+.bYVeqc .box-wrapper .post-box .coming {
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    color: rgb(158, 158, 158);
+    text-align: center;
+    margin-top: 10px;
+}
+.bYVeqc .box-wrapper .post-box .title {
+    width: 90%;
+    height: 27px;
+    margin: 7px auto 0px;
+    line-height: 27px;
+    overflow: hidden;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.bYVeqc .box-wrapper .post-box .title {
+    font-size: 18px;
+}
+.iyFFWC {
+    padding-top: 100px;
+    background-color: rgb(63, 63, 63);
+}
+.wrapper {
+        width: 100%;
+        height: 130px;
+    }
+

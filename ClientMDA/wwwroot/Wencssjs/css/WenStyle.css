@@ -1,0 +1,18 @@
+﻿.menu .title span {
+    font-size: 2em;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+.menu ul li {
+    font-size: 1.3em;   
+    padding: 10px 30px;
+    color: #ffffff;
+    transition: 0.25s;
+}
+
+    .menu ul li:hover {
+        /*#e29e9e*/
+        background-color: rgb(0, 176, 240);
+        color: #4a4a4a;
+    }

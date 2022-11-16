@@ -1,0 +1,112 @@
+﻿@model List<ClientMDA.ViewModels.CMovieViewModel>
+@{
+    ViewData["Title"] = "Default"; @*電影排行*@
+}
+
+<script>
+</script>
+@{
+    int count = 0;
+    for (var i = 0; i < Model.Count; i++)
+    {
+
+        <!--#region 電影評分-->
+        decimal? 預設mRate = Model[i].評分rate;
+        decimal? 原始總評分 = 0;
+        decimal? 平均評分 = 0;
+        decimal 平均評分ToDecimal = 0;
+        decimal 平均mRate = 0;
+
+        string 平均評分ToString = "";
+        if (Model[i].mRateList.Count() != 0)
+        {
+            for (int a = 0; a < Model[i].mRateList.Count(); a++)
+            { 原始總評分 += Model[i].mRateList[a]; }
+            平均評分 = 原始總評分 / Model[i].mRateList.Count();
+            平均評分ToString = 平均評分.ToString(); //轉字串
+            平均評分ToDecimal = decimal.Parse(平均評分ToString); //轉小數
+            平均mRate = decimal.Round(平均評分ToDecimal, 1); //取小數點
+        }
+        <!--#endregion 電影評分-->
+
+        count++;
+        string urlpic = "",urlIMDB ="";
+        if (Model[i].mPoster.Count() > 0) //localhost後台
+        {
+            urlpic = "http://192.168.36.4:44383/images/MovieImage/" + Model[i].mPoster[0].movieImage;
+        }
+        if (Model[i].mImgFrList.Count() > 0) //IMDB
+        {
+            urlIMDB = Model[i].mImgFrList[0];
+        }
+        <li class="charts-list-row">
+            <div class="divRow">
+                <span class="charts-list-rank">@count</span>@* //todo 電影編號*@
+                <div class="flipper">
+                    <div class="flipper-item layer1">
+                        @*電影海報*@
+                        <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號movieId})>
+                            @if (@urlpic != "")
+                            {
+                                <img title="@Html.DisplayFor(modelItem => Model[i].中文標題titleCht)"
+                                     class="charts-list-cover" id="poster" alt=""
+                                     src="@urlpic">
+                            }
+                            else if (@urlIMDB != "")
+                            {
+                                <img title="@Html.DisplayFor(modelItem => Model[i].中文標題titleCht)"
+                                     class="charts-list-cover" id="poster" alt=""
+                                     src="@urlIMDB">
+                            }
+                            else
+                            {
+                                <img title="@Html.DisplayFor(modelItem => Model[i].中文標題titleCht)"
+                                     class="charts-list-cover" id="poster" alt=""
+                                     src='~/images/Movie/poster_none1.png'>
+                            }
+                        </a>
+                        @*電影標題*@
+                        <span class="charts-list-desc">
+                            <span class="charts-list-song" title="@Html.DisplayFor(modelItem => Model[i].中文標題titleCht)">
+                                <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號movieId})>@Html.DisplayFor(modelItem => Model[i].中文標題titleCht)</a>
+                            </span>
+                            <span class="charts-list-artist" title="@Html.DisplayFor(modelItem => Model[i].英文標題titleEng)">
+                                <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號movieId})>@Html.DisplayFor(modelItem => Model[i].英文標題titleEng)</a>
+                            </span>
+                        </span>
+                        @*電影評分*@
+                        <span class="charts-list-content"></span>
+                        <span class="charts-list-span">
+                            <i class="fas fa-star" style="padding-right:5px;color:#ffc107"></i>
+                            @if (Model[i].mRateList.Count() != 0){@平均mRate}
+                             else{@預設mRate}
+                            @*@Html.DisplayFor(modelItem => Model[i].評分rate)*@
+                        </span>
+                        @*會員評分*@
+                        <div class="dropdown">
+                            <button aria-label="Rate @Html.DisplayFor(modelItem => Model[i].中文標題titleCht)"
+                                    class="ipc-rate-button ipc-rating-star-group--unrated ipc-rate-button--unrated ipc-rate-button--baseAlt"
+                                    data-testid="rate-button" data-modal-target="#ToRate">
+                                @*呼叫評分視窗*@
+                                <span class="ipc-rating-star ipc-rating-star--baseAlt ipc-rating-star--rate">
+                                    <i class="far fa-star" style="padding-right:5px;color:#ffc107"></i>評分
+                                </span>
+                            </button>
+                        </div>
+                        @*上映日期*@
+                        <span class="charts-list-date">@Html.DisplayFor(modelItem => Model[i].上映日期releaseDate)</span>
+                        @*加入片單*@
+                        <span class="charts-list-prev-rank">
+                            <div class="wlb_ribbon" data-tconst="tt0111161" data-recordmetrics="true" style="position: relative;">
+                                <div class="wl-ribbon standalone not-inWL" title="點擊添加到我的片單"></div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+}
+<script></script>
+
+

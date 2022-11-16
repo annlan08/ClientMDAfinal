@@ -1,0 +1,189 @@
+﻿@model ClientMDA.ViewModels.CWriteCommentViewModel  
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@{
+    ViewData["Title"] = "WriteComment";
+}
+
+@section Styles{
+
+    <link href="~/css/Member/tinymce.css" rel="stylesheet" />
+    <link href="~/css/Member/awesomplete.css" rel="stylesheet" />
+    <style>
+        .tox-tinymce {
+            /* 設定最低高度 */
+            min-height: 500px;
+        }
+
+        .align-r {
+            float: right
+        }
+    </style>
+}
+<h2>撰寫新評論</h2>
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            @*<input type="hidden" name="CommentId" />*@
+            <input type="hidden" name="MemberId" />
+            <label for="validationDefault01">發佈者暱稱</label>
+            <input type="text" class="form-control" id="validationDefault01" value="@mem.暱稱nickName" name="nick" disabled>
+        </div>
+        <div class="col-md-8 mb-3">
+            @*<input type="hidden" name="CommentId" />*@
+            <label for="validationDefault01">評論標題</label>
+            <input type="text" class="form-control" id="validationDefault01" value="" name="comTitle" required>
+            <button type="button" class="btn btn-info" id="demo">DEMO</button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="hidden" name="MovieId" />
+            <label for="validationDefault02">電影名稱</label>
+            @{
+                string mName = "";
+                if (Model != null)
+                {
+                    mName = Model.movieName;
+                }
+
+                <input type="text" list="typelist" class="form-control" id="autoCmpMovie" value="@mName" name="movieName" required>
+            }
+            <datalist id="typelist" class="">
+            </datalist>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationDefault03">觀影日期</label>
+            <input type="date" class="form-control" id="validationDefault03" name="watchDate" required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationDefault04">觀影方式</label>
+            <input type="text" list="typelist2" class="form-control" id="validationDefault04" name="way" required>
+            <datalist id="typelist2" class="">
+                <option>電影院</option>
+                <option>Netflix</option>
+                <option>Disney+</option>
+                <option>myVideo</option>
+                <option>HamiVideo</option>
+                <option>CATCHPLAY+</option>
+                <option>愛奇藝</option>
+                <option>LineTV</option>
+                <option>friDay影音</option>
+                <option>MOD</option>
+                <option>YouTube</option>
+                <option>DVD</option>
+                <option>AppleTV</option>
+                <option>電視台</option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault01">評分</label>
+            <input type="number" class="form-control" min="1" max="5" id="validationDefault01" value="" name="rate" required>
+        </div>
+        @*<div class="col-md-2 mb-3">
+                <input type="hidden" name="MovieId" />
+                <label for="validationDefault02">期待度</label>
+                <input type="number" class="form-control" min="1" max="5" id="validationDefault02" value="" name="anti" required>
+            </div>*@
+        @*</div>
+            <div class="form-row">*@
+        <div class="col-md-3 mb-3">
+            <label for="validationDefault06">公開級別</label>
+            <select class="form-control" name="open">
+                <option value="0" selected>公開</option>
+                <option value="1">僅追蹤者</option>
+                <option value="2">不公開</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <input class="form-check-input" type="checkbox" value="1" id="invalidCheck2" name="floor">
+            <label class="form-check-label" for="invalidCheck2" name="floor">開放討論串</label>
+        </div>
+    </div>
+
+
+    <textarea id="open-source-plugins" name="content">我的評論</textarea>
+
+    <div class="align-r"><button class="btn btn-info" type="submit" id="save">確定發布</button></div>
+    <div style="clear:both;"></div>
+
+</form>
+@*@Html.Raw(Model.txtKeyword)*@
+
+@section Scripts{
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/js/Member/tinymce.js"></script>
+    <script src="~/js/Member/awesomplete.js" async></script>
+
+    <script>
+
+
+    const inputText = document.querySelector("#autoCmpMovie")
+        const listData = document.querySelector("#typelist")
+    listData.style.display="none"
+
+    inputText.addEventListener("input", async() => {
+        const keyword = inputText.value
+        /*listData.style.display = "block"*/
+        let results = await fetch("@Url.Content("~/Member/autoCmpMovie")" + `?movie=${keyword}`)
+        let datas = await results.json()
+        //console.log(datas)
+        let htmlDatas = datas.map(data => {
+            return (
+                `
+                <option onclick="read(event)">${data}</option>
+                `)
+        })
+        listData.innerHTML = htmlDatas.join("")
+    })
+    function read(evt) {
+        inputText.value = evt.target.textContent
+        //listData.style.display = "none"
+    }
+    </script>
+    <script>
+        const demo = document.querySelector("#demo")
+        demo.addEventListener('click', () => {
+            document.querySelector('[name="comTitle"]').value = "《黑亞當》：簡單暴力的動作、放棄到底的劇情，卻成DC粉的第一道「正義曙光」"
+            inputText.value = "黑亞當"
+            document.querySelector('[name="watchDate"]').value = "2022-10-21"
+            document.querySelector('[name="way"]').value = "電影院"
+            document.querySelector('[name="rate"]').value = 4
+            document.querySelector('[name="open"]').selectedIndex = 0
+            document.querySelector('[name="floor"]').checked = true
+            //document.querySelector('[name="content"]')
+            let area = document.querySelector('#open-source-plugins_ifr')
+            let inner = area.contentWindow.document.getElementById('tinymce')
+            inner.innerHTML = `
+<div class="content">
+<img class="banner" src="https://news.agentm.tw/wp-content/uploads/template-4-20-750x422.png" alt="【影評】《黑亞當》：簡單暴力的動作、放棄到底的劇情，卻成DC粉的第一道「正義曙光」首圖" title="【影評】《黑亞當》：簡單暴力的動作、放棄到底的劇情，卻成DC粉的第一道「正義曙光」首圖">
+<div class="post" itemprop="articleBody" data-ad2trk-observe="main-article">
+<p class="p1"><span class="s1">今年仍然是 </span><span class="s2">DC </span><span class="s1">動盪不安的一年，儘管年初有我超愛的《<a href="https://www.agentm.tw/movie_page?m_id=c387db447a3ac9dce19798891aa8ae2cdd315525247ca1d5255204c4c8fd0cbd" target="_blank" rel="noopener">蝙蝠俠</a>》坐鎮，然而那畢竟是屬於獨立宇宙的作品，擴充宇宙還是一片混亂，今年本該看得到的《<a href="https://news.agentm.tw/231913/%e4%bc%8a%e8%96%a9%e7%b1%b3%e5%8b%92-%e9%96%83%e9%9b%bb%e4%bf%a0-%e5%8f%96%e6%b6%88-%e8%8f%af%e7%b4%8d%e5%85%84%e5%bc%9f-%e6%96%b9%e6%a1%88/" target="_blank" rel="noopener">閃電俠</a>》、《<a href="https://news.agentm.tw/233035/%e6%ba%ab%e5%ad%90%e4%bb%81-%e8%ad%89%e5%af%a6-dceu-%e6%b0%b4%e8%a1%8c%e4%bf%a02-%e5%bb%b6%e6%9c%9f/" target="_blank" rel="noopener">水行俠</a>》、《<a href="https://news.agentm.tw/228844/%e6%b2%99%e8%b4%8a2-%e9%9b%bb%e5%bd%b1-%e5%8a%87%e6%83%85-%e6%b4%a9%e6%bc%8f-%e6%83%85%e5%a0%b1/" target="_blank" rel="noopener">沙贊</a>》等等全部大延期，這對 </span><span class="s2">DC </span><span class="s1">粉絲來說絕對又是萬念俱灰。</span></p>
+<p class="p1"><span class="s1">不過同時也伴隨著好消息，那就是 </span><span class="s2">DC </span><span class="s1">高層進行了大改革，這意味著我們心心念念的擴充宇宙正在往好的方面發展，而首當其衝的正是今年 </span><span class="s2">DC </span><span class="s1">最後一部壓軸，由<a href="https://www.agentm.tw/artist_page?a_id=522725db59709087f50ec663e995432745b920eaed1d77f790430c5fc9402ce3" target="_blank" rel="noopener">巨石強森</a>主演的這部《<a href="https://www.agentm.tw/movie_page?m_id=f797d869f8bd7423d16c2d41d4bcf14677803259195d1dd70555bde0c9a20827" target="_blank" rel="noopener">黑亞當</a>》。</span></p>
+<p><span style="color: #800000;"><strong>＊內有彩蛋雷</strong></span></p>
+<p><img class="aligncenter size-large wp-image-238660" src="https://news.agentm.tw/wp-content/uploads/maxresdefault-27-750x422.jpeg" alt="黑亞當 影評 DC" width="750" height="422" srcset="https://news.agentm.tw/wp-content/uploads/maxresdefault-27-750x422.jpeg 750w, https://news.agentm.tw/wp-content/uploads/maxresdefault-27-540x304.jpeg 540w, https://news.agentm.tw/wp-content/uploads/maxresdefault-27-390x219.jpeg 390w, https://news.agentm.tw/wp-content/uploads/maxresdefault-27-768x432.jpeg 768w, https://news.agentm.tw/wp-content/uploads/maxresdefault-27-156x88.jpeg 156w, https://news.agentm.tw/wp-content/uploads/maxresdefault-27.jpeg 1280w" sizes="(max-width: 750px) 100vw, 750px" /></p>
+<p class="p1"><span class="s1">首先，這部電影可以說是簡單暴力的極致示範，雖然片長來到了兩個小時，但整部電影大概有一半以上的時間都給你滿滿的打鬥，而且這些打鬥還不是那種隨便摸一下的，而是帶著諸多暴力感，尤其是黑亞當本身所向披靡的戰力以及反英雄的設定，讓他在片中幾乎可以大殺四方，這在過去 </span><span class="s2">DC </span><span class="s1">電影中是實屬難得的。</span></p>
+<p class="p1"><span class="s1">他有點像是更肆無忌憚的《<a href="https://www.agentm.tw/movie_page?m_id=970e46dfae838a69b262405a03ae8261ad32e9081a9d98634ee463930a98f966" target="_blank" rel="noopener">自殺突擊隊</a>》，所以看起來特別爽快，這也和原先是以 </span><span class="s2">R </span><span class="s1">級拍攝有關，可惜最後還是降級了。而除了黑亞當以外的角色其視覺效果的呈現也不馬虎，各種魔法絕招的使用都可以看得出來本片確實花了很多預算在動作場面上，以動作場面的調度來說，這是值得讚賞的。</span></p>
+<p><img loading="lazy" class="aligncenter size-large wp-image-238643" src="https://news.agentm.tw/wp-content/uploads/2-466-750x428.png" alt="" width="750" height="428" srcset="https://news.agentm.tw/wp-content/uploads/2-466-750x428.png 750w, https://news.agentm.tw/wp-content/uploads/2-466-540x308.png 540w, https://news.agentm.tw/wp-content/uploads/2-466-390x223.png 390w, https://news.agentm.tw/wp-content/uploads/2-466-768x438.png 768w, https://news.agentm.tw/wp-content/uploads/2-466-154x88.png 154w, https://news.agentm.tw/wp-content/uploads/2-466.png 1191w" sizes="(max-width: 750px) 100vw, 750px" /></p>
+<p class="p1"><span class="s1">但除此之外，《黑亞當》各方面的表現都不太行，其中最為致命的則是劇情面。<a href="https://www.agentm.tw/artist_page?a_id=1021685347527abb2b3f4787b79760ed07488a5654b53481af7124482af1c672" target="_blank" rel="noopener">豪梅寇勒特瑟拉</a>是我蠻喜歡的導演，尤其他早些年和<a href="https://www.agentm.tw/artist_page?a_id=069a17d219dfb34ecdc4fbfa39ce5ac73c1e02841e7a3871dbb1da0dc5367045" target="_blank" rel="noopener">連恩尼遜</a>合作的數部結合了懸疑與動作的作品我幾乎都很愛（可惜現在豪梅的常駐合作對象似乎成了巨石強森），豪梅證明了他絕對有講故事的能力，然而他從開頭讓小孩當旁白的那一刻起，似乎就擺明沒有想講好這個故事，他把心思都放在動作場面上，導致劇情呈現一灘死水。</span></p>
+<p class="p1"><span class="s1">總之，《黑亞當》是一部相當極端的電影，如果你想看一部無腦到不行的爽片，那麼這片肯定有稱職的表現，而且最近大概也沒有什麼厲害的動作片能匹敵；不過你只要有絲毫對劇情的要求，那《黑亞當》完全可以讓你從頭吐槽到尾。當然，若你是 </span><span class="s2">DC </span><span class="s1">粉，為了美好的未來還是必看就是了（因為票房很重要⋯⋯</span><span class="s1">）。</span></p>
+</div>
+`
+        })
+    </script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+}

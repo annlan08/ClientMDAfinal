@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewData["Title"] = "CommentEdit";
+}
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@model ClientMDA.ViewModels.CWriteCommentViewModel
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@section Styles{
+
+    <link href="~/css/Member/tinymce.css" rel="stylesheet" />
+    <link href="~/css/Member/awesomplete.css" rel="stylesheet" />
+    <style>
+        .tox-tinymce {
+            /* 設定最低高度 */
+            min-height: 500px;
+        }
+
+        .align-r {
+            float: right
+        }
+    </style>
+}
+<h3>編輯評論</h3>
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            @*<input type="hidden" name="CommentId" />*@
+            <input type="hidden" name="MemberId" />
+            <input type="hidden" name="CommentId" value="@Model.CommentId" />
+            <label for="validationDefault01">發佈者暱稱</label>
+            <input type="text" class="form-control" id="validationDefault01" value="@mem.暱稱nickName" name="nick" disabled>
+        </div>
+        <div class="col-md-8 mb-3">
+            @*<input type="hidden" name="CommentId" />*@
+            <label for="validationDefault01">評論標題</label>
+            <input type="text" class="form-control" id="validationDefault01" value="@Model.comTitle" name="comTitle" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="hidden" name="MovieId" />
+            <label for="validationDefault02">電影名稱</label>
+            <input type="text" list="typelist" class="form-control" id="autoCmpMovie" value="@Model.movieName" name="movieName" disabled>
+            <datalist id="typelist" class="">
+            </datalist>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationDefault03">觀影日期</label>
+            <input type="date" class="form-control" id="validationDefault03" name="watchDate" value="@Model.watchDate" required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationDefault04">觀影方式</label>
+            <input type="text" list="typelist2" class="form-control" id="validationDefault04" name="way" value="@Model.way" required>
+            <datalist id="typelist2" class="">
+                <option>電影院</option>
+                <option>Netflix</option>
+                <option>Disney+</option>
+                <option>myVideo</option>
+                <option>HamiVideo</option>
+                <option>CATCHPLAY+</option>
+                <option>愛奇藝</option>
+                <option>LineTV</option>
+                <option>friDay影音</option>
+                <option>MOD</option>
+                <option>YouTube</option>
+                <option>DVD</option>
+                <option>AppleTV</option>
+                <option>電視台</option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault01">評分</label>
+            <input type="number" class="form-control" min="1" max="5" id="validationDefault01" value="@Model.rate" name="rate" required>
+        </div>
+     
+        <div class="col-md-3 mb-3">
+            <label for="validationDefault06">公開級別</label>
+            <select class="form-control" name="open" id="open">
+                <option value="0">公開</option>
+                <option value="1">僅追蹤者</option>
+                <option value="2">不公開</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <input class="form-check-input" type="checkbox" value="1" id="invalidCheck2" name="floor" required>
+            <label class="form-check-label" for="invalidCheck2" name="floor">開放討論串</label>
+        </div>
+    </div>
+
+
+    <textarea id="open-source-plugins" name="content">@Model.content</textarea>
+
+    <div class="align-r"><button class="btn btn-info" type="submit" id="save">確定修改</button></div>
+    <div style="clear:both;"></div>
+
+</form>
+@*@Html.Raw(Model.txtKeyword)*@
+
+
+@section Scripts{
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script src="~/js/Member/tinymce.js"></script>
+
+    <script>
+    const inputText = document.querySelector("#autoCmpMovie")
+    const listData = document.querySelector("#typelist")
+    listData.style.display = "none"
+
+    inputText.addEventListener("input", async () =>
+    {
+    const keyword = inputText.value
+    /*listData.style.display = "block"*/
+    let results = await fetch("@Url.Content("~/ Member / autoCmpMovie")" + `?movie =${ keyword}`)
+    let datas = await results.json()
+    //console.log(datas)
+    let htmlDatas = datas.map(data =>
+    {
+    return (
+    `
+    option onclick = "read(event)" >${ data}</ option >
+    `)
+    })
+    listData.innerHTML = htmlDatas.join("")
+    })
+    function read(evt)
+    {
+    inputText.value = evt.target.textContent
+    //listData.style.display = "none"
+    }
+    </script>
+    <script>
+        window.onload = function () {
+            const sel = document.querySelector('#open')
+            const chk = document.querySelector('#invalidCheck2')
+            sel.selectedIndex = '@Model.open'
+            if ('@Model.floor' == 1) {
+                chk.checked =true
+            }
+    }
+    </script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+}
+

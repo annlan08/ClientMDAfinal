@@ -1,0 +1,72 @@
+﻿@{
+
+}
+<link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+<style>
+    section {
+        text-align: center;
+    }
+
+    h2 {
+        position: absolute;
+        top: 40%;
+        left: 48.5%;
+        margin-top: -13px;
+        margin-left: -13px;
+    }
+
+    .px-3 h1 {
+        color: whitesmoke;
+    }
+
+    .px-3 p {
+        color: whitesmoke;
+    }
+</style>
+
+<div id="preloder">
+    <div class="loader"></div>
+    <div>
+        <h2 class="h-25">喔不!</h2>
+    </div>
+</div>
+
+<section class="justify-content-md-center" style="height:75vh">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <h1 class="pt-2 pb-1 m-auto">會員訂票資格已被暫停</h1>
+        <p class="lead p-1">很抱歉</p>
+        <p class="lead p-1">由於你違反了本網站會員相關規定</p>
+        <p class="lead p-1">已暫停線上訂票的功能</p>
+        <p class="lead p-1">哈 嫩!</p>
+        <p class="lead p-1">若有任何關於的疑問，歡迎與我們聯繫。</p>
+        <p class="lead p-1"></p>
+        <p class="lead p-1">（組織名稱）MDA電影資訊網</p>
+        <p class="lead p-1">（聯絡方式）台北市大安區復興南路一段390號2樓</p>
+        <p class="lead">
+            <a asp-controller="HomePage" asp-action="Index" class="btn btn-lg btn-primary fw-bold border-2 bg-black" id="okbtn">確定</a>
+        </p>
+    </div>
+</section>
+
+<script>
+    (function ($) {
+        $(window).on('load', async function () {
+            //let email ='annlan08@gmail.com'
+            //let url = "/Ticketing/sendmail" + `?email=${email}`;
+            //CallAjax(url);
+            setTimeout(() => {
+                $(".loader").delay(100).fadeOut();
+                $("#preloder").delay(50).fadeOut("slow");
+            },3000)
+
+
+        });
+    })(jQuery);
+
+    async function CallAjax(url) {
+        let response = await fetch(`${url}`)
+        //let datas = await response.json();
+        //console.log(response);
+    }
+</script>
+

@@ -1,0 +1,311 @@
+﻿@using ClientMDA.ViewModels
+@model CSeatMaoViewModels
+
+@{
+    string Seat = Model.出售座位資訊seatSoldInfo;
+    string[] SeatArrs = Seat.Split('@');
+    int count = Model.seatCount選擇座位數量;
+}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+<style>
+    section {
+        margin-top: 25px
+    }
+
+    html {
+        background-color: #070720;
+    }
+
+    body {
+        background-color: #070720;
+    }
+
+    .body-content {
+        background-color: #070720;
+    }
+
+    .movieInfo-library {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #1f2122;
+        border-radius: 23px;
+    }
+
+    .main-button {
+        padding: 50px;
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    .seatSample {
+        margin: auto;
+        text-align: center;
+    }
+
+        .seatSample .sampleName {
+            height: 15px;
+            color: rgb(120, 120, 120);
+            font-size: 0.875rem;
+            display: inline-block;
+        }
+
+        .seatSample .screen {
+            width: 300px;
+            color: rgb(142, 142, 142);
+            border: 1px solid rgb(142, 142, 142);
+            font-size: 0.75rem;
+            height: 26px;
+            line-height: 26px;
+            margin: 0px auto 30px;
+        }
+
+    .seatrow .dot {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin: 0.2vw;
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .seatrow div {
+        display: block;
+    }
+
+    .seatrow .green {
+    }
+
+    .seatrow .green2 {
+    }
+
+    .seatrow .none {
+        background-color: transparent;
+    }
+
+    .seatrow .saled {
+        background-color: rgb(100, 100, 100);
+    }
+
+    .seatrow .love {
+        background-image: url("/images/Ticketing/love.jpg");
+        background-position: center;
+        background-size: contain;
+    }
+
+    .seatMap {
+        width: 100%;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .seatrow .selected {
+        background-color: rgb(231, 0, 140);
+    }
+
+
+    .movieInfo-library {
+        margin-top: 60px;
+        padding: 30px;
+        background-color: #070720;
+        border-radius: 23px;
+    }
+
+        .movieInfo-library .item {
+            border-bottom: 1px solid #27292a;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+
+
+            .movieInfo-library .item ul li {
+                margin-top: 15px;
+            }
+
+                .movieInfo-library .item ul li img {
+                    margin-top: -30px;
+                }
+
+            .movieInfo-library .item ul li {
+                display: inline-block;
+                width: 16%;
+            }
+
+                .movieInfo-library .item ul li h4 {
+                    font-size: 20px;
+                    margin-bottom: 5px;
+                    color: whitesmoke;
+                    font-family: sans-serif;
+                }
+
+                .movieInfo-library .item ul li span {
+                    color: #666;
+                    font-size: 16px;
+                    color: whitesmoke;
+                }
+</style>
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+<section>
+    <input type="hidden" value="@count" id="countValue" />
+    <div class="movieInfo-library">
+        <div class="col-lg-12">
+            <div class="item">
+                <ul>
+                    <li><h4>片名</h4><span>@Model.MovieName電影名稱</span></li>
+                    <li><h4>影城</h4><span>@Model.TheaterName影城名稱</span></li>
+                    <li><h4>日期</h4><span>@Model.Date日期</span></li>
+                    <li><h4>版本</h4><span>@Model.fileVersion電影版本</span></li>
+                    <li><h4>時間</h4><span>@Model.StartTime開始時間</span></li>
+                    <li><h4>人數</h4><span>@count</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="seatSample">
+            <div class="seatrow">
+                <div class="dot selected"></div><div class="sampleName">您的座位</div>
+                <div class="dot green2"></div><div class="sampleName">未售出</div>
+                <div class="dot saled"></div><div class="sampleName">已售出</div>
+                <div class="dot love"></div><div class="sampleName">愛心座位</div>
+                <div class="screen">銀幕</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="seatMap">
+            @{
+                @:<div>
+                    @:<div class="seatrow">
+                        foreach (string seat in SeatArrs)
+                        {
+                            if (seat.Contains("NA"))
+                            {
+                                @:<div class="dot none"></div>
+                            }
+                            else if (seat.Contains("||"))
+                            {
+                            @:</div></div><div>
+                                @:<div class="seatrow">
+                                }
+                                else if (seat.Contains("saled"))
+                                {
+                                    @:<div class="dot saled"></div>
+                                }
+                                else if (seat.Contains("love"))
+                                {
+                                    @:<div class="dot love"></div>
+                                }
+                                else if (seat != "")
+                                {
+                                    @:<div class="dot green" data="@seat"></div>
+                                }
+                            }
+                        @:</div></div>
+            }
+            <form method="post" action="~/Ticketing/SelectTicket">
+                <div class="main-button" style="color:#e75e8d">
+                    <input class="btn btn-primary" style="background-color: #e75e8d; border-color: #e75e8d " type="submit" id="submitbtn" value="前往付款" />
+                    <input type="hidden" name="MovieCode" id="MovieCode" value="@Model.MovieCode電影代碼" />
+                    <input type="hidden" name="MovieID" id="MovieID" value="@Model.MovieID電影編號" />
+                    <input type="hidden" name="theaterName" id="theaterName" value="@Model.TheaterName影城名稱" />
+                    <input type="hidden" name="theaterName" id="theaterName" value="@Model.TheaterName影城名稱" />
+                    <input type="hidden" name="Date" id="Date" value="@Model.Date日期" />
+                    <input type="hidden" name="Time" id="Time" value="@Model.StartTime開始時間" />
+                    <input type="hidden" name="ticketCount" id="ticketCount" value="@Model.seatCount選擇座位數量" />
+                    <input type="hidden" name="theaterID" id="theaterID" value="@Model.TheaterID影城編號" />
+                    <input type="hidden" name="screenID" id="screenID" value="@Model.場次編號screeningId" />
+                    <input type="hidden" name="seatInfo" id="seatInfo" value="" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</section>
+<script>
+
+    (function ($) {
+        $(window).on('load', function () {
+            $(".loader").fadeOut();
+            $("#preloder").delay(20).fadeOut("slow");
+
+
+        });
+    })(jQuery);
+
+
+
+    const dots = document.getElementsByClassName("dot green");
+    const count = document.getElementById("countValue").value;
+    const btnsend = document.getElementById("submitbtn");
+
+    const seatInfo = document.getElementById("seatInfo");
+    const screenID = document.getElementById("screenID");
+
+    const ArrSeats = new Array();
+    for (let i = 0; i < count; i++) {
+        ArrSeats.push(null);
+    }
+    for (let item of dots) {
+        item.addEventListener("click", seat);
+    }
+
+    function seat(e) {
+        if (e.target.className == "dot green") {
+            e.target.className = e.target.className.replace("dot green", "dot selected");
+            if (ArrSeats[count - 1] != null) {
+                ArrSeats[count - 1].className = ArrSeats[count - 1].className.replace("dot selected", "dot green");
+            }
+            ArrSeats.pop();
+            ArrSeats.unshift(event.currentTarget);
+        }
+        else if (e.target.className == "dot selected") {
+            e.target.className = e.target.className.replace("dot selected", "dot green");
+            for (let i = 0; i < count; i++) {
+                if (ArrSeats[i] == e.target) {
+                    ArrSeats.splice(i, 1);
+                    ArrSeats.push(null);
+                }
+            }
+        }
+        console.log(ArrSeats)
+    }
+
+
+    let seatArr = new Array();
+    btnsend.addEventListener('click', () => {
+        for (let i = 0; i < count; i++) {
+            if (ArrSeats[i] == null) {
+                event.preventDefault();
+                console.log("No")
+                window.alert("請選擇符合數量的座位數")
+                return;
+            }
+            seatArr.push(ArrSeats[i].getAttribute('data'))
+        }
+        seatInfo.value = seatArr.join('#');
+        console.log(seatInfo.value);
+
+    })
+
+
+
+
+
+
+
+</script>
+

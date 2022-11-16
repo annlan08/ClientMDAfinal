@@ -1,0 +1,101 @@
+﻿@model List<ClientMDA.ViewModels.CTheater >
+@{
+    ViewData["Title"] = "測試業面";
+}
+<link href="~/css/Theater/電影院用改.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+
+    .star {
+        font-size: 2px !important;
+        width:317px;
+    }
+    .廣告1 {
+    
+    float:right
+    }
+    .浮動1 {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        width: 8em;
+        margin-top: -2.5em;
+        border-block: initial;
+        list-style-type: none;
+    }
+    .corThea {
+        background-color: #00b0f0 !important;
+        color: white !important;
+        font-size: 16px !important;
+        transition: opacity .5s ease-in-out;
+    }
+
+</style>
+<body>
+    <div style="margin-right:40px; border-style:solid;border-color:black">
+        <ul class="浮動1">
+            <li>
+                <figure class="廣告1">
+                    <iframe width="360" height="255" src="https://www.youtube.com/embed/0aXMx-027TU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                </figure>
+            </li>
+        </ul>
+    </div>
+    <figure style="float:left; position: fixed;left: 40px;top:50%;width:600px;margin-top: -2.5em;border-block: initial;list-style-type: none;z-index:999;">
+        <img height="100" src="~/images/findhotel-logo-vector.png" /><br />
+        <img height="100" src="~/images/Sponcer.png" /> <br />
+
+    </figure>
+    <div class="commonStyled__WrapperSampleNoContent-sc-kt5vy-9 MovieInfoContentWrapper--1tebbv1 exLSHN gYprgf" id="title" style="padding-top: 100px; overflow: auto">
+
+
+        <div class="wrapper" style="width:100% ;height:130px ">
+            <div id="熱映" class="tab checked">
+                熱門電影
+            </div>
+            <div id="上映" class="tab">
+                即將上映
+            </div>
+            <div class="underline">
+                <div class="bar"></div>
+            </div>
+        </div>
+        <div class="commonStyled__WrapperSampleNoContent-sc-kt5vy-9 MovieInfoBoxWrapper--13nahzv exLSHN bYVeqc">
+
+            <div id="頁面切換" class="box-wrapper">
+
+                @await Component.InvokeAsync("現正熱映", new { datas = Model })
+
+
+            </div>
+            <div class="page">
+                @await Component.InvokeAsync("頁數", new { datas = Model })
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+            $("#上映").click(function () {
+                $(this).removeClass("checked").siblings().removeClass("checked").end().addClass("checked");
+                $("#title").removeClass("gYprgf").addClass("iyFFWC")
+                $("#頁面切換").load("@Url.Content("~/Theater/now")")
+                $(".page").load("@Url.Content("~/Theater/page")")
+
+            })
+
+            $("#熱映").click(function () {
+                $(this).removeClass("checked").siblings().removeClass("checked").end().addClass("checked");
+                $("#title").removeClass("iyFFWC").addClass("gYprgf")
+                $("#頁面切換").load("@Url.Content("~/Theater/hot")")
+                $(".page").load("@Url.Content("~/Theater/page")")
+
+            })
+
+    </script>
+</body>

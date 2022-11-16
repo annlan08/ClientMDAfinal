@@ -1,0 +1,53 @@
+﻿.swiper-slide {
+    width: 120px;
+    height: 180px;
+    margin-right: 8px;
+    background-position: center;
+    background-size: cover;
+    float: left;
+}
+
+.rating {
+}
+
+.card-title {
+    margin: 20px 0 0 0;
+    font-size: 2em;
+}
+
+    .card-title p {
+        color: white;
+    }
+
+swiper-slide {
+    position: relative;
+}
+
+.movie-card {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-size: 0.5em;
+    opacity: 0;
+}
+
+
+.movie-tag.BottomArea {
+    bottom: 0;
+    left: 0;
+}
+
+.movie-tag span {
+    padding: 8px 8px 4px;
+}
+
+.swiper-slide:hover {
+    filter: grayscale(90%);
+    transition-duration: 0.3s;
+}
+
+    .swiper-slide:hover .movie-card {
+        opacity: 1;
+        transition-duration: 0.3s;
+        color: white;
+    }

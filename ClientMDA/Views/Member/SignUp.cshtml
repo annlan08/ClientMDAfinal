@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+@section Styles{
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <style>
+        div.login__form::after {
+            content: none;
+        }
+
+        #temp {
+            content: none;
+        }
+
+        .login {
+            padding: 10px 0 120px 0;
+        }
+    </style>
+}
+
+<!-- Page Preloder -->
+<div id="preloder" style="display: none;">
+    <div class="loader" style="display: none;"></div>
+</div>
+
+<!-- Header End -->
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg" style="background-image: url(&quot;img/normal-breadcrumb.jpg&quot;);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Welcome to MDA</h2>
+                    <p>觀影時刻</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+<!-- Login Section Begin -->
+<section class="login spad">
+    <div style="display:flex;">
+        <div class="login__form" style="margin:auto;" id="temp">
+            <h3>註冊</h3>
+            <form name="userInfo" method="post" enctype="multipart/form-data" action="~/Member/SignUp">
+                <div class="input__item">
+                    <input type="text" id="inputPhone" name="txtPhone" value="@ViewBag.phone" readonly>
+                    <span class="icon_mobile"></span><small id="phoneHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="input__item">
+                    <input type="email" id="inputEmail" name="txtEmail" placeholder="test@example.com">
+                    <span class="icon_mail"></span><small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="input__item">
+                    <input type="password" id="inputPwd" name="txtPassword" placeholder="密碼">
+                    <span class="icon_lock"></span><small id="pwdHelp" class="form-text text-muted"></small>
+                </div>
+                <input type="submit" id="buttonSubmit" class="site-btn" value="註冊" />
+                <div>
+                    <button type="button" class="site-btn" id="demo1">demo_2</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Login Section End -->
+<!-- Js Plugins -->
+@section Scripts{
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @*<script src="~/js/Member/SignUp.js"></script>*@
+
+    <script>
+        const btn = document.querySelector("#buttonSubmit")
+        const inputPhone = document.querySelector("#inputPhone");
+        const inputEmail = document.querySelector("#inputEmail");
+        const inputPwd = document.querySelector("#inputPwd");
+        const phoneWarning = document.querySelector("#phoneHelp")
+        const emailWarning = document.querySelector("#emailHelp")
+        const pwdWarning = document.querySelector("#pwdHelp")
+
+        inputPhone.addEventListener("blur", async () => {
+            const url = '@Url.Content("~/Member/checkExist")'
+            const params = `?phone=${inputPhone.value}`
+            let response = await fetch(url + params)  //resolve->response, reject
+            let data = await response.text()
+            //console.log(data)
+            if (data == 'True') {
+                phoneWarning.textContent = "帳號已存在"
+            }
+            else if (inputPhone.value == "") {
+                phoneWarning.textContent = "不可空白"
+            }
+            else phoneWarning.textContent = ""
+
+        })
+        inputEmail.addEventListener("blur", () => {
+            if (inputEmail.value == "") {
+                emailWarning.textContent = "不可空白"
+            }
+            else emailWarning.textContent = ""
+        })
+        inputPwd.addEventListener("blur", () => {
+            if (inputPwd.value == "") {
+                pwdWarning.textContent = "不可空白"
+            }
+            else pwdWarning.textContent = ""
+        })
+
+
+        btn.addEventListener("click",  function(evt) {
+            if (phoneWarning.textContent != "" || emailWarning.textContent != "" || pwdWarning.textContent != ""
+                || inputPhone.value == "" || inputEmail.value == "" || inputPwd.value == "") {
+                btn.setAttribute('type', 'button')
+            }
+            else {
+                btn.setAttribute('type', 'submit')
+            }
+
+        })
+
+    </script>
+    <script>
+        const demo1 = document.querySelector("#demo1")
+        
+        demo1.addEventListener("click", () => {
+            inputEmail.value = "0902@outlook.com"
+            inputPwd.value = "0000"
+        })
+    </script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+}
+

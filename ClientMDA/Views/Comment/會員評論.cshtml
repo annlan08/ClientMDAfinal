@@ -1,0 +1,305 @@
+﻿@model ClientMDA.ViewModels.CMemberCommentViewModel
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    var a = "";
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+    var connectId = Html.ViewContext.RouteData.Values["id"];
+}
+@{
+    ViewData["Title"] = "會員評論";
+}
+
+@section Styles{
+    <style>
+        #memBgImg { /*會員背景圖*/
+            background: #E55D87; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #5FC3E4, #E55D87); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, rgba(137, 211, 235,0.8), rgba(236, 137, 168,0.8)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .membtn {
+            float: right;
+            bottom: 0;
+            margin-right: 20px;
+        }
+
+        .events-desc { /*時間軸評論內容*/
+            overflow: hidden !important; /*溢位*/
+            text-overflow: ellipsis !important; /*文字溢位ellipsis... */
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /*限制元素顯示文字行數*/
+            -webkit-box-orient: vertical; /*垂直排列*/
+            word-break: break-all;
+        }
+
+        .memImg-Circle { /*會員大頭貼*/
+            clip-path: circle(45% at 50% 50%);
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/Comment/jquery.eeyellow.Timeline.css" /> @*我的評論時間軸*@
+}
+
+@*會員header*@
+<div id="memBgImg" class="py-1 bg-image-full">
+    @*會員背景圖*@
+    <div class="text-center my-5">
+
+        @if (@Model.會員照片image != null)
+        {<div>
+                <img class="memImg-Circle" height="170" alt="..."
+                     src="http://192.168.36.4:44383/images/Member/@Model.會員照片image">
+            </div>
+        }
+        else
+        {
+            <img class="memImg-Circle" height="170" alt="..."
+                 src="~/images/Member/MEMBER.png">
+            @*會員預設大頭貼 https://dummyimage.com/150x150/6c757d/dee2e6.jpg *@
+        }
+        <h4 class="text-white fs-3 fw-bolder">@Model.暱稱nickName</h4>
+        @*<span class="text-white-50 mb-0">@@帳號</span><br />
+        <span class="text-white-50 mb-0">此用戶觀看過N部電影</span>*@
+        <span class="text-white-50 mb-0">
+            <span type="button" data-toggle="modal" data-target="#commentCountModal">
+                @Model.commentCount
+            </span> 則評論 ‧
+            <span type="button" data-toggle="modal" data-target="#memberFollowModal">
+                @Model.memberfollow
+            </span> 人追蹤
+        </span><br />
+        <!-- #region 評論Modal -->
+        <div class="modal fade" id="commentCountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">評論清單</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color:black">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="color:black !important;text-align:left">
+                        <!--modal content start-->
+                        @{
+                            var cCount = 0;
+                            for (int i = 0; i < Model.commentCount; i++)
+                            {
+                                cCount++;
+                                <div><a style="color:black" href="#comment_@cCount">#@cCount @Model.commentList[i]</a></div>
+                            }
+                        }
+                        <!--modal content end-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--#endregion 評論Modal end-->
+        <!-- #region 追蹤會員Modal -->
+        <div class="modal fade" id="memberFollowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">追蹤會員清單</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color:black">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="color:black;text-align:left">
+                        <!--modal content start-->
+                        @{
+                            var fCount = 0;
+                            for (int i = 0; i < Model.memberfollow; i++)
+                            {
+                                fCount++;
+                                <div><a style="color:black" href="@Model.memFollowIdList[i]">#@fCount @Model.memFollowList[i]</a></div>
+                            }
+                        }
+                        @*<a href="@Url.Action("電影評論", "Comment", new { id = Model.評論編號commentId })"><span class="see-more">@Model.評論標題commentTitle </span></a>*@
+                        <!--modal content end-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--#endregion 追蹤會員Modal end-->
+
+        <div class="membtn">
+            <!--weiting begin-->
+            @{
+                if (mem != null)
+                {
+                    <span><input class="btn btn-info btn-sm" type="button" id="followMem" status="y" value="追蹤會員" onclick="setFollow(event)"></span>
+                    <span><button type="button" id="btnReport" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reportModal">檢舉</button></span>
+                }
+                else
+                {
+                    <span>@Html.ActionLink("追蹤會員", "checkLogin", new { page = "會員評論", id = connectId }, new { type = "button", @class = "btn btn-info btn-sm" })</span>
+                    <span>@Html.ActionLink("檢舉", "checkLogin", new { page = "會員評論", id = connectId }, new { type = "button", @class = "btn btn-danger btn-sm" })</span>
+                }
+            }
+            <!-- Modal -->
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    @using (Html.BeginForm("Report檢舉", "Comment"))
+                    {
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">檢舉</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="color:black;text-align:left">
+                                <!--modal content start-->
+                                @{ if (mem != null)
+                                    {
+                                        <input type="hidden" name="會員編號memberId" value="@mem.會員編號memberId" />
+                                        <input type="hidden" name="對象targetId" value="1" />
+                                        <input type="hidden" name="追讚倒編號actionTypeId" value="3" />
+                                        <input type="hidden" name="連接編號connectId" value="@connectId" />
+                                        <input type="hidden" name="" value="" />
+                                        <div><label>檢舉人</label><input type="text" readonly value="@mem.會員電話cellphone" /></div>
+                                        <div><label>檢舉對象</label><input type="text" readonly value="@Model.暱稱nickName" /></div>
+                                        <div><label>檢舉理由</label><textarea cols="100" name="檢舉理由reportReason" required></textarea></div>
+                                    }}<!--modal content end-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary" id="submitReport">確定</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--modal end-->
+            <!--weiting end-->
+
+
+        </div>
+    </div>
+</div>
+
+@*評論時間軸*@
+<body>
+    <div class="VivaTimeline">
+        <dl>
+            <!--今天-->
+            <dt>Today</dt>
+            <dt>@DateTime.Now.ToString("yyyy") - @DateTime.Now.ToString("MMMM", new System.Globalization.CultureInfo("en-us")).Substring(0, 3)</dt>
+
+
+            @await Component.InvokeAsync("時間軸評論", new { id = Model.會員編號memberId })
+
+
+            <!--會員建立日期-->
+            <dt>@Model.建立時間createdTime.ToString("yyyy") - @Model.建立時間createdTime.ToString("MMMM", new System.Globalization.CultureInfo("en-us")).Substring(0, 3)</dt>
+            <dt>Start</dt>
+            <br />
+        </dl>
+    </div>
+</body>
+
+@section Scripts{
+    <script>
+        $('.VivaTimeline').vivaTimeline();
+        $('.VivaTimeline').vivaTimeline({
+            carousel: true
+        });
+        $('.VivaTimeline').vivaTimeline({
+            carousel: true,
+            carouselTime: 3000
+        });
+
+    </script>
+    @*<script src="jquery.min.js"></script>
+        <script src="bootstrap.min.js"></script>*@
+    <script src="~/js/Comment/jquery.eeyellow.Timeline.js"></script> @*我的評論時間軸*@
+
+    <script>
+        //const follow = document.querySelector('#followMem')
+        //follow.addEventListener('click', () => {
+        //})
+    </script>
+    <script>
+            @*window.onload=function () {
+                if ('@a' == "") {
+                    document.querySelector("#btnReport").addEventListener('click', () => {
+                        @{Accessor.HttpContext.Session.SetString(CDictionary.SK登後要前往的頁面, "~/Comment/會員評論/1");}
+                        window.location = '@Url.Content("~/member/login")'
+                    })
+                }
+            }*@
+    </script>
+
+    @*weiting beging*@
+    <script>
+
+
+    window.onload = async function () {
+        const btnfollow = document.querySelector('#followMem')
+        @*if ('@mem' == null||'@mem'=='') {
+            btnfollow.setAttribute('value','追蹤會員')
+        }*@
+        '@{int login = 0;
+            int? memid = null;
+            if (mem != null)
+            {
+                login = 1;
+                memid = mem.會員編號memberId;
+            }
+                }'
+        console.log('@login')
+        console.log('@mem')
+        if ('@login' ==1) {
+            let memid = '@memid'
+                let followid = '@connectId'
+                let target = 1
+
+                const url = '@Url.Content("~/comment/checkFollow")'
+                const params = `?memid=${memid}&followid=${followid}&target=${target}`
+                let response = await fetch(url + params)
+            let data = await response.text()
+            if (data == "y")
+                btnfollow.setAttribute('value', '取消追蹤')
+        }
+        else
+            await btnfollow.setAttribute('value', '追蹤會員')
+
+                // checkFollow(int memid, int followid, int target)
+            }
+    </script>
+    <script>
+    async function setFollow(event){
+        let follomid = '@connectId'
+                const url = '@Url.Content("~/comment/follow")'
+        const params = `?connectid=${follomid}&target=1`
+                let response = await fetch(url + params)
+                let data = await response.text()
+        if (data == "add") {
+            event.target.setAttribute('value', '取消追蹤')
+        }
+        else {
+            event.target.setAttribute('value', '追蹤會員')
+        }
+            }
+
+    </script>
+
+
+    @*weiting end*@
+
+}
+
+
+

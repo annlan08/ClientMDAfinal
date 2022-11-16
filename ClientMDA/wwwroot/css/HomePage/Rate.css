@@ -1,0 +1,189 @@
+﻿.rating, .ratingE {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+    .rating > input, .ratingE > input {
+        display: none;
+    }
+
+    .rating > label, .ratingE > label {
+        position: relative;
+        width: 1em;
+        font-size: 3rem;
+        color: #00b0f0;
+        cursor: pointer;
+    }
+
+        .rating > label::before, .ratingE > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before,
+        .ratingE > label:hover:before,
+        .ratingE > label:hover ~ label:before {
+            opacity: 1 !important;
+        }
+
+    .rating > input:checked ~ label:before, .ratingE > input:checked ~ label:before {
+        opacity: 1;
+    }
+
+    .rating:hover > input:checked ~ label:before,
+    .ratingE:hover > input:checked ~ label:before {
+        opacity: 0.4;
+    }
+
+
+
+.modalst, .modalstE {
+    /*display: none;*/
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    width: 680px;
+    max-width: 80%;
+    /*height:720px;*/
+    border: none;
+    background-color: transparent;
+    transform: translate(-50%,-50%) scale(0);
+    /*align-items: center;
+    justify-content: center;
+    vertical-align: middle;*/
+}
+
+    .modalst.active, .modalstE.active {
+        transform: translate(-50%,-50%) scale(1);
+    }
+
+
+
+#fafastarrate, #fafastarrateE {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11.8rem;
+    color: #00b0f0;
+    z-index: 7;
+}
+
+#fafastarrate, .rating > label {
+    color: rgba(245,197,24);
+}
+
+.modalst > #fafastarrate,
+.modalstE > #fafastarrateE {
+    padding-left: 34%
+}
+
+.star > #showRateE, .starE > #showRateEE {
+    position: absolute;
+    inset: 0 0 0 0;
+}
+
+#rate-number, #rate-numberE {
+    position: absolute;
+    color: rgba(255 255 255);
+    font-size: 6rem;
+    z-index: 8;
+}
+
+.modal-rating-header, .modal-rating-headerE {
+    padding: 5px 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 5;
+    height: 100px;
+}
+
+.modal-close-btn, .modal-close-btnE {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+    height: 50px;
+    width: 50px;
+}
+
+    .modal-close-btn:hover, .modal-close-btnE:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+#modal-rating-body, #modal-rating-bodyE {
+    /*顏色要改*/
+    border: 1px solid rgba(31,31,31);
+    background-color: rgba(31,31,31);
+    border-radius: 10px;
+    padding: 10px;
+    height: 400px;
+    align-items: center;
+}
+
+#rating-it, #rating-itE {
+    font-size: 1.6rem;
+    /*改字的顏色*/
+    color: rgba(245,197,24);
+}
+
+#rating-it {
+    color: #00b0f0;
+}
+
+#in-rating-movie, #in-rating-movieE {
+    font-size: 2rem;
+    padding-top: 10px;
+}
+
+#rating-title, #rating-titleE {
+    text-align: center;
+    padding: 100px 10px 10px 10px;
+}
+
+#overlay, #overlayE {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    pointer-events: none;
+    z-index: 7;
+}
+
+    #overlay.active, #overlayE.active {
+        pointer-events: all;
+        opacity: 1;
+    }
+
+.sumitstarBtn, .sumitstarBtnE, #sumitstarBtn1 {
+    border: 0;
+    border-radius: 10px;
+    background-color: dimgrey;
+    color: whitesmoke;
+    width: 180px;
+    height: 40px;
+    font-size: 1.25rem;
+}
+
+#summitbox, #summitboxE {
+    text-align: center
+}
+
+.modal-rating-header-btn, .modal-rating-header-btnE {
+    z-index: 9;
+}
+
+#deletestar{
+    display:none;
+}

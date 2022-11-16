@@ -1,0 +1,180 @@
+﻿@using ClientMDA.Models
+@model List<電影院theater>
+
+@{
+
+}
+
+<link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+<style>
+    html {
+        background-color: #070720;
+    }
+
+    body {
+        background-color: #070720;
+    }
+
+    .Screen {
+        font-family: Montserrat, "Noto Sans TC", "Microsoft JhengHei", sans-serif !important;
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        height: 100vh;
+        background-color: #070720;
+        z-index: 2000;
+        padding-bottom: 100px;
+        overflow: auto;
+        height: calc(100vh - 130px);
+        float: none;
+        width: 100%;
+        margin: 5px auto;
+        overflow-y: auto;
+    }
+
+    .dyOReL {
+        clear: both;
+    }
+
+    .Screen .wrapper {
+        max-width: 1200px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        position: relative;
+        justify-content: space-between;
+    }
+
+        .Screen .wrapper .north {
+            width: 35%;
+        }
+
+        .Screen .wrapper .space {
+            width: 20%;
+            height: 5vh;
+        }
+
+        .Screen .wrapper .loc-part {
+            min-width: 180px;
+            width: 22%;
+            min-height: 80vh;
+            display: inline-flex;
+            -webkit-box-pack: start;
+            place-content: flex-start;
+            flex-wrap: wrap;
+            vertical-align: top;
+        }
+
+            .Screen .wrapper .loc-part .big-title {
+                width: 100%;
+                font-size: 1.375rem;
+                color: rgb(158, 158, 158);
+                font-weight: 300;
+                text-align: left;
+                height: 50px;
+                float: left;
+                margin: 0px;
+            }
+
+            .Screen .wrapper .loc-part .cinema {
+                width: 100%;
+                color: rgb(255, 255, 255);
+                font-weight: 300;
+                text-align: left;
+                cursor: pointer;
+                height: 50px;
+            }
+
+                .Screen .wrapper .loc-part .cinema:hover {
+                    color: rgb(220, 220, 220);
+                    font-size: 1.1rem;
+                }
+</style>
+
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<main id="main" data-aos="fade" data-aos-delay="1500">
+    <section class="pricing" id="pricing">
+        <div class="Screen">
+            <div class="wrapper">
+                <div class="space"></div>
+                <div class="loc-part north">
+                    <h3 class="big-title">北區</h3>
+                    <div class="commonStyled__Clearfix-sc-kt5vy-2 dyOReL"></div>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            if (item.地址address.Contains("台北") || item.地址address.Contains("新北") || item.地址address.Contains("宜蘭") || item.地址address.Contains("基隆"))
+                            {
+                                int id = item.電影院編號theaterId;
+                                string name = item.電影院名稱theaterName;
+                                <div class="cinema"><a asp-route-theaterID=@id asp-controller="Ticketing" asp-action="SelectByMovie">@name</a></div>
+                            }
+                        }
+                    }
+                </div>
+                <div class="loc-part ">
+                    <h3 class="big-title">桃竹苗</h3>
+                    <div class="commonStyled__Clearfix-sc-kt5vy-2 dyOReL"></div>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            if (item.地址address.Contains("桃園") || item.地址address.Contains("新竹") || item.地址address.Contains("苗栗"))
+                            {
+                                int id = item.電影院編號theaterId;
+                                string name = item.電影院名稱theaterName;
+                                <div class="cinema"><a asp-route-theaterID=@id asp-controller="Ticketing" asp-action="SelectByMovie">@name</a></div>
+                            }
+                        }
+                    }
+                </div>
+                <div class="loc-part ">
+                    <h3 class="big-title">中區</h3><div class="commonStyled__Clearfix-sc-kt5vy-2 dyOReL"></div>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            if (item.地址address.Contains("台中") || item.地址address.Contains("彰化") || item.地址address.Contains("南投") || item.地址address.Contains("雲林"))
+                            {
+                                int id = item.電影院編號theaterId;
+                                string name = item.電影院名稱theaterName;
+                                <div class="cinema"><a asp-route-theaterID=@id asp-controller="Ticketing" asp-action="SelectByMovie">@name</a></div>
+                            }
+                        }
+                    }
+                </div>
+                <div class="loc-part ">
+                    <h3 class="big-title">南區花東及離島</h3>
+                    <div class="commonStyled__Clearfix-sc-kt5vy-2 dyOReL"></div>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            if (item.地址address.Contains("高雄") || item.地址address.Contains("台南") || item.地址address.Contains("澎湖") || item.地址address.Contains("屏東") || item.地址address.Contains("嘉義") || item.地址address.Contains("花蓮"))
+                            {
+                                int id = item.電影院編號theaterId;
+                                string name = item.電影院名稱theaterName;
+                                <div class="cinema"><a asp-route-theaterID=@id asp-controller="Ticketing" asp-action="SelectByMovie">@name</a></div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    (function ($) {
+        $(window).on('load', function () {
+            $(".loader").fadeOut();
+            $("#preloder").delay(20).fadeOut("slow");
+
+
+        });
+    })(jQuery);
+</script>
+
+

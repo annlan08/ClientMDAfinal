@@ -1,0 +1,633 @@
+﻿@using ClientMDA.ViewModels
+@model CInfoForMakeNewOrderViewModel
+
+@{
+    string text = "+886";
+    decimal totalPrice = 0;
+
+    string[] product = Model.ProductInfo.Split('#');
+
+    List<int> productcount = new List<int>()
+{
+        Convert.ToInt32(product[0]),
+        Convert.ToInt32(product[1]),
+        Convert.ToInt32(product[2]),
+        Convert.ToInt32(product[3]),
+    };
+
+    List<int> productprice = new List<int>()
+{
+        120,200,80,100
+    };
+
+    List<string> productname = new List<string>()
+{
+        "超值套餐","豪華套餐","爆米花","造型飲料杯"
+    };
+
+    foreach (var item in Model.Alltciket)
+    {
+        totalPrice += (item.TicketPrice) * (item.TicketCount);
+    }
+
+    totalPrice += ViewBag.fee;
+
+    for (int i = 0; i < productcount.Count(); i++)
+    {
+        totalPrice += productcount[i] * productprice[i];
+    }
+}
+@section Styles{
+    <link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="form-validation.css" rel="stylesheet">
+    <style>
+        .swal2-top-end h2 {
+            color: greenyellow !important;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+            .nav-scroller .nav {
+                display: flex;
+                flex-wrap: nowrap;
+                padding-bottom: 1rem;
+                margin-top: -1px;
+                overflow-x: auto;
+                text-align: center;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+        .form-label {
+            color: whitesmoke;
+        }
+
+        .form-check-label {
+            color: whitesmoke;
+        }
+
+        .mb-3 {
+            color: whitesmoke;
+        }
+
+        body {
+            --bs-bg-opacity: 1;
+        }
+
+        .needs-validation .label-text {
+            color: whitesmoke;
+        }
+
+        .my-0 {
+            color: black !important;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .paypal {
+        }
+
+        .credit {
+        }
+
+        .opayment {
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        img.hope {
+            height: 90px;
+            width: 90px !important;
+        }
+    </style>
+}
+
+<figure style="float:left; position: fixed;left: 40px;top:50%;width:600px;margin-top: -2.5em;border-block: initial;list-style-type: none;z-index:999;">
+    <img height="200" src="~/images/unknown.png" />
+</figure>
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<section class="container justify-content-center m-5" id="all">
+    <div class="container justify-content-center m-2">
+        <main>
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-4 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">訂票內容</span>
+                        <span class="badge bg-primary rounded-pill">3</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+
+                        @foreach (var item in Model.Alltciket)
+                        {
+                            decimal price = (item.TicketPrice) * (item.TicketCount);
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">@item.TicketName</h6>
+                                    <small class="text-muted">購買數量:@item.TicketCount 張</small>
+                                </div>
+                                <span class="text-muted">$@price.ToString("0.00")</span>
+                            </li>
+                        }
+                        @for (int i = 0; i < productcount.Count(); i++)
+                        {
+                            if (productcount[i] > 0)
+                            {
+                                decimal price = productprice[i] * productcount[i];
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div>
+                                        <h6 class="my-0">@productname[i]</h6>
+                                        <small class="text-muted">購買數量:@productcount[i] 個</small>
+                                    </div>
+                                    <span class="text-muted">$@price.ToString("0.00")</span>
+                                </li>
+                            }
+
+                        }
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">手續費</h6>
+                                <small class="text-muted">每張票加收20手續費</small>
+                            </div>
+                            <span class="text-muted">@ViewBag.fee</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">優惠折扣</h6>
+                                <small id="coupontype">折扣內容資訊</small>
+                            </div>
+                            <span class="text-success" id="discount">$0</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span style="color:gray!important">總價(NT$)</span>
+                            <strong style="color:black!important" id="totalprice">$@totalPrice.ToString("0.00#")</strong>
+                        </li>
+                    </ul>
+
+                    <div class="card p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="優惠碼" id="coupontext">
+                            <button type="button" class="btn btn-secondary" id="couponbtn">輸入優惠碼</button>
+                        </div>
+                    </div>
+                    <div class="card p-2 mt-2">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" id="checkcoupon">查看我的優惠</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">帳單地址</h4>
+                    <form class="needs-validation" novalidate action="~/Ticketing/PaymentWeb3" id="formInfo">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">姓 氏</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    姓氏需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">名 字</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    名字需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="username" class="form-label">連絡電話</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"> @text </span>
+                                    <input type="tel" class="form-control" id="username" placeholder="電話號碼" required>
+                                    <div class="invalid-feedback">
+                                        連絡電話需輸入
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="email" class="form-label">電子郵件 <span class="text-muted">(註明)</span></label>
+                                <input type="email" class="form-control" name="email" id="email" required>
+                                <div class="invalid-feedback">
+                                    電子郵件需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address" class="form-label">帳單地址</label>
+                                <input type="text" class="form-control" id="address" placeholder="輸入地址" required>
+                                <div class="invalid-feedback">
+                                    帳單地址需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address2" class="form-label">居住城市<span class="text-muted">(可選)</span></label>
+                                <input type="text" class="form-control" id="address2" placeholder="輸入城市">
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="send-email">
+                            <label class="mb-0" for="send-email">我同意以後會收到來自本網站的相關優惠訊息</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="save-info">
+                            <label class="mb-0" for="save-info">儲存個人資訊</label>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h4 class="mb-3">付款方式</h4>
+
+                        <div class="my-3">
+                            <div class="form-check">
+                                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                                <label class="mb-0" for="credit">信用卡</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                                <label class="mb-0" for="debit">歐付寶支付</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                                <label class="mb-0" for="paypal">PayPal</label>
+                            </div>
+                        </div>
+
+                        <div class="row gy-3 credit">
+                            <div class="col-md-10 pb-2">
+                                <label for="cc-number" class="form-label">信用卡號碼</label>
+                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    信用卡號碼需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="cc-expiration" class="form-label">有效日期 月</label>
+                                <input type="text" class="form-control" id="cc-expirationM" placeholder="MM" required>
+                                <div class="invalid-feedback">
+                                    有效日期需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="cc-expiration" class="form-label"> 年 </label>
+                                <input type="text" class="form-control" id="cc-expirationY" placeholder="YYYY" required>
+                                <div class="invalid-feedback">
+                                    有效日期需輸入
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="cc-cvv" class="form-label">安全碼</label>
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    安全碼需輸入
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <input type="hidden" name="fullPrice" id="fullPrice" value="@totalPrice" />
+                        <input type="hidden" name="ScreenID" id="ScreenID" value="@Model.ScreenID" />
+                        <input type="hidden" name="SeatInfo" id="SeatInfo" value="@Model.SeatInfo" />
+                        <input type="hidden" name="TicketInfo" id="TicketInfo" value="@Model.TicketInfo" />
+                        <button class="w-75 btn btn-primary btn-lg credit" type="submit">確認付款</button>
+                        <button class="w-75 btn btn-primary btn-lg bi-paypal paypal" type="button" id="paypalbtn">PAYPAL</button>
+                        <button class="w-75 btn btn-primary btn-lg opayment" type="button" id="opayment">前往歐付寶頁面</button>
+                        <button class="ml-3 btn btn-dark btn-lg credit" type="button" id="Demo">Demo</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</section>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <div class="row justify-content-center m-auto pb-4">
+            <div>
+                <p style="color:black!important">為確保您的安全，已向您輸入的電子郵件發送簡訊</p>
+                <p style="color:black!important">請入電子郵件上的核准碼</p>
+            </div>
+        </div>
+        <div class="row justify-content-center m-auto pb-4">
+            <div>
+                <input type="text" placeholder="驗證碼" class="w-100" id="ckeckcode" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button class="btn-primary p-2" id="modalOK">確認</button>
+                <button class="btn-danger p-2" id="modalClose">取消</button>
+                <button class="btn-action p-2" id="modalRe">重發驗證碼</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-bottom w3-card-4">
+        <div class="w3-container" id="div01">
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let total =@totalPrice;
+            (function ($) {
+            $(window).on('load', function () {
+                $(".loader").fadeOut();
+                $("#preloder").delay(20).fadeOut("slow");
+            });
+        })(jQuery);
+        $('figure').hide();
+        const modal = document.getElementById("myModal");
+        const close = document.getElementById("closeModal");
+        const code = document.getElementById("ckeckcode");
+        const form = document.getElementById("formInfo");
+        const view = document.getElementById("all");
+        const preloader = document.getElementById("preloder");
+
+        $('.opayment').hide();
+        $('.paypal').hide();
+
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    else {
+                        event.preventDefault()
+                        modal.style.display = "block";
+                        let checkemail = email.value
+                        let url = "/Ticketing/sendmail" + `?email=${checkemail}`;
+                        CallAjax(url);
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+
+        close.addEventListener('click', function () {
+            modal.style.display = "none";
+        })
+
+
+        let firstName = document.getElementById('firstName');
+        let lastName = document.getElementById('lastName');
+        let username = document.getElementById('username');
+        let email = document.getElementById('email');
+        let address = document.getElementById('address');
+        let ccnumber = document.getElementById('cc-number');
+        let ccexpirationM = document.getElementById('cc-expirationM');
+        let ccexpirationY = document.getElementById('cc-expirationY');
+        let cccvv = document.getElementById('cc-cvv');
+        let address2 = document.getElementById('address2');
+
+        $('#Demo').click(() => {
+            console.log('click');
+            firstName.value = '王';
+            lastName.value = '小明';
+            username.value = '0987878878';
+            email.value = 'ilovemdaofficialok@gmail.com'
+            address.value = '台北市大安區復興南路一段';
+            ccnumber.value = '5882-5646-5465-6666';
+            ccexpirationM.value = '12';
+            ccexpirationY.value = '2035';
+            cccvv.value = '666';
+            address2.value = '台北市'
+        })
+
+        $('#modalClose').click(() => {
+            modal.style.display = "none";
+        })
+
+        $('#modalRe').click(() => {
+            let checkemail = email.value
+            let url = "/Ticketing/sendmail" + `?email=${checkemail}`;
+            CallAjax(url);
+        })
+
+        $('#paypalbtn').click(() => {
+            event.preventDefault();
+            form.submit();
+        })
+
+        $('#modalOK').click(() => {
+            console.log('click');
+            modal.style.display = "none";
+            let checkcode = code.value
+            let url = "/Ticketing/checkcode" + `?code=${checkcode}`;
+            CallAjaxCheck(url);
+        })
+
+        async function CallAjax(url) {
+            let response = await fetch(`${url}`)
+        }
+
+        async function CallAjaxCheck(url) {
+            let response = await fetch(`${url}`)
+            let data = await response.json();
+            if (data == 1) {
+                view.style.display = "none";
+                preloader.style.display = "block";
+                form.submit();
+
+            }
+            else {
+                window.alert("驗證碼錯誤");
+            }
+            console.log(data);
+        }
+
+        $('#credit').click(function () {
+            $('.credit').show();
+            $('.opayment').hide();
+            $('.paypal').hide();
+        })
+
+        $('#debit').click(function () {
+            $('.credit').hide();
+            $('.opayment').show();
+            $('.paypal').hide();
+        })
+
+        $('#paypal').click(function () {
+            $('.credit').hide();
+            $('.opayment').hide();
+            $('.paypal').show();
+        })
+
+        $('#opayment').click(function () {
+            $('#formInfo').attr("action", "OPayment")
+            $('#formInfo').submit();
+        })
+
+        $('#couponbtn').click(function () {
+            let code = $('#coupontext').val();
+            CallAjaxCoupon(code);
+        })
+
+        async function CallAjaxCoupon(code) {
+            let _url = await '@Url.Action("Coupon", "Ticketing")' + `?code=${code}`;
+                $.ajax({
+                    type: "GET",
+                    url: _url,
+                    success: function (result) {
+                        console.log(result);
+                        if (result == 'F') {
+                            window.alert("無此優惠或你已使用過優惠");
+                        }
+                        else {
+                            $('#coupontype').text(result['優惠名稱couponName']);
+                            $('#discount').text(`$-${result['優惠折扣couponDiscount']}`);
+                            let t = parseInt(total) - parseInt(result['優惠折扣couponDiscount']);
+                            $('#totalprice').text(`$${t}.00`);
+                            $('#fullPrice').val(t);
+
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3500,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: '優惠券使用成功'
+                            })
+                        }
+                    }});}
+
+
+        $('#checkcoupon').click(function () {
+            document.getElementById('id01').style.display = 'block'
+            FindAjaxCoupon();
+        })
+
+        async function FindAjaxCoupon() {
+            let _url = '@Url.Action("ShowCoupon", "Ticketing")';
+            $.ajax({
+                type: "GET",
+                url: _url,
+                success: function (result) {
+                    $('#div01').empty();
+                    $('#div01').html(result);
+                    copyInput();
+                }
+            })
+        }
+
+        function copyInput() {
+            $('div[name="clickcopy"]').click(function () {
+                let copyText = $('#coupontext').val(this.getAttribute('data'));
+                copyText.select();
+                document.execCommand("copy");
+                alert("以複製優惠代碼");
+            })
+        }
+    </script>
+}
+
+

@@ -1,0 +1,28 @@
+﻿@using ClientMDA.Models
+@model List<優惠明細couponList>
+@{
+
+}
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card">
+                    <img src="~/Ticketing/coupon.jpg" class="card-img-top" alt="圖片失效">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color:red;font-size:18px">@item.優惠編號coupon.優惠名稱couponName </h5>
+                        <p class="card-text" style="color:black">折扣價格 @item.優惠編號coupon.優惠折扣couponDiscount.ToString("0.0") </p>
+                        <p class="card-text" style="color:black">優惠代碼 @item.優惠編號coupon.優惠代碼couponCode </p>
+                        <div name="clickcopy" class="card-text" style="color:Highlight;cursor:pointer" data="@item.優惠編號coupon.優惠代碼couponCode">點一下複製</div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+</div>

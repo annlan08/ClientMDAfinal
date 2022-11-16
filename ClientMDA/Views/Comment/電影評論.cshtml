@@ -1,0 +1,435 @@
+﻿@model ClientMDA.ViewModels.CCommentViewModel
+<!-- #region 會員Session-->
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    var a = "";
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+}
+<!-- #endregion 會員Session-->
+
+@{
+    ViewData["Title"] = "電影評論";
+}
+
+@section Styles{
+    <style>
+        .swal2-title {
+            color: #545454 !important;
+        }
+
+        .row d-flex justify-content-center {
+            margin: 0;
+        }
+
+        .mem_rate {
+            float: right;
+            padding-top: 5px;
+        }
+
+        .mem_info {
+            float: left;
+        }
+
+        .mem_line {
+            border: solid 1px white;
+        }
+
+        .report:hover {
+            background-color: #e53637;
+        }
+
+        .img-fluid.rounded-circle {
+            height: 30px !important;
+            margin: 0 5px 0 0;
+        }
+
+        .report:hover {
+            background-color: #e53637 !important;
+        }
+
+        .unLike:hover {
+            background-color: #F5AB00 !important;
+        }
+
+        .blog__details__btns {
+            margin-bottom: 10px;
+        }
+
+        .memComImg-Circle { /*會員大頭貼*/
+            clip-path: circle(45% at 50% 50%);
+            height: 30px;
+            margin-right: 3px;
+        }
+
+        input, select, textarea { /*留言版型跑版*/
+            max-width: none !important;
+        }
+    </style>
+    <link href="~/css/fontawesome-free-6.2.0-web/all.css" rel="stylesheet" />
+    @*電影icon樣式*@
+    <script src="~/js/fontawesome-free-6.2.0-web/all.js"></script>
+    @*電影icon樣式*@
+}
+
+<section class="blog-details spad">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="blog__details__title">
+
+                    <!-- #region 電影評論 -->
+                    <!-- 電影標題 -->
+                    <div class="anime__details__title">
+                        <a href="@Url.Action("電影介紹","Movie", new {id= Model.電影編號movieId})">
+                            <h3><i class="fa-solid fa-film"></i> @Model.中文標題titleCht</h3>
+                        </a>
+                    </div>
+                    <!-- 評論標題 -->
+                    <h4>@Model.評論標題commentTitle</h4><hr class="mem_line" />
+                    <h6>
+                        <span class="mem_info">
+                            <!-- 會員頭貼 -->
+                            <span style="color:white">
+                                @if (Model.會員照片image != null)
+                                {
+                                    <img class="memComImg-Circle" src="http://192.168.36.4:44383/images/Member/@Model.會員照片image" alt="">
+                                }
+                                else
+                                {
+                                    <img class="memComImg-Circle" src="~/images/Member/MEMBER.png" alt="">
+                                }
+                                <!-- 會員暱稱 -->
+                                <a href="@Url.Action("會員評論","Comment", new {id= Model.會員編號memberId})">@Model.暱稱nickName</a>
+                            </span>
+                            <!-- 觀影方式/觀影日期 -->
+                            @if (Model.觀影方式source != null)
+                            {
+                                <span> - @Html.DisplayFor(modelItem => Model.觀影日期viewingTime) 於<span style="color:white"> @Model.觀影方式source</span> 觀看</span>
+                            }
+                            else if (Model.觀影日期viewingTime != null)
+                            {
+                                <span> - @Html.DisplayFor(modelItem => Model.觀影日期viewingTime) 觀看</span>
+                            }
+                            else
+                            {
+                            }
+                        </span>
+                        <!-- 會員評分 -->
+                        <span class="mem_rate" style="color: #ffc107;">
+                            <i class="fa fa-star"></i> @Model.評分rate
+                        </span>
+                    </h6>
+                </div>
+            </div>
+            <!-- 評論圖片 -->
+            @*<div class="col-lg-8">
+                    <div class="blog__details__pic">
+                        <img src="http://192.168.36.4:44383/images/Comment/@Model.cImgFrList" alt="">
+                        @Model.cImgFrList
+                    </div>
+                </div>*@
+            <!-- 評論內容 -->
+            <div class="col-lg-8">
+                <div class="blog__details__content">
+                    <div class="blog__details__text">
+                        <p>
+                            @Html.Raw(Model.評論內容comments)
+                        </p>
+                    </div>
+
+                    <div class="blog__details__tags">
+                        <!-- 評論標籤 -->
+                        @*<a href="#">#神片</a>*@
+                        @*<a href="#">#主角好帥</a>*@
+                        <a href="#">
+                            <span style="color:white">發佈時間</span>
+                            <span> - @Html.DisplayFor(modelItem => Model.發佈時間commentTime)</span>
+                        </a>
+
+                        <!-- 評論按鈕 -->
+                        <div class="blog__details__comment__item__text" style="float:right">
+                            <a class="Like" href="#">Like <i class="fas fa-thumbs-up"></i></a>
+                            <a class="unLike" href="#">UnLike <i class="fas fa-thumbs-down"></i></a>
+                            @*<a class="follow" href="#">追蹤</a>*@
+                            @*<button type="button" id="btnCommentReport" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#commentReportModal">檢舉</button>*@
+
+                            <!--weiting begin-->
+                            @{
+                                if (mem != null)
+                                {
+                                    <a class="follow" id="followMem" onclick="setFollow(event)" style="cursor: pointer; ">追蹤評論</a>
+                                    <a class="report" style="cursor: pointer; " data-toggle="modal" data-target="#ReportModal">檢舉</a>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("追蹤評論", "checkLogin", new { page = "電影評論", id = Model.評論編號commentId }, new { type = "button", @class = "follow" })
+                                    @Html.ActionLink("檢舉", "checkLogin", new { page = "電影評論", id = Model.評論編號commentId }, new { type = "button", @class = "report" })
+                                }
+                            }
+                        </div>
+
+                        @{ //評論檢舉
+                            if (mem != null)
+                            {
+                                <!-- Modal -->
+                                <div class="modal fade" id="ReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        @using (Html.BeginForm("Report檢舉", "Comment"))
+                                        {
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">檢舉</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" style="color:black">
+                                                    <!--modal content start-->
+                                                    <input type="hidden" name="會員編號memberId" value="@mem.會員編號memberId" />
+                                                    <input type="hidden" name="對象targetId" value="2" />
+                                                    <input type="hidden" name="追讚倒編號actionTypeId" value="3" />
+                                                    <input type="hidden" name="連接編號connectId" value="@Model.comment.評論編號commentId" />
+                                                    <div><label>檢舉人</label><input type="text" readonly value="@mem.暱稱nickName" /></div>
+                                                    <div><label>檢舉對象</label><input type="text" readonly value="@Model.暱稱nickName" /></div>
+                                                    @{string content = Model.評論標題commentTitle;
+                                                        if (string.IsNullOrEmpty(Model.評論標題commentTitle))
+                                                        {
+                                                            content = "無標題";
+                                                        }
+                                                    }
+                                                    <div><label>評論標題</label><input type="text" readonly value="@content " /></div>
+                                                    <div><label>檢舉理由</label><textarea cols="50" name="檢舉理由reportReason"></textarea></div>
+
+                                                    <!--modal content end-->
+
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                    <button type="submit" class="btn btn-primary" id="submitAddList">確定</button>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <!--modal end-->
+                            }
+                        }
+                        <!--weiting end-->
+
+                    </div>
+                    <!-- 發佈時間 -->
+                    @*<div style="margin: 10px 0 10px 0; border: solid 1px rgba(0,0,0,0)">
+                            <span class="mem_info">
+                                <span style="color:white">發佈時間</span>
+                                <span> - @Html.DisplayFor(modelItem => Model.發佈時間commentTime)</span>
+                            </span>
+                        </div>*@
+
+
+                    <!-- 上/下一篇評論 -->
+                    <div class="blog__details__btns">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="blog__details__btns__item">
+                                    <h5>
+                                        <!-- 抓同會員id的上一篇 / 同電影id的上一篇 -->
+                                        <a href="@Url.Action("電影評論", "Comment", new { id = Model.評論編號commentId})">
+                                            <span class="arrow_left"></span> 上一篇評論
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="blog__details__btns__item next__btn">
+                                    <h5>
+                                        <!-- 抓同會員id的下一篇 / 同電影id的下一篇 -->
+                                        <a href="#">下一篇評論 <span class="arrow_right"></span></a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分享 -->
+                    <div class="blog__details__social" style="float:right">
+                        <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2F192.168.36.4%3A44340%2F&width=450&layout=standard&action=recommend&size=large&share=true&height=35&appId=106674369441068"
+                                width="125" height="35" style="border:none;overflow:hidden;float:right;margin-left:5px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                        @*<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=138&layout=button&action=like&size=large&share=true&height=65&appId=106674369441068"
+                            width="110" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>*@
+                        <div data-url="https://developers.line.biz/zh-hant/docs/line-social-plugins/install-guide/using-line-share-buttons/"
+                             class="line-it-button" data-lang="zh_Hant" data-type="share-b" data-env="REAL" data-color="default" data-size="small" data-count="false" data-ver="3" style="height:35px"></div>
+                        <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+                        @*<a href="#" class="facebook"><i class="fa fa-facebook-square"></i> Facebook</a>*@
+                        @*<a href="#" class="pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>*@
+                        @*<a href="#" class="linkedin"><i class="fa fa-linkedin-square"></i> Linkedin</a>*@
+                        @*<a href="#" class="twitter"><i class="fa fa-twitter-square"></i> Twitter</a>*@
+                    </div><hr />
+                    <!-- #endregion 電影評論 -->
+                    <!-- #region 留言 -->
+                    <!-- 你的留言 -->
+                    <form asp-action="電影評論">
+                        <div class="blog__details__form">
+                            <div class="section-title">
+                                <h5>你的留言</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" class="form-control" name="評論編號commentId" value="@Model.評論編號commentId" />
+                                    @if (@mem == null) /*非會員*/
+                                    {
+                                        <input type="text" placeholder="Name" readonly="readonly" style="margin-bottom:10px;width:730px"> /*不能輸入*/
+                                    }
+                                    else /*會員*/
+                                    {
+                                        <input type="hidden" class="form-control" name="會員編號memberId" value="@mem.會員編號memberId" required />
+                                        <input type="text" placeholder="Name" readonly="readonly" style="margin-bottom: 10px; width: 730px" name="暱稱nickName" value="@mem.暱稱nickName" required>/*顯示會員暱稱不能修改*/
+                                    }
+                                </div>
+                                <div class="col-lg-12" style="margin-bottom:50px;">
+                                    @if (@mem == null) /*非會員*/
+                                    {
+                                        <textarea placeholder="Message" readonly="readonly" style="margin-bottom:10px;width:730px"></textarea>
+                                        @Html.ActionLink("登入留言", "checkLogin", new { page = "電影評論", id = Model.評論編號commentId }, new { @class = "btn btn-info btn-sm", @style = "float:right" })
+                                    }
+                                    else /*會員*/
+                                    {
+                                        <textarea placeholder="Message" style="margin-bottom: 10px; width: 730px" name="回覆內容floors" value="" required></textarea>
+                                        <button type="submit" style="float:right" class="btn btn-info btn-sm" id="save">送出留言</button>
+                                        <button type="button" style="float:right; margin-right:5px" class="btn btn-secondary btn-sm" id="demo">DEMO</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- 會員留言 -->
+                    <div class="blog__details__comment">
+                        <div class="section-title">
+                            <h5>共 @Model.floorCount 則 留言</h5>
+                        </div>
+
+                        @await Component.InvokeAsync("評論留言list", new { id = Model.評論編號commentId })
+
+                        @if (Model.floorCount == 0)
+                        {
+                            if (mem == null)
+                            {
+                                <h4 style="text-align:center;font-weight:400">@Html.ActionLink("目前沒有留言 快來留下你的想法~", "checkLogin", new { page = "電影評論", id = Model.評論編號commentId })</h4>
+                            }
+                            else
+                            {
+                                <h4 style="text-align:center;font-weight:400">目前沒有留言 快來留下你的想法~</h4>
+                            }
+                        }
+                        else { }
+                    </div>
+                    <!-- #endregion 留言 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+
+    <script>
+        //留言DEMO
+        const demo = document.querySelector("#demo")
+        demo.addEventListener('click', () => {
+            document.querySelector('[name="回覆內容floors"]').value = "巨石強森宇宙、兩小時巨型MV😆"
+        })
+    </script>
+
+    <script>
+        //分享
+        function appendJS(src) {
+            var script = document.createElement("script");
+            script.src = src;
+            document.head.appendChild(script);
+        }
+        appendJS('https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js');
+        appendJS('https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.0');
+    </script>
+
+    <!-- #region weiting beging -->
+    <script>
+
+    window.onload = async function () {
+        const btnfollow = document.querySelector('#followMem')
+        @*if ('@mem' == null||'@mem'=='') {
+            btnfollow.innerHTML = '追蹤評論'//.setAttribute('value','追蹤會員')
+        }*@
+        '@{int login = 0;
+            int? memid = null;
+            if (mem != null)
+            {
+                login = 1;
+                memid = mem.會員編號memberId;
+            }
+                }'
+        console.log('@login')
+        console.log('@mem')
+        if ('@login' ==1) {
+            let memid = '@memid'
+            let followid = '@Model.評論編號commentId'
+                let target = 2
+
+                const url = '@Url.Content("~/comment/checkFollow")'
+                const params = `?memid=${memid}&followid=${followid}&target=${target}`
+                let response = await fetch(url + params)
+            let data = await response.text()
+            if (data == "y")
+                btnfollow.innerHTML = '取消追蹤'//.setAttribute('value', '取消追蹤')
+        }
+        else
+            btnfollow.innerHTML = '追蹤評論'//.setAttribute('value', '追蹤評論')
+
+                // checkFollow(int memid, int followid, int target)
+            }
+    </script>
+    <script>
+    async function setFollow(event){
+        let followcom = '@Model.評論編號commentId'
+                const url = '@Url.Content("~/comment/follow")'
+        const params = `?connectid=${followcom}&target=2`
+                let response = await fetch(url + params)
+                let data = await response.text()
+        if (data == "add") {
+            event.target.innerHTML='取消追蹤'
+        }
+        else {
+            event.target.innerHTML = '追蹤評論'
+        }
+            }
+    </script>
+    <!-- #endregion weiting end -->
+    <!-- #region 檢舉 -->
+    @*<script>
+            window.onload=function () { //評論檢舉
+                    if ('@a' == "") {
+                        document.querySelector("#btnFloorReport").addEventListener('click', () => {
+                            @{Accessor.HttpContext.Session.SetString(CDictionary.SK登後要前往的頁面, "~/Comment/電影評論/2");} //抓電影評論id
+                            window.location = '@Url.Content("~/member/login")'
+                        })
+                    }
+            }
+            window.onload=function () { //留言檢舉
+                    if ('@a' == "") {
+                        document.querySelector("#btnCommentReport").addEventListener('click', () => {
+                            @{Accessor.HttpContext.Session.SetString(CDictionary.SK登後要前往的頁面, "~/Comment/電影評論/2");} //抓電影評論id
+                            window.location = '@Url.Content("~/member/login")'
+                        })
+                    }
+            }
+        </script>*@
+    <!-- #endregion 檢舉 -->
+}

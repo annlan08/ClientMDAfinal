@@ -1,0 +1,29 @@
+﻿@using ClientMDA.Models
+@model 電影movie
+@{
+    string delectors = "";
+    string actor = "";
+
+    var d = Model.電影導演movieDirectors.Select(D => D.導演編號director.導演中文名字nameCht);
+    var a = Model.電影主演casts.Select(A => A.演員編號actor.演員中文名字nameCht);
+
+    foreach(var item in d)
+    {
+        delectors += $"{item} ";
+    }
+
+    foreach (var item in a)
+    {
+        actor += $"{item} ";
+    }
+}
+
+@*電影資訊表*@
+
+
+    <div class="grade">@Model.電影分級編號rating.分級級數ratingLevel</div>
+    <div class="datebox m-auto mt-2">片長:@Model.片長runtime 上應日期:@Model.上映日期releaseDate</div>
+    <div class="staff p-1 d-block">導 演：<span>@delectors</span></div>
+    <div class="staff d-block">演 員：<span>@actor</span></div>
+    <div class="Infotext d-block">@Model.劇情大綱plot</div>
+

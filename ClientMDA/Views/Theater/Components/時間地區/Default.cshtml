@@ -1,0 +1,132 @@
+﻿@using ClientMDA.ViewModels
+@model List<CTheater>
+@{
+    ViewData["Title"] = "Default";
+}
+
+<style>
+    .roddy {
+        border: 2px solid blue;
+        box-shadow: blue 0px 2px 4px 0px;
+    }
+    .oo {
+    }
+    .kk {
+    }
+</style>
+
+
+
+@foreach (var item in Model)
+{
+
+
+
+
+
+    @foreach (CcinemaViewMode q in item.cinemas影廳種類)
+    {
+        
+        @if (q.場次ID.Count > 0)
+        {
+<div class="cinemabox" id="ts22">
+
+    <div class="cinemaName">
+        @item.電影院名稱theaterName
+    </div>
+    <div class="toggleBox  sts" id="time">
+        @{
+                <div class="sessionBox" id="tt">
+                
+                    @if (q.場次ID.Count > 0)
+                    {
+
+                      
+                        <div class="version" id="tn">
+                            @q.CinemaName
+                            
+                        </div>
+                    }
+                    <div class="session">
+                        @for (int i = 0; i < q.場次ID.Count(); i++)
+                        {
+                            string a = q.放映時間[i];
+                        <div class="time tt1">
+                            @*@foreach(var x in q.場次座位數量) {
+         <input type="hidden" class="場場" value="@x.座位數量">
+        }*@
+                            <input type="hidden" class="場場" value="@q.場次ID[i]">
+                            <div style="display:none" class="場次123">@q.場次ID[i]</div>
+                            <span class="seats"></span> @a
+
+                        </div>
+
+                        }
+
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+                        }
+        }
+}
+<script>
+    $(".time").click(function () {
+        var x = $(".datebox.checked .month").html()+$(".datebox.checked .date").html()
+        var i = $(".oo .cinemaName").html()
+        var a = $(".kk .version").html()
+        var t = $(".roddy").html()
+        var 場次 = $(".time.roddy input").val()
+        var 座位 = $(".場場").val()
+        console.log(座位)
+        //console.log(t)
+        document.querySelector("#新視窗").style.display = "inline"
+        document.querySelector("#影城").innerHTML=i
+        document.querySelector("#日期").innerHTML = x
+        document.querySelector("#時間").innerHTML = t
+        document.querySelector("#版本").innerHTML = a
+
+    })
+    //$(".session .time").hover(function () {
+    //    $(this).removeClass("roddy").siblings().removeClass("roddy").end().addClass("roddy");
+    //},
+    //    function () {
+    //        $(this).prevAll().removeClass("roddy").end().removeClass("roddy");
+    //    });
+    $(".tt1").hover(function () {
+
+        $(this).removeClass("roddy").siblings().removeClass("roddy").end().addClass("roddy");
+        var 場次 = $(".場次123").html()
+        var 場次2 = $(".場場").html()
+        console.log(場次2)
+
+        console.log(場次)
+    },
+        function () {
+            $(this).prevAll().removeClass("roddy").end().removeClass("roddy");
+        });
+
+    $(".session .time").click(function () {
+        $(this).removeClass("iooi").siblings().removeClass("iooi").end().addClass("iooi");
+        $(".submit").addClass("iooi")
+        var 場次 = $(".場次").val()
+        console.log(場次)
+    })
+    $(".cinemabox").hover(function () {
+
+            $(this).removeClass("oo").siblings().removeClass("oo").end().addClass("oo");
+        },
+            function () {
+
+                $(this).prevAll().removeClass("oo").end().removeClass("oo");
+        });
+    $(".sessionBox").hover(function () {
+
+        $(this).removeClass("kk").siblings().removeClass("kk").end().addClass("kk");
+    },
+        function () {
+
+            $(this).prevAll().removeClass("kk").end().removeClass("kk");
+        });
+</script>

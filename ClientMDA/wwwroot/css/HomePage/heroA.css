@@ -1,0 +1,196 @@
+﻿#setbanner{
+   /* margin:10%;*/
+}
+
+.list, .listb {
+    list-style-type: none;
+    color: white;   
+}
+.listb {
+    vertical-align: bottom;
+}
+    .hangposter {
+    background-color: transparent;
+    height: 286px;
+    width: 200px;
+    z-index: 1;
+}
+
+#content {
+    z-index: 0;
+    height: 100%;
+    width: 100%;   
+}
+
+#img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+#imgbox {
+    width: 1140px;
+    height: 650px;
+}
+
+#img-wrapper > img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#imgbanner {
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+#img-wrapper > .hangposter {
+    position: absolute;
+    inset: 56% 0 0 3.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-wrapper > .content {
+    position: absolute;
+    inset: 0;
+    font-size: 2rem;
+    padding: 1rem;
+    background: rgba(0,0,0,.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-wrapper > #content {
+    position: absolute;
+    /*inset: 80% 0 0 0;*/
+    padding: 1rem;
+    /*background: rgba(0,0,0,.8);*/
+    /*background: linear-gradient(to top, #000000,transparent );*/
+    background-image: linear-gradient(transparent, black);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.img-wrapper > img,
+.img-wrapper > .content {
+    transition: 200ms ease-in-out;
+}
+
+#play {
+   
+    font-size: 80px;
+    color: rgba(255,255,255);
+    z-index:9;
+    /*margin: 5%;
+    margin-left: 25%;*/
+}
+
+
+#content > #play {
+    position:absolute;
+    inset: 80% 0 0 -42%;
+}
+#content > #box-banner {
+    position: absolute;
+    inset: 82% 0 0 36%;
+}
+/*#img-wrapper > #playbox {
+    position: absolute;
+    height: 25%;
+    width: 75%;
+    background-color: red;
+}*/
+/*改顏色*/
+#img-wrapper:hover #play,
+.arrow_carrot-left:hover, .arrow_carrot-right:hover {
+    color: rgba(245,197,24);
+}
+
+#box-banner {    
+    margin-bottom: 2%;
+    margin-right: 5%;
+    vertical-align: bottom;
+}
+
+#banner-active {
+    width: 1140px;
+    height: 650px;
+}
+
+#right, #left {
+    color: transparent;
+  /*  font-size: 36px;
+    height: 66px;
+    width: 66px;
+    background: #0b0c2a;
+    line-height: 66px;
+    text-align: center;   
+    transform: rotate(45deg);
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    margin-top: -47px;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    cursor: pointer;
+    user-select: none;*/
+}
+
+/*.arrow_carrot-right, .arrow_carrot-left {
+    transform: rotate(-45deg);
+    display: block;
+    z-index: 1 !important;
+}*/
+/*.arrow_carrot-right:before {
+    content: "\35";
+}*/
+
+/*#right::after, #left::after {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 54px;
+    width: 54px;
+    background: rgba(255, 255, 255, 0.1);
+    content: "";
+    z-index: -1;
+    margin: 0 auto;
+}*/
+
+
+/*#banner-active > #right {
+    inset: 50% 0 0 98% !important;
+}
+*/
+
+#right, #left {
+    background-color: transparent;
+    z-index: 2;
+    height: 96px;
+    width: 70px;
+    border: solid;
+    border-color: #fff;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.swiper > #right {
+    position: absolute;
+    inset: 45% 0 0 94%;
+}
+
+.swiper > #left {
+    position: absolute;
+    inset: 45% 94% 0 0;
+}
+
+#right:hover, #left:hover {
+    color: rgba(245,197,24);
+}

@@ -1,0 +1,30 @@
+﻿#Qbox {
+    margin-top: 80px;
+    /*justify-content: center;*/
+    width: 1140px;   
+}
+
+#accordionExample {
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
+}
+
+#Qcard{
+    width:850px;
+    margin-left:150px;
+}
+#Qbtn {
+    text-align: left;
+    width: 800px;
+    font-size:1.5rem;
+}
+    #Qbtn:hover {
+        background-color:rgba(247,247,247);
+    }
+
+.card-body {
+    color:black;
+    font-size:1.5rem;
+}
+
+

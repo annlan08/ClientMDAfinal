@@ -1,0 +1,383 @@
+﻿@model List<ClientMDA.ViewModel.WenViewModel.WenCAddToCartItem>
+
+@{
+    ViewData["Title"] = "AddToCard";
+    Layout = "~/Views/Shared/_WenLayout.cshtml";
+    decimal sum = 0;
+
+    foreach (var item in Model)
+    {
+        sum += item.小計;
+    }
+
+    string photo = "empty.jpg";
+}
+<style>
+    .text-6:hover {
+        /*box-shadow: 0 10px;*/
+        padding-bottom: 20px;
+        margin: 10px;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 5px #00ffff solid;
+    }
+
+    .text-6 {
+        /*box-shadow: 0 10px;*/
+        padding-bottom: 20px;
+        margin: 10px;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: darkgreen;
+        /*border-bottom: 2px #0094ff solid;*/
+    }
+
+    fieldset {
+        width: 300px;
+        border: 1px solid #acd6ff;
+        border-radius: 15px;
+        margin: 15px;
+    }
+
+    .st1 {
+      
+        border-bottom: 3px dashed #bebebe;
+        margin: 20px;
+        padding-bottom: 5px;
+    }
+
+    #div1 {
+        float: left;
+    }
+
+    #div2 {
+        float: left;
+    }
+
+    #div3 {
+        clear: left;
+    }
+
+    #div4 {
+        clear: left;
+    }
+
+    .prdprice {
+    }
+</style>
+
+<div style="display:block;height:40px;"></div>
+<div id="listBtn" onclick="listBtn()">選擇付款方式</div>
+<div id="C" style="display:none;">
+    <p>信用卡</p>
+    <div id="div1">
+        <fieldset>
+            <register>
+                @*<div class="st1"> <label>卡號:</label>&nbsp;&nbsp;<input type="text" value="1234567890123456" /></div>
+            <div class="st1"><label>驗證碼(3碼):</label>&nbsp;&nbsp;<input type="text" value="890" /></div>
+            <div class="st1"><label>有效期限:</label>&nbsp;&nbsp;<input type="text" value="20230101" /></div>*@
+            </register>
+
+            <form asp-action="creditcardsubmit" method="post" enctype="multipart/form-data">
+            @*<form method="post" enctype="multipart/form-data">*@
+                <img id="myimg" class="card-img-top img-thumbnail p-4" src="~/images/WenProduct/@photo" />
+                <div class="form-group">
+                    <label for="InputFile">請選擇要上傳的信用卡</label>
+                    <input id="InputFile" class="form-control" type="file" onchange="selectimgFile(this.files)" name="file1" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="buttonSubmit" class="btn btn-primary st2">送出</button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    <div id="div2" style="display:none;">
+        <fieldset>
+            @*<div class="form-group">
+                    <label class="st2">卡號</label>
+                    <textarea class="form-control st2" readonly rows="10"></textarea>
+             </div>*@
+            <div class="form-group">
+                <div class="st1"> <label>卡號:</label>&nbsp;&nbsp;<input type="text" value="1234567890123456" /></div>
+                <div class="st1"><label>驗證碼(3碼):</label>&nbsp;&nbsp;<input type="text" value="890" /></div>
+                <div class="st1"><label>有效期限:</label>&nbsp;&nbsp;<input type="text" value="20230101" /></div>
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+
+<div id="div3">
+    <div style="display:block;height:40px;"></div>
+    <h4>我的購物車</h4>
+    <a class="btn btn-outline-info" asp-action="OptionTheater">繼續購物</a>
+</div>
+
+<div style="display:block;height:40px;"></div>
+<div id="div4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <td class="col-2 text-white">&nbsp;</td>
+                            <td class="col-1 text-white">數量</td>
+                            <td class="col-3 text-white">描述</td>
+                            <td class="col-3 text-white">電影院</td>
+                            <td class="col-3 text-white">小計</td>
+                            <td class="col-auto">  </td>
+                        </tr>
+                    </thead>
+                    <tbody class="text-white">
+                        @{ int No = 0;
+                            foreach (var item in Model)
+                            {
+                                No++;
+                                string proID = "productItem" + No;
+                                <tr data="@item.商品編號productId" class="text-white" id="@proID">
+                                    <td class="text-white">
+                                        <div class="container">
+                                            <div class="card bg-white text-black" style="width:8rem;">
+                                                <img class="card-img-top w-100 p-4" src="~/images/WenProduct/@item.商品圖片路徑imagePath" />
+                                                <div class="row justify-content-center card-header">
+                                                    <p class="card-title">@Html.DisplayFor(modelItem => item.商品名稱productName)</p>
+                                                    <p class="card-title prdprice">單價: @item.商品價格productPrice.ToString("0")</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <input type="hidden" id="No" value=" @No" name="No" />  @*id="No" value=" @count" name="No"*@
+                                        @* @Html.ActionLink("刪除", "ProductDelete", new { No = @No }, new { onclick = "return confirm('要刪嗎?')" })*@
+
+                                        @*<form name="DelInfo" method="get" action="~/WenShoppingCart/ProductDelete" enctype="text/plain" id="Deleteform">*@
+                                        <!--<input type="hidden" id="inputdelete" name="Inprod" />
+                                        </form>-->
+                                        @*<input type="number" value="@Html.DisplayFor(modelItem => item.count)" />*@
+                                        @Html.DisplayFor(modelItem => item.count)
+                                        @*<input type="number" value=" @Html.DisplayFor(modelItem => item.count)" />*@
+                                        @*<input style="width:50px" type="number" min="1" value="1" id="qty" name="quantity">*@
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.商品介紹introduce)</td>
+                                    <td>
+                                        <label>@Html.DisplayFor(modelItem => item.電影院名稱theaterName)</label>
+                                    </td>
+                                    <td>
+                                        <label>@item.小計.ToString("0")</label>
+                                    </td>
+                                    <td><button class="Deletebtn btn btn-success mb-3" data-toggle="modal" data-target="#myModel"><i class="fa-regular fa-trash-can"></i></button></td>
+
+                                </tr>
+
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="modal fade text-dark" id="myModel" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4>您好，要移除商品嗎?</h4>
+                                <button class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>親愛的顧客您好，確定要移除此商品嗎?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal">關閉</button>
+                                <button id="D" type="submit" class="btn btn-warning" data-dismiss="modal">移除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @*送出購買商品明細*@
+    <form name="DelInfo" method="get" action="~/WenShoppingCart/ProductDelete" enctype="text/plain" id="Deleteform">
+        @*<input asp-action="ProductDelete" asp-route-id="@No" type="text" />  id="No" value=" @count" name="No"*@
+        <input type="hidden" id="inputdelete" name="id" />
+    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <table class="table table-borderless text-success justify-content-end">
+
+                    <tr>
+                        <td>優惠代碼</td>
+                        <td>
+                            <input id="Coupon_Code" type="text" />
+                            <input id="hiddenpoint" type="hidden" />
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-warning" type="submit" id="btnpass">貼上</button>
+
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-info" type="submit" id="btnpoint">使用</button>
+
+                        </td>
+                        <td id="discount">
+                        </td>
+                    </tr>
+
+                    <tr class="table-bordered">
+                        <td>含稅共計</td>
+                        <td id="fullprice">@sum.ToString("0")</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <form asp-action="CreateReceipt" method="post" enctype="application/x-www-form-urlencoded">
+                    @*<form method="post" action="CreateReceipt" id="createR">*@
+
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <div class="form-group">
+                            <input type="hidden" asp-for="@Model[i].商品編號productId" />
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="@Model[i].count" />
+                        </div>
+                    }
+                    <div class="form-group">
+                        <input type="submit" value="訂單送出" class="btn btn-outline-success" id="subcreateR">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*送出購買商品明細*@
+
+@section Scripts{
+    <script>
+        let deletebtns = document.getElementsByClassName('Deletebtn')//自動長出的刪除鍵
+        let deleteID = document.querySelector('#inputdelete')//隱藏欄位，放要刪除的產品id號碼
+        let D = document.querySelector('#D')//出現要刪除的方塊，「移除」的按鈕
+        let inputdelete = document.querySelector('#inputdelete')//隱藏欄位，放要刪除的產品id號碼,設定value
+        let proID = document.getElementById('proID')//根據序號No產生的Id
+
+        let hiddenpoint = document.getElementById('hiddenpoint')
+        let Coupon_Code = document.getElementById('Coupon_Code')
+        let mypoint = document.getElementById('mypoint')
+        let btn = document.getElementById('btnpoint')
+        let btnpass = document.getElementById('btnpass')
+        let u1 = document.getElementById("u1")      
+
+        btnpass.addEventListener('click', async() => {
+
+            const text = await navigator.clipboard.readText();
+            console.log(text);
+            Coupon_Code.value = text;
+
+        })
+
+        function listBtn() {
+            var listBtn = document.getElementById('listBtn');
+            var C = document.getElementById('C');
+            if (C.style.display === 'none') {
+                C.style.display = 'block';              
+              /*  C.innerText = "畫面收";*/
+            } else {
+                C.style.display = 'none';
+                listBtn.innerText = "選擇付款方式";
+            }
+        }   
+        
+
+        function selectimgFile(files) {
+            //console.log(files)
+            //show.append(files[0].name) 可以找到檔名
+            let mynewimg = files[0]
+            //console.log(myimg.src)
+            let objURL = URL.createObjectURL(mynewimg)
+            myimg.src = objURL
+
+            var div2 = document.getElementById('div2');
+            if (div2.style.display === 'none') {
+                div2.style.display = 'block';
+            }
+        }
+
+
+        btn.addEventListener("click", async () => {
+            hiddenpoint.value = Coupon_Code.value
+            //console.log(hiddenpoint.value)
+            let point = hiddenpoint.value
+            hiddenpoint.setAttribute("value", `${hiddenpoint.value}`)
+
+            let response = await fetch("@Url.Content("~/WenShoppingCart/expoint")" +`?Coupon_Code=${point}`)
+            let DATAS = await response.json()
+            //console.log(DATAS)
+            //let Frag = document.createDocumentFragment()
+            for (let i = 0; i < DATAS.length; i++) {
+                const cell1 = document.getElementById("discount")
+                let txt = document.createTextNode(DATAS[i])
+                cell1.classList.add("btn-primary")
+                cell1.appendChild(txt)
+            }
+            let d = $('#discount').text();
+            //console.log('d is ' + d);
+            let o = $('#fullprice').text();
+            //console.log('o is ' + o);
+            let numd = parseInt(d);
+            let numo = parseInt(o);
+            $('#fullprice').text(numo - numd);
+            btn.style.display = 'none'
+        })
+
+        for (let item of deletebtns) {
+            item.addEventListener('click', evt => {
+                evt.preventDefault();
+                deleteID = $(event.currentTarget).parents('tr')[0].getAttribute('data');
+                console.log($(event.currentTarget).parents('tr')[0].getAttribute('data'))
+                inputdelete.setAttribute('value', deleteID);
+                D.addEventListener('click', evt => {
+                    item.closest("tr").remove();
+                    console.log(inputdelete)
+                    $('#Deleteform').submit();
+                })
+            })
+        }
+
+        //subcreateR.addEventListener('click', evt => {
+        //    evt.preventDefault();
+        //    $('createR').submit();
+        //})
+
+
+        //let prdprice = document.getElementsByClassName('.prdprice');
+        //console.log(prdprice)
+        //let fullprice = 0;
+        //addprice();
+        //function addprice(){
+        //    for (let item of prdprice) {
+        //        let p = item.innerHTML;
+        //        console.log(p)
+        //        fullprice = fullprice + p;
+        //    }
+        //}
+
+        //$('#fullprice').text(fullprice);
+        //console.log(fullprice);
+    </script>
+}
+

@@ -1,0 +1,410 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@using ClientMDA.ViewModels
+@model List<CMovieListViewModel>
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@{
+    ViewData["Title"] = "WatchList";
+}
+@section Styles{
+
+
+
+
+    <link href="~/css/Member/WatchList.css" rel="stylesheet" />
+    <link href="~/css/Member/MemberMain.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+
+
+    <style>
+        .content {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .member_area {
+            color: white;
+        }
+
+        .white {
+            color: white;
+            /*text-align: center*/
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+        }
+    </style>
+
+}
+
+<div class="white">
+    <div class="member_id">
+        <span class="member_hello">HELLO!</span>
+        @{
+            if (mem.暱稱nickName != null)
+            {
+                <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">@mem.暱稱nickName</a></span>
+            }
+            else
+            {
+                <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">簡易會員</a></span>
+
+            }
+        }
+    </div>
+    <div class="row">
+        <div class="member_menu">
+            @{
+                if (mem.正式會員formal == true)
+                {
+                    <a id="watchlist" href="../Member/WatchList" title="我的片單" class="member_link">我的片單</a>
+                    <a id="commentList" href="../Member/CommentList" title="我的評論" class="member_link">我的評論</a>
+                    <a id="wishlist" href="../Member/wishlist" title="我的追蹤" class="member_link">我的追蹤</a>
+                }
+                else
+                {
+                    <a id="watchlist" href="../Member/NotFormal" title="我的片單" class="member_link">我的片單</a>
+                    <a id="commentList" href="../Member/NotFormal" title="我的評論" class="member_link">我的評論</a>
+                    <a id="wishlist" href="../Member/NotFormal" title="我的追蹤" class="member_link">我的追蹤</a>
+                }
+            }
+            <a id="orderlist" href="../Member/orderlist" title="訂單查詢" class="member_link">訂單查詢</a>
+            @*<a id="memberbonuslist" href="../Member/memberbonuslist" title="我的紅利金" class="member_link">我的紅利金</a>*@
+            <a id="memberdiscount" href="../Member/memberdiscount" title="我的抵用券" class="member_link">我的抵用券</a>
+
+            <a id="memberpassword" href="../Member/PasswordEdit" title="密碼修改" class="member_link">密碼修改</a>
+            <a id="MemberEdit" href="../Member/MemberEdit" title="資料修改" class="member_link ">資料修改</a>
+            <a href="../Member/logout" class="member_link" title="登出">登出</a>
+        </div>
+        <div class="member_main" style="color:white">
+            <div class="member_area ">
+                <!--content-->
+
+                <h2>
+                    我的所有片單
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link add" data-toggle="modal" data-target="#AddModalCenter">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </h2>
+                <!-- Modal -->
+                <div class="modal fade" id="AddModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        @using (Html.BeginForm("WatchListCreate", "Member"))
+                        {
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">我的所有片單</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!--modal content start-->
+
+                                    <table id="WatchList" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>片單</th>
+                                                <th>移除</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableLists">
+                                            @{
+                                                foreach (CMovieListViewModel list in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <input type="hidden" class="id" name="listId" value="@list.listId" />
+                                                            <input type="text" class="form-control name" name="listName" value="@list.listName">
+                                                        </td>
+                                                        <td><button type="button" onclick="deleteRow(event)" class="btn btn-danger btn-sm delList"><i class="fas fa-trash-alt"></i></button></td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                    <input type="text" class="form-control" id="inputListName" name="listName"
+                                           placeholder="我的片單">
+                                    <button type="button" id="btnAddList" class="site-btn btn-sm mt-3">
+                                        <i class="fa-solid fa-plus"></i> 新增
+                                    </button>
+                                    <small id="duplicate" style="color:darkgray"></small>
+                                    <!--modal content end-->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" id="submitAddList">確定</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!--modal end-->
+
+                @{
+                    foreach (CMovieListViewModel list in Model)
+                    {
+                        string modalName = "Edit" + list.listId;
+                                <div class="content">
+                                    <div class="card-title">
+                                        <p>
+                                            @list.listName
+                                            <input type="hidden" name="listId" value="@list.listId" />
+                                            <button class="btn btn-link btn-sm edit" data-toggle="modal" data-target="#@modalName">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                        </p>
+                                    </div>
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            @{
+                                                foreach (var movie in list.myLists)
+                                                {
+                                                    <div class="swiper-slide"
+                                                         style="background-image: url('@movie.moviePic')">
+
+                                                        <a href='@Url.Content($"~/movie/電影介紹?id={movie.movieId}")'>
+                                                            <p class="movie-card">@movie.movieTitle</p>
+                                                        </a>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                </div>
+
+
+                        <!--edit modal-->
+                        <div class="modal fade" id="@modalName" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                @using (Html.BeginForm("MyWatchListEdit", "Member"))
+                                {
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <input type="hidden" name="listId" class="listId_forEdit" id="listId_forEdit" value="@list.listId" />
+                                            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">@list.listName</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!--modal content start-->
+
+                                            <table id="MovieList" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>電影</th>
+                                                        <th>移除</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tableMovies">
+                                                    @{
+                                                        foreach (var movie in list.myLists)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="hidden" class="listId" name="listId" value="@movie.listId" />
+                                                                    <input type="hidden" class="mylistId" name="mylistId" value="@movie.myMovieListId" />
+                                                                    <input type="hidden" class="movieId" name="movieId" value="@movie.movieId" />
+                                                                    <input type="text" class="form-control movieName" name="" value="@movie.movieTitle">
+                                                                </td>
+                                                                <td><button type="button" onclick="deleteRow(event)" class="btn btn-danger btn-sm delMovie"><i class="fas fa-trash-alt"></i></button></td>
+                                                            </tr>
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                            <input type="text" list="typelist" class="form-control inputMovie" id="inputMovie" name="movieName" placeholder="電影名稱">
+                                            <datalist id="typelist" class="typelist"></datalist>
+                                            <button type="button" id="btnAddMovie" class="site-btn btn-sm mt-3 btnAddMovie">
+                                                <i class="fa-solid fa-plus"></i> 新增
+                                            </button>
+                                            <small id="duplicateMovie" class="duplicateMovie" style="color:darkgray"></small>
+                                            <!--modal content end-->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                            <button type="button" class="btn btn-primary submitAddMovie" id="submitAddMovie">確定</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <!--edit modal end-->
+
+                    }
+                }
+
+                <!--end content-->
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @*<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>*@
+
+    <script>
+        const inputName = document.querySelector("#inputListName")
+        const btnAddList = document.querySelector("#btnAddList")
+        const duplicate = document.querySelector("#duplicate")
+        const tableLists = document.querySelector("#tableLists")
+
+        btnAddList.addEventListener("click", async () => {
+
+            const url = "@Url.Content("~/member/checkWatchList")"
+            const params = `?name=${inputName.value}`
+            let response = await fetch(url + params)  //resolve->response, reject
+            let data = await response.text()
+            if (inputName.value == "") {
+                duplicate.textContent = "不可空白"
+            }
+            else if (data == 'True') {
+                duplicate.textContent = "片單名稱重複"
+            }
+            else {
+                duplicate.textContent = ""
+
+                var tr = document.createElement('tr');
+                tr.innerHTML = `
+<td>
+<input type="hidden" class="id" name="listId" value="" />
+<input type="text" class="form-control name" name="listName" value="${inputName.value}"/>
+</td>
+<td><button type="button" onclick="deleteRow(event)" class="btn btn-danger btn-sm delList"><i class="fas fa-trash-alt"></i></button></td>
+                `
+                tableLists.appendChild(tr);
+
+            }
+        })
+
+
+
+        const submitAddList = document.querySelector("#submitAddList")
+        submitAddList.addEventListener("click", async () => {
+            var ids = document.querySelectorAll('.id')
+            var names = document.querySelectorAll('.name')
+            for (let i = 0; i < ids.length; i++) {
+                ids[i].setAttribute('name',`ls[${i}].listId`)
+            }
+            for (let i = 0; i < names.length; i++) {
+                names[i].setAttribute('name', `ls[${i}].listName`)
+            }
+            await submitAddList.setAttribute('type', 'submit')
+        })
+
+
+    </script>
+    <script>
+        function deleteRow(event) {
+            event.target.closest('tr').remove();
+        }
+    </script>
+    <script>
+    const inputMovie = document.querySelectorAll(".inputMovie")
+    const btnAddMovie = document.querySelectorAll(".btnAddMovie")
+    const duplicateMovie = document.querySelectorAll(".duplicateMovie")
+    const tableMovies = document.querySelectorAll(".tableMovies")
+
+        btnAddMovie.forEach(item => {
+            item.addEventListener("click", addtargetmovie)
+        })
+
+        function addtargetmovie(event) {
+            //console.log(this)
+            console.log(this.closest('div'))
+            console.log(this.closest('div').querySelector('.inputMovie'))
+            console.log(this.closest('div').querySelector('.duplicateMovie'))
+            console.log(this.closest('div').querySelector('.tableMovies'))
+            if (this.closest('div').querySelector('.inputMovie').value == "") {
+                this.closest('div').querySelector('.duplicateMovie').textContent = "不可空白"
+            }
+            else {
+                this.closest('div').querySelector('.duplicateMovie').textContent = ""
+
+                var tr = document.createElement('tr');
+                tr.innerHTML = `
+                                                        <td>
+                                                            <input type="hidden" class="listId" name="listId" value="${this.closest('form').querySelector('.listId_forEdit').value}" />
+                                                            <input type="hidden" class="mylistId" name="mylistId" value="" />
+                                                            <input type="hidden" class="movieId" name="movieId" value="" />
+                                                            <input type="text" class="form-control movieName" name="movieName" value="${this.closest('div').querySelector('.inputMovie').value}">
+                                                        </td>
+                                                        <td><button type="button" onclick="deleteRow(event)" class="btn btn-danger btn-sm delMovie"><i class="fas fa-trash-alt"></i></button></td>
+                `
+                this.closest('div').querySelector('.tableMovies').appendChild(tr);
+            }
+        }
+
+
+        const submitAddMovie = document.querySelectorAll(".submitAddMovie")
+        submitAddMovie.forEach(item => {
+            item.addEventListener("click", addIndex)
+        })
+        function addIndex(event) {
+            var movieids = this.closest('form').querySelectorAll('.movieId')
+            var listids = this.closest('form').querySelectorAll('.listId')
+            var mylistids = this.closest('form').querySelectorAll('.mylistId')
+            var movieName = this.closest('form').querySelectorAll('.movieName')
+
+            for (let i = 0; i < movieids.length; i++) {
+                movieids[i].setAttribute('name', `mv[${i}].movieId`)
+                listids[i].setAttribute('name', `mv[${i}].listId`)
+                mylistids[i].setAttribute('name', `mv[${i}].mylistId`)
+                movieName[i].setAttribute('name', `mv[${i}].movieName`)
+            }
+
+            this.setAttribute('type', 'submit')
+        }
+
+
+
+        const listData = document.querySelectorAll(".typelist")
+
+        listData.forEach(item => {
+            item.style.display="none"
+        })
+
+        inputMovie.forEach(item => {
+
+            item.addEventListener("input", async () => {
+                let keyword = item.value
+                let results = await fetch("@Url.Content("~/Member/autoCmpMovie")" + `?movie=${keyword}`)
+                let datas = await results.json()
+                //console.log(datas)
+                let htmlDatas = datas.map(data => {
+                    return (
+                        `
+                <option onclick="read(event)">${data}</option>
+                `)
+                })
+                listData.forEach(item => { item.innerHTML = htmlDatas.join("") })
+            })
+        })
+
+
+        function read(evt) {
+            this.closest('input').value = evt.target.textContent
+        }
+
+
+
+
+    </script>
+
+}

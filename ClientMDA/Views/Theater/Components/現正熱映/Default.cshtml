@@ -1,0 +1,96 @@
+﻿@using ClientMDA.ViewModels
+@model List<CTheater>
+
+@{
+    ViewData["Title"] = "Default";
+
+
+
+}
+
+@{
+
+
+    for (var i = 0; i < 12; i++)
+    {
+        <a href="@Url.Action("快定頁面測試", "Theater", new { id = Model[i].電影編號movieId })">
+
+            <div class="post-box">
+
+                @{
+                    string urlpic = "";
+                    if (Model[i].MPimg.Count > 0)
+                        urlpic = "http://192.168.36.4:44383/images/MovieImage/" + Model[i].MPimg[0];
+                    //urlpic =Model[i].MPimg[0];
+
+                    else
+                    {
+                        urlpic = "../../images/Theater/common/poster.png";
+                    }
+                        <div class="post" style="background-image: url('@urlpic')"></div>
+
+                }
+                <div class="star">
+                    <div class="commonStyled__MovieStars-sc-kt5vy-3 ijuViJ" style="text-align: center">
+
+                        @{
+                            decimal? x = Model[i].評分rate;
+                            decimal? 總評分 = 0;
+                            decimal? 平均評分 = 0;
+                            decimal 會員的評分 = 0;
+                            decimal 會員的評分結果 = 0;
+
+                            string 轉 = "";
+                            if (Model[i].會員評分.Count() != 0)
+                            {
+                                for (int a = 0; a < Model[i].會員評分.Count(); a++)
+                                {
+
+                                    總評分 += Model[i].會員評分[a];
+                                }
+                                平均評分 = 總評分 / Model[i].會員評分.Count();
+                                轉 = 平均評分.ToString();
+                                會員的評分 = decimal.Parse(轉);
+                                會員的評分結果 = decimal.Round(會員的評分, 1);
+                            }
+                            if (Model[i].會員評分.Count() != 0)
+                            {
+                                <div class="star" style=" text-align: center"><i class="fas fa-star" style="color:#ffc107"></i></div>
+                                <div class="star" style=" text-align: center">@會員的評分結果</div>
+                            }
+                            else
+                            {
+                                <div class="star" style=" text-align: center"><i class="fas fa-star" style="color:#ffc107"></i></div>
+                                <div class="star" style=" text-align: center">@x</div>
+                            }
+                        }
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="title" title="@Model[i].中文標題titleCht">
+                    <input type="hidden" value="@Model[i].電影編號movieId" />
+                    @Model[i].中文標題titleCht
+                </div>
+                <div class="en" title="@Model[i].英文標題titleEng">
+                    @Model[i].英文標題titleEng
+
+                </div>
+                <div class="grade">
+                    @Model[i].分級級數ratingLevel
+                </div>
+            </div>
+        </a>
+
+    }
+
+
+}
+
+<script>
+   
+</script>
+

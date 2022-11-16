@@ -1,0 +1,153 @@
+﻿@model ClientMDA.ViewModels.CLogin2ViewModel
+@{
+    ViewData["Title"] = "Login2";
+}
+
+@section Styles{
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+    <style>
+        div.login__form::after {
+            content: none;
+        }
+
+        #temp {
+            content: none;
+        }
+
+        .login {
+            padding: 10px 0 120px 0;
+        }
+    </style>
+}
+
+<!-- Page Preloder -->
+<div id="preloder" style="display: none;">
+    <div class="loader" style="display: none;"></div>
+</div>
+
+<!-- Header End -->
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg" style="background-image: url(&quot;img/normal-breadcrumb.jpg&quot;);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Welcome to MDA</h2>
+                    <p>觀享時刻</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+<!-- Login Section Begin -->
+<section class="login spad">
+    <div style="display:flex;">
+        <div class="login__form" style="margin:auto;" id="temp">
+            <h3></h3>
+            <form method="post">
+                <div class="dialog-title">
+                    <h2 class="white">變更密碼</h2>
+                    <div class="dialog-close mui-icon icon-btn mui-icon-close" title="關閉"></div>
+                </div>
+                <div class="dialog-content">
+                    <div class="op" style="margin-top: 10px;">
+                        <div class="label div-old-pswd">
+                            <label for="txt_old_password">目前密碼</label>
+                            <input type="hidden" name="memberId" value="@ViewBag.memId" />
+                        </div>                        
+                        <div class="label mt-3">
+                            <label for="login-pwd" style="margin-right:0px">新密碼</label><span class="r-hint">(密碼長度需為 6 ~ 16 個字元)</span>
+                        </div>
+                        <div>
+                            <input autocomplete="off" id="txt_new_password" name="txt_new_password" style="width:240px" type="password">
+                        </div>
+                        <div class="label mt-3">
+                            <label for="login-pwd">確認新密碼</label>
+                        </div>
+                        <div>
+                            <input autocomplete="off" id="txt_new_password_confirm" name="txt_new_password_confirm" style="width:240px" type="password">
+                            <small id="differMessage"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" id="save" value="儲存變更" class="site-btn m-1" />
+                    <input type="button" id="cancel" value="取消" class="site-btn btn-cancel m-1" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+<!-- Login Section End -->
+<!-- Js Plugins -->
+@section Scripts{
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <script>
+        const cancel = document.querySelector("#cancel")
+        const txtNew = document.querySelector("#txt_new_password");
+        const txtNewCon = document.querySelector("#txt_new_password_confirm");
+        const msgDiffer = document.querySelector("#differMessage");
+        const save = document.querySelector("#save");
+
+        cancel.addEventListener('click', () => {
+            location.replace('@Url.Content("~/homepage/index")')
+        })
+        txtNewCon.addEventListener("input", () => {
+            if (txtNew.value != txtNewCon.value) {
+                msgDiffer.textContent = "輸入密碼不一致"
+            }
+            else {
+                msgDiffer.textContent = ""
+            }
+        })
+        txtNew.addEventListener("input", () => {
+            if (txtNew.value != txtNewCon.value) {
+                msgDiffer.textContent = "輸入密碼不一致"
+            }
+            else {
+                msgDiffer.textContent = ""
+            }
+        })
+        save.addEventListener("click", () => {
+            if (msgDiffer.textContent != "" || txtOld.value == "" || txtNew.value == "") {
+                save.setAttribute('type', 'button')
+            }
+            else {
+                save.setAttribute('type', 'submit')
+            }
+        })
+    </script>
+}

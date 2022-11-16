@@ -1,0 +1,44 @@
+﻿
+/*-------------header 滑入特效----------------*/
+
+/*.nav-btn::before {*/ /*EZ訂樣式*/
+/*position: absolute;*/ /*OK*/
+/*content: "";
+    bottom: 0px;
+    width: 0px;
+    height: 3px;
+    background-color: rgb(231, 0, 140);*/ /*OK*/
+/*transition: all 0.3s ease 0s;
+    left: 50%;
+    transform: translateX(-50%);
+}*/
+
+.header__menu ul li .aBorder {
+    position: relative;
+}
+
+    .header__menu ul li .aBorder::after {
+        content: "";
+        position: absolute;
+        right: 50%;
+        left: 50%;
+        bottom: 0;
+        border-bottom: 5px solid rgb(0, 176, 240);
+        transition: .3s;
+    }
+
+    /*.header__menu ul li .aBorder:hover {
+        color: rgb(189, 237, 255);*/  /*header滑入字體顏色*/
+    /*}*/
+
+        .header__menu ul li .aBorder:hover::after {
+            right: 0%;
+            left: 0%;
+        }
+
+/*-------------header 點擊特效----------------*/
+
+    /*.header__menu ul li .aBorder:focus {
+        background: #00b0f0;
+        color: #ffffff;
+    }*/

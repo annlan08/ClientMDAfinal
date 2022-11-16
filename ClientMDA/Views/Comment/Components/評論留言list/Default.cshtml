@@ -1,0 +1,183 @@
+﻿@model List<ClientMDA.ViewModels.CFloorViewModel>
+<!-- #region 會員Session-->
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    var a = "";
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+    var connectId = Html.ViewContext.RouteData.Values["id"];
+    <!-- #endregion 會員Session-->
+}
+
+@{
+    ViewData["Title"] = "Default"; @*評論留言list*@
+}
+<style>
+    btnfloorReport { /*留言檢舉按紐*/
+        height: 20px;
+        width: 60px;
+        font-size: 9px;
+        margin: 0;
+        margin-bottom: 11px;
+        padding: 0;
+    }
+
+    .memImg-Circle { /*會員大頭貼*/
+        clip-path: circle(45% at 50% 50%);
+        height: 55px;
+        width: 55px;
+    }
+
+    .floorCount {
+        background: none !important;
+        padding: 0 !important;
+    }
+</style>
+@{
+    int count = 0;
+    @for (var i = 0; i < @Model.Count; i++)
+    {
+
+        count++;
+        string NickName = "";
+        if (Model[i].fNickName.Count() > 0)
+        {
+            NickName = Model[i].fNickName[0];
+        }
+        <div class="blog__details__comment__item">
+            <div class="blog__details__comment__item__pic" style="margin-right:20px">
+                @if (Model[i].fMemImg != null)
+                {
+                    <img class="memImg-Circle" src="http://192.168.36.4:44383/images/Member/@Model[i].fMemImg[0]" alt="" />
+                }
+                else
+                {
+                    <img class="memImg-Circle" src="~/images/Member/MEMBER.png" alt="" />
+                    @*會員預設大頭貼 https://dummyimage.com/150x150/6c757d/dee2e6.jpg *@
+                }
+            </div>
+            <div class="blog__details__comment__item__text">
+                <h5>#@count</h5>
+                <a class="floorCount" href="@Url.Action("會員評論","Comment", new {id= Model[i].會員編號memberId})">
+                    <h5>
+                        @NickName
+                        <span style="display: inline;"> - @Html.DisplayFor(modelItem => Model[i].發佈時間floorTime)</span>
+                    </h5>
+                </a>
+                <p>
+                    @Model[i].回覆內容floors
+                </p>
+                <div @*style="height:20px"*@>
+                    @*<iframe src='' scrolling='no' frameborder='0' style='width:60px; height:20px;' allowTransparency='true' onload='this.src="//www.facebook.com/plugins/like.php?locale=zh_TW&amp;href="+location.protocol+"//"+location.hostname + location.pathname + "&amp;layout=button_count&amp;action=like&amp;colorscheme=light&amp;share=false"; this.onload="";'></iframe>*@
+                    <a href="#">Like @Model[i].被按讚次數thumbsUp <i class="fas fa-thumbs-up"></i></a>
+                    <a class="unLike" href="#">UnLike @Model[i].被倒讚次數thumbsDown <i class="fas fa-thumbs-down"></i></a>
+                    @{
+                        if (mem != null)
+                        {
+                            <a class="report" href="#" type="button" name="@Model[i].樓數編號floorId/@NickName" id="btnReport" data-toggle="modal" data-target="#floorReportModal">檢舉</a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("檢舉", "checkLogin", new { page = "電影評論", id = Model[i].評論編號commentId }, new { type = "button", @class = "report" })
+                        }
+                    }
+                    @*<button type="button" id="btnfloorReport" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#floorReportModal">檢舉</button>*@
+                </div>
+                <!-- #region 留言檢舉 -->
+                @if (mem != null)
+                {
+                    <!-- Modal -->
+                    <div class="modal fade" id="floorReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            @using (Html.BeginForm("Report檢舉", "Comment"))
+                            {
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">檢舉</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="color:black">
+                                        <!--modal content start-->
+                                        <input type="hidden" name="會員編號memberId" value="@mem.會員編號memberId" />
+                                        <input type="hidden" name="對象targetId" value="0" />
+                                        <input type="hidden" name="追讚倒編號actionTypeId" value="3" />
+                                        <input type="hidden" name="連接編號connectId" class="連接編號connectId" />
+                                        <input type="hidden" name="評論編號commentId" value="@Model[i].評論編號commentId" />
+                                        <div><label style="width:80px">檢舉人:</label><input style="width:300px" type="text" readonly value="@mem.暱稱nickName" /></div>
+                                        <div><label style="width:80px">檢舉對象:</label><input style="width:300px" type="text" readonly class="NickName" /></div>
+                                        <div>
+                                            <label style="width:80px;vertical-align:top">檢舉理由:</label>
+                                            <textarea style="width: 300px; margin-left:-5px " cols="50" name="檢舉理由ReportReason"></textarea>
+                                        </div>
+                                        <!--modal content end-->
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                        @*<button type="button" class="btn btn-secondary" id="demo2">Demo</button>*@
+                                        <button type="submit" class="btn btn-primary" id="submitAddList">確定</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!--modal end-->
+                }
+                <!-- #endregion 留言檢舉 -->
+            </div>
+        </div>
+    }
+}
+
+<script>
+    //檢舉DEMO
+    //const demo2 = document.querySelector("#demo2")
+    //demo2.addEventListener('click', () => {
+    //    document.querySelector('[name="ReportReason"]').value = "不當言論"
+    //})
+</script>
+
+<script>
+    let btnclick = document.getElementsByClassName("report")
+    for (let btn of btnclick) {
+
+        btn.addEventListener("click", function () {
+            let reportinfo = btn.name;
+            let connectId = document.querySelector(".連接編號connectId");
+            let NickName = document.querySelector(".NickName")
+            /*let ReportReason = document.querySelector(".檢舉理由ReportReason")*/
+            connectId.value = reportinfo.split("/")[0];
+            NickName.value = reportinfo.split("/")[1];
+            //ReportReason.value = reportinfo.split("/")[2];
+            console.log(reportinfo);
+            console.log(connectId.value);
+            console.log(NickName.value);
+            //console.log(ReportReason);
+
+        })
+    }
+</script>
+<!-- #region 響應式元件js/css/cdn -->
+@*<script>
+    $('#submitAddList').click(function () {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: '已收到您的檢舉',
+            showConfirmButton: false,
+            timer: 1200,
+            color: '#545454'
+        })
+    });
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">*@
+<!-- #endregion 響應式元件js/css/cdn -->

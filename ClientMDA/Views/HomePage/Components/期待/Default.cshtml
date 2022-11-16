@@ -1,0 +1,71 @@
+﻿@model List<ClientMDA.ViewModels.CHomePageNewViewModel>
+@{
+    ViewData["Title"] = "Default"; @*本周新片*@
+}
+
+
+
+<div class="container" id="showlist">
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <ul class="charts-list">
+                <li class="charts-list-row--header d-none d-md-flex">
+                    <span class="charts-list-rank">序號</span>
+                    <span class="charts-list-poster">電影海報</span>
+                    <span class="charts-list-movietitle">電影資訊</span>
+                    <span class="charts-list-content"></span>
+                    <span class="charts-list-MDArate"> 介紹 </span>
+                    <span class="charts-list-MemRate"> 上映日期 </span>
+                    <span class="charts-list-movieDate"> 期待度 </span>
+                    <span class="charts-list-addList"> 加入片單 </span>
+                </li>
+                @{int count = 0;
+                    for (var i = 0; i < Model.Count; i++)
+                    {
+                        count++;
+                        <li class="charts-list-row">
+                            <div class="divRow">
+                                <span class="charts-list-rank">@count</span>
+                                <div class="flipper">
+                                    <div class="flipper-item layer1" id="im">
+                                        <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})>
+                                            <img class="charts-list-cover" id="poster" alt="" title="@Model[i].中文標題Title_Cht" src="@Model[i].圖片雲端ImageIMDB">
+                                        </a>
+                                        <span class="charts-list-desc">
+                                            <span class="charts-list-song" title="@Model[i].中文標題Title_Cht">
+                                                <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})>@Html.DisplayFor(modelItem => Model[i].中文標題Title_Cht)</a>
+                                            </span>
+                                            <span class="charts-list-artist" title="@Model[i].電影英Movie_En">
+                                                <a href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})>@Html.DisplayFor(modelItem => Model[i].電影英Movie_En)</a>
+                                            </span>
+                                        </span>
+                                        <span class="charts-list-span" id="i">
+                                            <button class="AddListBtn" id="addlistbtn" onclick="window.location.href=@Url.Action("電影介紹","Movie", new {id= Model[i].電影編號Movie_ID})">
+                                                電影介紹
+                                            </button>
+                                        </span>
+                                        <span class="charts-list-span" id="ii2">@Model[i].上映日期Release_Date.Value.ToString("D")</span>
+                                        <span class="charts-list-span" id="iii"><i class='fa fa-star checked' id="ToRE"></i> &nbsp; @Model[i].期待度anticipation </span>
+                                        <div class="charts-list-span" id="iiii">
+                                            <div class="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--m ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon poster-card-watchlist-ribbon" aria-label="add to watchlist" role="button" tabindex="0" id="bookmarkboard">
+                                                <svg class="ipc-watchlist-ribbon__bg" @*width="500px" height="500px*@ color="red" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation" id="BOOOKmarkboard">
+                                                    <polygon class="ipc-watchlist-ribbon__bg-ribbon2" fill="rgb(35, 35,37,.6)" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOOkmarkboard"></polygon>
+                                                    <polygon class="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343" id="BOOokmarkboard"></polygon>
+                                                    <polygon class="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049" id="BOokmarkboard"></polygon>
+                                                </svg>
+                                                <div id="bookplusboard">
+                                                    <span class="glyphicon" id="bookplusboardinner2" style="font-size: 2.15rem;">&#x2b;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>

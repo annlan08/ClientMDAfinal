@@ -1,0 +1,210 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@using ClientMDA.ViewModels
+@model List<CCouponListViewModel>
+
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@{
+    ViewData["Title"] = "MemberDiscount";
+}
+@section Styles{
+    <link href="~/css/Member/MemberMain.css" rel="stylesheet" />
+    <style>
+        .control-label {
+            color: white;
+        }
+
+        .white {
+            color: white;
+            text-align: center
+        }
+
+        .content {
+            margin: 0 auto;
+        }
+
+        .available {
+            color: #00B0F0
+        }
+
+        .used {
+            color: lightgray
+        }
+
+        .overdue {
+            color: lightgray
+        }
+    </style>
+}
+
+<div class="member_id">
+    <span class="member_hello">HELLO!</span>
+    @{
+        if (mem.暱稱nickName != null)
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">@mem.暱稱nickName</a></span>
+        }
+        else
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">簡易會員</a></span>
+
+        }
+    }
+</div>
+
+<div class="row">
+    <div class="member_menu">
+        @{
+            if (mem.正式會員formal == true)
+            {
+                <a id="watchlist" href="../Member/WatchList" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/CommentList" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/wishlist" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+            else
+            {
+                <a id="watchlist" href="../Member/NotFormal" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/NotFormal" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/NotFormal" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+        }
+
+        <a id="orderlist" href="../Member/orderlist" title="訂單查詢" class="member_link">訂單查詢</a>
+        @*<a id="memberbonuslist" href="../Member/memberbonuslist" title="我的紅利金" class="member_link">我的紅利金</a>*@
+        <a id="memberdiscount" href="../Member/memberdiscount" title="我的抵用券" class="member_link">我的抵用券</a>
+
+        <a id="memberpassword" href="../Member/PasswordEdit" title="密碼修改" class="member_link">密碼修改</a>
+        <a id="MemberEdit" href="../Member/MemberEdit" title="資料修改" class="member_link ">資料修改</a>
+        <a href="../Member/logout" class="member_link" title="登出">登出</a>
+    </div>
+    <div class="member_main">
+        <div class="member_area">
+            <!--content-->
+            <h2 class="white text-left">我的抵用券</h2>
+            <div class="mb-2 mt-2">
+                <strong class="white text-left">紅利點數餘額:  <strong style="color: #E4B71C; font-size:20px">@mem.紅利點數bonus</strong></strong>
+            </div>
+            @using (Html.BeginForm("AddCoupon", "Member"))
+            {
+        <div class="mb-1">
+            @Html.TextBox("txtKeyword", null, new { @id = "txt", @placeholder = "輸入優惠代碼" })
+            <button type="button" class="site-btn mt-3 mb-2" id="check">查詢優惠</button>
+            <button type="button" id="demo" class="btn btn-secondary mt-3 mb-3">demo</button>
+            <button type="button" id="demounder" class="btn btn-secondary mt-3 mb-3">demo不足</button>
+            <button type="button" id="demominus" class="btn btn-secondary mt-3 mb-3">demo扣點</button>
+
+        </div>
+                <div class="mb-2 white text-left">
+                    <label>優惠券所需紅利點數: </label>
+                    <label id="cost"></label>
+                </div>
+                <div>
+                    <button type="submit" class="site-btn mb-2" id="submit" disabled> <i class="fa-solid fa-plus"></i> 確認新增</button>
+                </div>
+            }
+
+
+            <table class="table white">
+                <thead>
+                    <tr>
+                        <th scope="col">折扣金額</th>
+                        <th scope="col">抵用券內容</th>
+                        <th scope="col">使用期限</th>
+                        <th scope="col">使用狀況</th>
+                    </tr>
+                </thead>
+                <tbody class="white">
+                    @{
+
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row" class="">$@decimal.Round(item.diccount)</th>
+                                <td class="">@item.couponName</td>
+                                <td class="">
+                                    @item.dueDate
+                                </td>
+                                @{
+                                    if (item.dueDate < DateTime.Now)
+                                    {
+                                        <td class="overdue">已過期</td>
+                                    }
+                                    else if (item.used == true)
+                                    {
+                                        <td class="used">已使用</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="available">未使用</td>
+                                    }
+                                }
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <!--end content-->
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+        var myJsVariable = '@ViewBag.under'
+
+            if (myJsVariable !=null&&myJsVariable!="") {
+                window.alert("紅利點數不足")        }
+
+        const demo = document.querySelector("#demo")
+        const demounder = document.querySelector("#demounder")
+        const demominus = document.querySelector("#demominus")
+        const txt = document.querySelector("#txt")
+        demo.addEventListener("click", () => {
+            txt.value = "Bday100"
+        })
+        demounder.addEventListener("click", () => {
+            txt.value = "Bonus60"
+        })
+        demominus.addEventListener("click", () => {
+            txt.value = "Bonus5"
+        })
+
+        const btnSubmit = document.querySelector("#submit")
+        const btnCheck = document.querySelector("#check")
+        const lblCost = document.querySelector("#cost")
+        btnCheck.addEventListener("click", async() => {
+        const url = "@Url.Content("~/member/checkCoupon")"
+        const params = `?coupon=${txt.value}`
+            let response = await fetch(url + params)
+            let data = await response.text()
+            if (data == 'no') {
+                lblCost.textContent = "查無優惠"
+            }
+            else if (data == "ex") {
+                lblCost.textContent = "優惠已過期"
+            }
+            else
+            {
+                lblCost.textContent = data
+                btnSubmit.removeAttribute("disabled")
+            }
+
+        })
+
+    </script>
+}

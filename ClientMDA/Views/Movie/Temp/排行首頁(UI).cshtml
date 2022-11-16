@@ -1,0 +1,466 @@
+﻿
+@{
+    ViewData["Title"] = "電影排行";
+}
+
+@section Styles{
+    <style>
+
+        .far .fas { /*星星*/
+            padding-right: 5px;
+            color: #ffc107 !important;
+            font-family: "Font Awesome 5 Free";
+        }
+
+        .divFlip {
+            margin: 20px 0 0 -15px;
+        }
+
+        .text-white span.btn-warning {
+            color: black !important;
+        }
+
+        div .btn-warning.select { /*頂部篩選器按鈕位置*/
+            margin: 60px 0 0 0 !important;
+            float:right;
+        }
+
+        .selectDIV {
+            margin: -25px 0 0 400px; /*頂部篩選器 篩選條件位置*/
+        }
+
+        .container a:hover{ @*header滑入不要有底線*@
+            text-decoration:none !important;
+        }
+
+        #rate { /*會員評分-撰寫評論按鈕*/
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        div #charts-list-span { /*排行-會員評分-評分水平置中*/
+            width: 100px;
+            text-align: center;
+        }
+
+        .dropdown-item-text { /*排行-會員評分-評分垂直置中*/
+            margin: auto 0 auto 0;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .btn.btn-warning.btn-sm { /*會員評分-評分按鈕大小調整*/
+            height: 23px;
+            padding-top: 0;
+        }
+
+        #rate { /*會員評分-評分-撰寫評論按鈕*/
+            height: 23px !important;
+            padding-top: 0;
+        }
+
+        .dropdown-menu.show {
+            line-height: 30px;
+        }
+
+        .dropdown-menu li{
+            width: 280px;
+        }
+            .dropdown-menu li span {
+                color: black;
+            }
+
+            .dropdown-menu li a {
+                color: black;
+            }
+
+    </style>
+}
+
+<link href="~/css/Movie/排行.css" rel="stylesheet" />
+<link href="~/css/Movie/排行-關注清單.css" rel="stylesheet" />
+<link href="~/css/Movie/排行-篩選器上收合.css" rel="stylesheet" />
+<link href="~/css/Movie/btn.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Kanit:700" rel="stylesheet"> @*排行字型 "Kanit"*@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> @*星星字型 "Font Awesome 5 Free"*@
+
+<br />
+<span style="font-size:33px">@ViewData["Title"] </span><span style="font-size:25px"> TOP 50 Movies</span>
+<br />
+<span style="font-size:13px">排行榜計算說明：依據 MDA 全體會員有效評分總次數排序而成，並由系統自動定期更新。</span>
+<br />
+
+<body style="overflow: visible !important">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-12">
+                @* 篩選器 *@
+                <button class="btn btn-warning select" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    篩選條件
+                </button>
+                <div id="offcanvasWithBothOptions" class="offcanvas offcanvas-top" data-bs-scroll="true" tabindex="-1" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    @*篩選條件*@
+                    <div class="selectDIV">
+                        <div class="offcanvas-body">
+                            <div class="btn-group" role="group" aria-label="First group">
+                                <span class="category-title"> 排行榜</span>
+                                <input type="radio" class="btn-check" name="demo" id="radio1" autocomplete="off" checked>
+                                <label class="btn btn-outline-rank" for="radio1">全部</label>
+
+                                <input type="radio" class="btn-check" name="demo" id="radio2" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="radio2">日榜</label>
+
+                                <input type="radio" class="btn-check" name="demo" id="radio3" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="radio3">週榜</label>
+
+                                <input type="radio" class="btn-check" name="demo" id="radio4" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="radio4">年榜</label>
+                            </div>
+                            <br /><br />
+
+                            <div class="btn-group">
+                                <span class="category-title"> 排　序</span>
+                                <input type="radio" class="btn-check" name="demo1" id="radio5" autocomplete="off" checked>
+                                <label class="btn btn-outline-rank" for="radio5">依評分</label>
+
+                                <input type="radio" class="btn-check" name="demo1" id="radio6" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="radio6">依票房</label>
+
+                                <input type="radio" class="btn-check" name="demo1" id="radio7" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="radio7">依評分總數</label>
+                            </div>
+                            <br /><br />
+
+                            <div class="btn-group">
+                                <span class="category-title"> 地　區</span>
+                                <input type="checkbox" class="btn-check" id="check0" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check0">全部</label>
+
+                                <input type="checkbox" class="btn-check" id="check1" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check1">台灣</label>
+
+                                <input type="checkbox" class="btn-check" id="check2" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check2">香港</label>
+
+                                <input type="checkbox" class="btn-check" id="check3" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check3">中國</label>
+
+                                <input type="checkbox" class="btn-check" id="check4" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check4">美國</label>
+
+                                <input type="checkbox" class="btn-check" id="check5" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check5">英國</label>
+
+                                <input type="checkbox" class="btn-check" id="check6" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check6">日本</label>
+
+                                <input type="checkbox" class="btn-check" id="check7" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check7">韓國</label>
+
+                                <input type="checkbox" class="btn-check" id="check8" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check8">泰國</label>
+
+                                <input type="checkbox" class="btn-check" id="check9" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check9">印度</label>
+
+                                <input type="checkbox" class="btn-check" id="check10" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="check10">其他</label>
+                            </div>
+                            <br /><br />
+
+                            <div class="btn-group">
+                                <span class="category-title"> 年　份</span>
+                                <input type="checkbox" class="btn-check" id="0check0" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check0">全部</label>
+
+                                <input type="checkbox" class="btn-check" id="0check1" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check1">新片</label>
+
+                                <input type="checkbox" class="btn-check" id="0check2" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check2">2022年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check3" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check3">2021年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check4" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check4">2020年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check5" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check5">2019年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check6" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check6">2018年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check7" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check7">2017年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check8" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check8">2016年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check9" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check9">2015年</label>
+
+                                <input type="checkbox" class="btn-check" id="0check10" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="0check10">更早</label>
+                            </div>
+                            <br /><br />
+
+                            <div class="btn-group">
+                                <span class="category-title"> 片　種</span>
+                                <input type="checkbox" class="btn-check" id="1check0" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check0">全部</label>
+
+                                <input type="checkbox" class="btn-check" id="1check1" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check1">動作</label>
+
+                                <input type="checkbox" class="btn-check" id="1check2" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check2">冒險</label>
+
+                                <input type="checkbox" class="btn-check" id="1check3" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check3">浪漫</label>
+
+                                <input type="checkbox" class="btn-check" id="1check4" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check4">恐怖</label>
+
+                                <input type="checkbox" class="btn-check" id="1check5" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check5">驚悚</label>
+
+                                <input type="checkbox" class="btn-check" id="1check6" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check6">科幻</label>
+
+                                <input type="checkbox" class="btn-check" id="1check7" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check7">奇幻</label>
+
+                                <input type="checkbox" class="btn-check" id="1check8" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check8">歷史</label>
+
+                                <input type="checkbox" class="btn-check" id="1check9" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check9">戰爭</label>
+
+                                <input type="checkbox" class="btn-check" id="1check10" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check10">動畫電影</label>
+
+                                <input type="checkbox" class="btn-check" id="1check11" autocomplete="off">
+                                <label class="btn btn-outline-rank" for="1check11">其他</label>
+                            </div><br /><br />
+                        </div>
+                    </div> @*篩選條件*@
+                </div>
+                <br /><br />
+            </div>
+            <div class="col-12 col-md-12">
+                @* 排行榜 *@
+                <div class="u-datepicker-box">
+                    <input type="text" class="datepicker" id="datepicker">
+                    <button class="btn btn-dark">搜尋電影</button>
+                </div>
+                <ul class="charts-list">
+                    <li class="charts-list-row--header d-none d-md-flex">
+                        <span class="charts-list-rank">排行</span>
+                        <span class="charts-list-poster">電影海報</span>
+                        <span class="charts-list-movietitle">電影資訊</span>
+                        <span class="charts-list-content"></span>
+                        <span class="charts-list-MDArate"> MDA評分 </span>
+                        <span class="charts-list-MemRate"> 會員評分 </span>
+                        <span class="charts-list-movieDate"> 上映日期 </span>
+                        <span class="charts-list-addList"> 加入片單 </span>
+                    </li>
+
+                    <li class="charts-list-row">
+                        <div class="divRow">
+                            <span class="charts-list-rank">1</span>
+                            <div class="flipper">
+                                <div class="flipper-item layer1">
+                                    <a asp-area="" asp-controller="Home" asp-action="電影劇照牆">
+                                        <img class="charts-list-cover" alt="" title="月光光新慌慌：萬聖結"
+                                             src="https://m.media-amazon.com/images/M/MV5BZTg1Y2Q3MzctMDlkOS00OGE1LWE4MjUtNmJjNDNkZmM2YmVkXkEyXkFqcGdeQXVyMjY5ODI4NDk@@._V1_.jpg">
+                                    </a>
+                                    <span class="charts-list-desc">
+                                        <span class="charts-list-song" title="月光光新慌慌：萬聖結">
+                                            <a asp-area="" asp-controller="Comment" asp-action="電影評論">月光光新慌慌：萬聖結</a>
+                                        </span>
+                                        <span class="charts-list-artist" title="Halloween Ends">
+                                            <a asp-area="" asp-controller="Comment" asp-action="電影評論">Halloween Ends</a>
+                                        </span>
+                                    </span>
+
+                                    <span class="charts-list-content"></span>
+                                    <span class="charts-list-span"><i class="fas fa-star" style="padding-right:5px;color:#ffc107"></i> 5.0</span>
+
+                                    <div class="dropdown">
+                                        <div id="charts-list-span"
+                                             type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="dropdown-item-text" style="color:#fff">
+                                                <i class="far fa-star" style="padding-right:5px;color:#ffc107"></i>評分
+                                            </span>
+                                        </div>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li>
+                                                <span class="dropdown-item-text">
+                                                    <i class="far fa-star" style="color:#ffc107"></i>
+                                                    <i class="far fa-star" style="color:#ffc107"></i>
+                                                    <i class="far fa-star" style="color:#ffc107"></i>
+                                                    <i class="far fa-star" style="color:#ffc107"></i>
+                                                    <i class="far fa-star" style="padding-right:5px;color:#ffc107"></i>
+                                                    <button class="btn btn-warning btn-sm">評分</button>
+                                                    <button class="btn btn-secondary btn-sm"
+                                                            id="rate" onclick="executeExample('threeButtons')">
+                                                        撰寫評論
+                                                    </button>
+                                                </span>
+                                            </li>
+                                            @*<li><a class="dropdown-item" href="#" >撰寫評論</a></li>*@
+                                        </ul>
+                                    </div>
+                                    <span class="charts-list-date">2022-10-14</span>
+                                    <span class="charts-list-prev-rank">
+                                        <div class="wlb_ribbon" data-tconst="tt0111161" data-recordmetrics="true" style="position: relative;">
+                                            <div class="wl-ribbon standalone not-inWL" title="點擊添加到關注列表"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="charts-list-row">
+                        <div class="divRow">
+                            <span class="charts-list-rank">2</span>
+                            <div class="flipper">
+                                <div class="flipper-item layer1">
+                                    <img class="charts-list-cover" src="https://m.media-amazon.com/images/M/MV5BZjE2ZWIwMWEtNGFlMy00ZjYzLWEzOWEtYzQ0MDAwZDRhYzNjXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg" alt="" title="微笑">
+                                    <span class="charts-list-desc">
+                                        <span class="charts-list-song" title="微笑">微笑</span>
+                                        <span class="charts-list-artist" title="Smile">Smile</span>
+                                    </span>
+                                    <span class="charts-list-content"></span>
+                                    <span class="charts-list-span"><i class="fas fa-star" style="padding-right:5px;color:#ffc107"></i> 5.0</span>
+                                    <span class="charts-list-span" id="rate" onclick="executeExample('threeButtons')"><i class="far fa-star" style="padding-right:5px;color:#ffc107"></i>評分</span>
+                                    <span class="charts-list-date">2022-09-30</span>
+                                    <span class="charts-list-prev-rank">
+                                        <div class="wlb_ribbon" data-tconst="tt0111161" data-recordmetrics="true" style="position: relative;">
+                                            <div class="wl-ribbon standalone not-inWL" title="點擊添加到關注列表"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="charts-list-row">
+                        <div class="divRow">
+                            <span class="charts-list-rank">3</span>
+                            <div class="flipper">
+                                <div class="flipper-item layer1">
+                                    <img class="charts-list-cover" src="https://m.media-amazon.com/images/M/MV5BYjNhZjA3MTctOTFjNi00Mjg5LTk3ODctOGZkNDMyMjY3YWNhXkEyXkFqcGdeQXVyMTI2ODM1ODUw._V1_.jpg" alt="" title="鱷魚歌王">
+                                    <span class="charts-list-desc">
+                                        <span class="charts-list-song" title="鱷魚歌王">鱷魚歌王</span>
+                                        <span class="charts-list-artist" title="Lyle, Lyle, Crocodile">Lyle, Lyle, Crocodile</span>
+                                    </span>
+                                    <span class="charts-list-content"></span>
+                                    <span class="charts-list-span"><i class="fas fa-star" style="padding-right:5px;color:#ffc107"></i> 5.0</span>
+                                    <span class="charts-list-span"><i class="far fa-star" style="padding-right:5px;color:#ffc107"></i> 評分</span>
+                                    <span class="charts-list-date">2023-01-20</span>
+                                    <span class="charts-list-prev-rank">
+                                        <div class="wlb_ribbon" data-tconst="tt0111161" data-recordmetrics="true" style="position: relative;">
+                                            <div class="wl-ribbon standalone not-inWL" title="點擊添加到關注列表"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="charts-list-row">
+                        <div class="divRow">
+                            <span class="charts-list-rank">4</span>
+                            <div class="flipper">
+                                <div class="flipper-item layer1">
+                                    <img class="charts-list-cover" src="https://m.media-amazon.com/images/M/MV5BY2I4MDIwYWUtOWMxNC00ZTIzLWE3OGYtOWUyMmIwZGE2NjU4XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1080_.jpg" alt="" title="女王">
+                                    <span class="charts-list-desc">
+                                        <span class="charts-list-song" title="女王">女王</span>
+                                        <span class="charts-list-artist" title="The Woman King">The Woman King</span>
+                                    </span>
+                                    <span class="charts-list-content"></span>
+                                    <span class="charts-list-span"><i class="fas fa-star" style="padding-right:5px;color:#ffc107"></i> 5.0</span>
+                                    <span class="charts-list-span"><i class="far fa-star" style="padding-right:5px;color:#ffc107"></i> 評分</span>
+                                    <span class="charts-list-date">2022-11-25</span>
+                                    <span class="charts-list-prev-rank">
+                                        <div class="wlb_ribbon" data-tconst="tt0111161" data-recordmetrics="true" style="position: relative;">
+                                            <div class="wl-ribbon standalone not-inWL" title="點擊添加到關注列表"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="charts-list-row">
+                        <div class="divRow">
+                            <span class="charts-list-rank">5</span>
+                            <div class="flipper">
+                                <div class="flipper-item layer1">
+                                    <img class="charts-list-cover" src="https://m.media-amazon.com/images/M/MV5BNDQwNzE0ZTItYmZjMC00NjI3LWFlNzctNTExZDY2NWE0Zjc0XkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_FMjpg_UX1000_.jpg" alt="" title="阿姆斯特丹">
+                                    <span class="charts-list-desc">
+                                        <span class="charts-list-song" title="阿姆斯特丹">阿姆斯特丹</span>
+                                        <span class="charts-list-artist" title="Amsterdam">Amsterdam</span>
+                                    </span>
+                                    <span class="charts-list-content"></span>
+                                    <span class="charts-list-span"><i class="fas fa-star" style="padding-right:5px;color:#ffc107"></i> 5.0</span>
+                                    <span class="charts-list-span"><i class="far fa-star" style="padding-right:5px;color:#ffc107"></i> 評分</span>
+                                    <span class="charts-list-date">2022-10-07</span>
+                                    <span class="charts-list-prev-rank">
+                                        <div class="wlb_ribbon" data-tconst="tt0111161" data-recordmetrics="true" style="position: relative;">
+                                            <div class="wl-ribbon standalone not-inWL" title="點擊添加到關注列表"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Scripts{
+
+    <script>
+        $('#rate').click(function () {
+            Swal.fire({
+                title: '請為此部電影評分',
+                text: $(document).add(`<i class="far fa-star" style="padding-right:5px;color:#ffc107"></i>`),
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: '評分',
+                denyButtonText: `撰寫評論`,
+                CancelButtonText: '取消',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('評分成功!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('撰寫評論', 'link', 'info')
+                }
+            })
+        });
+    </script>
+    @*響應式元件*@
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    @*響應式元件*@
+
+    @*下拉篩選*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    @*下拉篩選*@
+
+    @*footer樣式*@
+    <!--<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>-->
+
+}

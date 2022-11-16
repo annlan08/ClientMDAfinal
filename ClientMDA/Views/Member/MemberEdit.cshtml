@@ -1,0 +1,370 @@
+﻿@using ClientMDA.Models
+@model 會員member
+
+@using System.Web
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@using ClientMDA.ViewModels
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@{
+    ViewData["Title"] = "MemberEdit";
+}
+@section Styles{
+    <link href="~/css/Member/MemberMain.css" rel="stylesheet" />
+    <style>
+        .control-label {
+            color: white;
+        }
+
+        .white {
+            color: white;
+            text-align: center
+        }
+
+        .content {
+            margin: 0 auto;
+        }
+
+        .containerA {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .bg {
+            background-color: #0B0C2A;
+        }
+    </style>
+}
+<div class="member_id">
+    <span class="member_hello">HELLO!</span>
+    @{
+        if (mem.暱稱nickName != null)
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">@mem.暱稱nickName</a></span>
+        }
+        else
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">簡易會員</a></span>
+
+        }
+    }
+</div>
+
+<div class="row">
+    <div class="member_menu">
+        @{
+            if (mem.正式會員formal == true)
+            {
+                <a id="watchlist" href="../Member/WatchList" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/CommentList" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/wishlist" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+            else
+            {
+                <a id="watchlist" href="../Member/NotFormal" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/NotFormal" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/NotFormal" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+        }
+
+        <a id="orderlist" href="../Member/orderlist" title="訂單查詢" class="member_link">訂單查詢</a>
+        @*<a id="memberbonuslist" href="../Member/memberbonuslist" title="我的紅利金" class="member_link">我的紅利金</a>*@
+        <a id="memberdiscount" href="../Member/memberdiscount" title="我的抵用券" class="member_link">我的抵用券</a>
+
+        <a id="memberpassword" href="../Member/PasswordEdit" title="密碼修改" class="member_link">密碼修改</a>
+        <a id="MemberEdit" href="../Member/MemberEdit" title="資料修改" class="member_link ">資料修改</a>
+        <a href="../Member/logout" class="member_link" title="登出">登出</a>
+    </div>
+    <div class="member_main">
+        <div class="member_area">
+            <!--content-->
+            <h2 class="white">會員資訊</h2>
+
+            <h4 class="white">基本資訊修改</h4>
+            <hr />
+            <form asp-action="MemberEdit" method="post" class="containerA" enctype="multipart/form-data">
+
+                <div class="form-row ">
+                    <div class="col-3 mr-1 ml-5">
+                        <div class="form-row">
+                            <div class="card text-white bg mb-3">
+                                <div class="card-body">
+                                    <label asp-for="暱稱nickName" class="control-label">暱稱</label>
+                                    <input type="text" id="nickname" name="暱稱nickName" class="form-control" value="@mem.暱稱nickName" />
+                                    <input type="hidden" name="會員編號memberId" value="@mem.會員編號memberId" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="card text-white bg mb-3">
+                                <div class="card-body">
+                                    <label asp-for="姓氏lName" class="control-label">姓</label>
+                                    <input type="text" id="lName" name="姓氏lName" class="form-control" value="@mem.姓氏lName" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-3 mr-1">
+                        <div class="form-row">
+                            <div class="card text-white bg mb-3 ">
+                                <div class="card-body">
+                                    <label asp-for="會員電話cellphone" class="control-label">手機</label>
+                                    <input type="text" name="會員電話cellphone" class="form-control" value="@mem.會員電話cellphone" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row ">
+                            <div class="card text-white bg mb-3">
+                                <div class="card-body">
+                                    <label asp-for="名字fName" class="control-label">名</label>
+                                    <input type="text" id="fName" name="名字fName" class="form-control" value="@mem.名字fName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 mr-1">
+                        <div class="card text-white bg mb-3">
+                            <div class="card-body">
+                                @{
+                                    if (mem.會員照片image != null)
+                                    {
+
+                                        <img src="http://192.168.36.4:44383/images/Member/@mem.會員照片image" id="preview" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/Member/noPerson.jpg" id="preview" />
+                                    }
+                                }
+                                <input type="file" name="memberPhoto" id="myimg" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="card text-white bg mb-3 mr-1 col-3  ml-5">
+                        <div class="card-body">
+                            <label asp-for="電子信箱email" class="control-label">電子郵件</label>
+                            <input name="電子信箱email" type="email" class="form-control" value="@mem.電子信箱email" readonly />
+                        </div>
+                    </div>
+                    <div class="card text-white bg mb-3 mr-1 col-3">
+                        <div class="card-body">
+                            <label asp-for="生日birthDate" class="control-label">生日</label>
+                            <input type="date" class="form-control" value="@String.Format("{0:yyyy-MM-dd}", (mem.生日birthDate))" max="@DateTime.Now.ToString("yyyy-MM-dd")" id="bdSelect" />
+                            <input type="hidden" name="birthDate" value="@String.Format("{0:yyyy-MM-dd}", (mem.生日birthDate))" id="bd" />
+                        </div>
+                    </div>
+                    <div class="card text-white bg mb-3 mr-1 col-3">
+                        <div class="card-body">
+                            <label asp-for="性別gender" class="control-label">性別</label>
+                            <select class="form-control" id="genderSelection">
+                                <option value="0">男</option>
+                                <option value="1">女</option>
+                                <option value="2">多元性別</option>
+                                <option value="3" selected>不公開</option>
+                            </select>
+                            <input type="hidden" name="性別gender" value="@mem.性別gender" id="gender" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="card text-white bg mb-3 mr-1 col-3  ml-5">
+                        <div class="card-body">
+                            <label asp-for="地址address" class="control-label">地址<i>-縣市</i></label>
+                            <select id="select1" class="form-control">
+                                <option>未選擇</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <input type="hidden" name="地址address" value="@mem.地址address" id="address" />
+                    @*<div class="card text-white bg mb-3 mr-1 col-3">
+                            <div class="card-body">
+                                <label asp-for="地址address" class="control-label"><i>-鄉鎮市區</i></label>
+                                <select id="select2" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="card text-white bg mb-3 mr-1 col-3">
+                            <div class="card-body">
+                                <label asp-for="地址address" class="control-label"><i>道路</i></label>
+                                <select id="select3" class="form-control"></select>
+                                <input type="hidden" name="地址address" value="" />
+                            </div>
+                        </div>*@
+
+                </div>
+                <div class="form-row">
+                    <div class="card text-white bg mb-3 mr-1 col-3  ml-5">
+                        <div class="card-body">
+                            <label asp-for="紅利點數bonus" class="control-label">紅利</label>
+                            <div>
+                                @{
+                                    int bonus = 0;
+                                    if (mem.紅利點數bonus != null)
+                                    {
+                                        bonus = (int)mem.紅利點數bonus;
+                                    }
+                                    <label style="color:lightgray">@bonus 點</label>
+                                }
+
+                                <input type="hidden" name="紅利點數bonus" value="@mem.紅利點數bonus" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card text-white bg mb-3 mr-1 col-3">
+                        <div class="card-body">
+                            <label asp-for="正式會員formal" class="control-label">會員狀態</label>
+                            <div>
+                                @{
+                                    string formal = "";
+                                    if (mem.正式會員formal == true) { formal = "正式會員"; }
+                                    else { formal = "簡易會員"; }
+                                    <label style="color: #E4B71C">@formal</label>
+                                }
+
+                                <input type="hidden" name="正式會員formal" value="@mem.正式會員formal" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card text-white bg mb-3 mr-1 col-3">
+                        <div class="card-body">
+                            <label asp-for="會員權限permission" class="control-label">會員權限</label>
+                            <div>
+                                @{
+                                    List<string> per = new List<string>() { "正常使用", "停權", "審核中", "管理員" };
+                                    <label style="color:lightgray">@per[mem.會員權限permission]</label>
+                                }
+                                <input type="hidden" name="會員權限permission" value="@mem.會員權限permission" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row justify-content-center">
+                    <input type="submit" value="儲存變更" class="site-btn mr-1" />
+                    <button type="button" class="site-btn" id="demo1">demo_1</button>
+                    @*<input type="submit" value="取消" class="site-btn mr-1" style="background-color:#6c757d" />*@
+                </div>
+
+
+
+
+            </form>
+            <!--end content-->
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        const bdSelect = document.querySelector("#bdSelect");
+        const bd = document.querySelector("#bd")
+        if ('@mem.生日birthDate' != null) {
+            bdSelect.setAttribute.readonly = true;
+        }
+        bdSelect.addEventListener("change", () => {
+            bd.value = bdSelect.value
+            console.log(bd.value)
+        })
+
+
+        const genders = document.querySelector("#genderSelection");
+        if ('@mem.性別gender' != null) {
+            genders.selectedIndex = '@mem.性別gender';
+        }
+        const gender = document.querySelector("#gender")
+        genders.addEventListener("change", () => {
+            gender.value = genders.value
+        })
+
+    </script>
+
+    <script>
+        $('#myimg').on('change', function (e) {
+            const file = this.files[0];
+            const objectURL = URL.createObjectURL(file);    // 使用 createObjectURL 產生圖片url
+            $('#preview').attr('src', objectURL);
+        });
+    </script>
+
+    <script>
+    const selCity = document.querySelector("#select1")
+       // const selSite = document.querySelector("#select2")
+       // const selRoad = document.querySelector("#select3")
+
+        async function LoadCities() {
+            let response = await fetch("@Url.Content("~/Member/city")")
+            let datas = await response.json()
+            datas.forEach(city => {
+                const opt = new Option(city, city)
+                if (opt.value == '@Html.Raw(HttpUtility.JavaScriptStringEncode(mem.地址address))') {
+                    opt.setAttribute('selected', true)
+                }
+                selCity.options.add(opt)
+            })
+        }
+        LoadCities()
+
+        const add = document.querySelector("#address")
+        selCity.addEventListener("change", () => {
+            add.value = selCity.value;
+            //console.log(add.value);
+        })
+
+
+        @*selCity.addEventListener("change", async () => {
+            //console.log(selCity.options[selCity.selectedIndex].value)
+            const url = "@Url.Content("~/Member/site")"
+            const params = `?city=${selCity.options[selCity.selectedIndex].value}`
+            let response = await fetch(url + params)
+            let datas = await response.json()
+            //console.log(datas)
+            selSite.options.length = 0
+            datas.forEach(site => {
+                const opt = new Option(site, site)
+                selSite.options.add(opt)
+            })
+        })
+        selSite.addEventListener("change", async () => {
+            const url = "@Url.Content("~/Member/road")"
+            const params = `?site=${selSite.options[selSite.selectedIndex].value}`
+            let response = await fetch(url + params)
+            let datas = await response.json()
+            selRoad.options.length = 0
+            datas.forEach(road => {
+                const opt = new Option(road, road)
+                selRoad.options.add(opt)
+            })
+        })*@
+    </script>
+    <script>
+        const demo1 = document.querySelector("#demo1")
+        const nick = document.querySelector("#nickname")
+        const lName = document.querySelector("#lName")
+        const fName = document.querySelector("#fName")
+        demo1.addEventListener("click", () => {
+            nick.value = "小二"
+            lName.value = "陳"
+            fName.value = "二"
+            genders.selectedIndex = 3
+            bdSelect.value = '2000-11-08'
+            selCity.selectedIndex=7
+        })
+    </script>
+
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+}

@@ -1,0 +1,29 @@
+﻿@using ClientMDA.ViewModels
+@model List<CMovieImagesListViewModel>
+
+@{
+    ViewData["Title"] = "電影劇照牆";
+}
+
+@section Styles{
+    <style>
+    </style>
+    <link href="~/css/fontawesome-free-6.2.0-web/all.css" rel="stylesheet" />
+    @*電影icon樣式*@
+    <script src="~/js/fontawesome-free-6.2.0-web/all.js"></script>
+    @*電影icon樣式*@
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @foreach (var item in Model)
+    {
+        <div class="card bg-dark text-white">
+            <img src="http://192.168.36.4:44383/images/MovieImage/@item.圖片image" class="card-img" alt="...">
+            <div class="card-img-overlay">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+                <p class="card-text"></p>
+            </div>
+        </div>
+    }

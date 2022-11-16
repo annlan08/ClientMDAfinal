@@ -1,0 +1,236 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@using ClientMDA.ViewModels
+@model List<CFollowListViewModel>
+
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+
+}
+@{
+    ViewData["Title"] = "WishList";
+}
+@section Styles{
+    <link href="~/css/Member/tab.css" rel="stylesheet" />
+    <link href="~/css/Member/MemberMain.css" rel="stylesheet" />
+    <style>
+        .white {
+            color: white;
+            /*text-align: center*/
+        }
+
+        tbody td:hover {
+            color: #00b0f0;
+            /*background-color: rgba(0,0,0,.075);*/
+        }
+
+        .btn:hover {
+            color: #E7008C;
+        }
+    </style>
+}
+<div class="member_id">
+    <span class="member_hello">HELLO!</span>
+    @{
+        if (mem.暱稱nickName != null)
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">@mem.暱稱nickName</a></span>
+        }
+        else
+        {
+            <span class="member_id_name"><a style="color: #E4B71C" href="../Comment/會員評論/@mem.會員編號memberId">簡易會員</a></span>
+
+        }
+    }
+</div>
+<div class="row">
+    <div class="member_menu">
+        @{
+            if (mem.正式會員formal == true)
+            {
+                <a id="watchlist" href="../Member/WatchList" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/CommentList" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/wishlist" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+            else
+            {
+                <a id="watchlist" href="../Member/NotFormal" title="我的片單" class="member_link">我的片單</a>
+                <a id="commentList" href="../Member/NotFormal" title="我的評論" class="member_link">我的評論</a>
+                <a id="wishlist" href="../Member/NotFormal" title="我的追蹤" class="member_link">我的追蹤</a>
+            }
+        }
+        <a id="orderlist" href="../Member/orderlist" title="訂單查詢" class="member_link">訂單查詢</a>
+        @*<a id="memberbonuslist" href="../Member/memberbonuslist" title="我的紅利金" class="member_link">我的紅利金</a>*@
+        <a id="memberdiscount" href="../Member/memberdiscount" title="我的抵用券" class="member_link">我的抵用券</a>
+
+        <a id="memberpassword" href="../Member/PasswordEdit" title="密碼修改" class="member_link">密碼修改</a>
+        <a id="MemberEdit" href="../Member/MemberEdit" title="資料修改" class="member_link ">資料修改</a>
+        <a href="../Member/logout" class="member_link" title="登出">登出</a>
+    </div>
+    <div class="member_main">
+        <div class="member_area white">
+            <!--content-->
+            <div class="tab-contnet">
+                <div class="btn-group checkout-btn" role="group" id="tabs">
+                    <a href="#" class="btn active">追蹤會員</a>
+                    <a href="#" class="btn">追蹤評論</a>
+                </div>
+
+                <div id="tab-inner" class="">
+                    <!-- 追蹤會員 -->
+                    <div class="form-content" id=tab1>
+                        <div class="form-group">
+                            <table class="table white" id="table_result">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">序</th>
+                                        <th scope="col">會員暱稱</th>
+                                        <th scope="col">最新發表</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="white">
+
+                                    @{
+                                        int count = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            if (item.targetId == 1) //會員
+                                            {
+                                                count++;
+                                                <tr scope="row">
+                                                    <th scope="row" class="">@count</th>
+                                                    <td><a href='@Url.Content($"~/comment/會員評論/{item.connectId}")'>@item.followMemName</a></td>
+                                                    <td>
+                                                        @{
+                                                            foreach (CWriteCommentViewModel s in item.comments)
+                                                            {
+                                                                if (string.IsNullOrEmpty(s.comTitle))
+                                                                {
+                                                                    s.comTitle = "無標題";
+                                                                }
+                                                                <a href='@Url.Content($"~/comment/電影評論/{s.CommentId}")'>@s.comTitle</a><br />
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }                               
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!-- 追蹤評論 -->
+                    <div class="form-content">
+                        <div class="form-group">
+                            <table class="table white" id="table_result">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">序</th>
+                                        <th scope="col">評論標題</th>
+                                        <th scope="col">最新回覆</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="white">
+
+                                    @{
+                                        int count2 = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            if (item.targetId == 2) //評論
+                                            {
+                                                count2++;
+                                                if (string.IsNullOrEmpty(item.followComTitle))
+                                                {
+                                                    item.followComTitle = "無標題";
+                                                }
+                                                <tr scope="row">
+
+                                                    <th scope="row" class="">@count2</th>
+                                                    <td><a href='@Url.Content($"~/comment/電影評論/{item.connectId}")'>@item.followComTitle</a></td>
+                                                    <td>
+                                                        @{
+                                                            foreach (string s in item.replies)
+                                                            {
+                                                                <a>@s</a><br />
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        }
+
+                                    }
+
+                                   
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!--end content-->
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        let tabLink = document.getElementById("tabs").querySelectorAll("a");
+
+        let tabContents = document.getElementById("tab-inner").querySelectorAll('.form-content');
+
+        window.onload = function () {
+
+            // 啟動第一個panel
+            panelDisplay(tabLink[0]);
+            //點擊  tab a連結
+            for (let i = 0; i < tabLink.length; i++) {
+                tabLink[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    panelDisplay(this);
+                    // return false;
+                });
+
+            };
+
+            function panelDisplay(activePanel) {
+                // Do something...
+                for (let i = 0; i < tabLink.length; i++) {
+
+                    //設定條件tabLink ==activePanel
+                    //將tablink代入for循環中並利用 if ...else 進行條件 classList.add增加class="active" ，就是每執行一次function的時候就進行全部tablinks增加class
+
+                    if (tabLink[i] == activePanel) {
+                        tabLink[i].classList.add("active");
+                        tabContents[i].style.display = "block";
+
+                    } else {
+                        tabLink[i].classList.remove("active");
+                        tabContents[i].style.display = "none";
+                    }
+                }
+            }
+
+        };
+    </script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+}

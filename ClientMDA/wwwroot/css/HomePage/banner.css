@@ -1,0 +1,178 @@
+﻿html,
+body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    z-index:0;
+}
+
+.swiper {
+    position: relative;
+    margin-bottom: 10%;
+    width: 100%;
+    height: 100%;
+    z-index:1;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+
+
+
+    .list li {
+        margin-top: 20%;        
+    }
+
+    .listb li {
+        text-align: left;
+        font-size: 1.5rem;
+    }
+
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+   
+}
+
+
+
+
+.img-wrapper > img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.ipc-icon ipc-icon--play-circle-outline-large-inline sc-8f5243a8-5 jdPzoP slide-caption-play-icon {
+    color: rgba(255,255,255);
+}
+
+content-banner :hover {
+    color: rgba(245,197,24);
+}
+
+
+.swiper-wrapper{
+    z-index:1;
+}
+
+.swiper > #left {
+    position: absolute;
+    inset: 50% -99% 0 0;
+}
+
+
+#loginlist{   
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#addmylist {
+    font-size: 2.5rem;
+}
+
+/*bookmark*/
+#BOokmark, #BOokmarkboard, #BOokmarkRE {
+    fill: rgb(35, 35,37,.5);
+    z-index: 5;
+}
+
+#bookmark, #bookmarkboard, #bookmarkRE {
+    /*background-color: red;*/
+    height: 10%;
+    /* width:90%;*/
+}
+/*#BOOOkmark, #BOOOkmarkboard*/
+.ipc-watchlist-ribbon__bg-ribbon, .ipc-watchlist-ribbon__bg-ribbon1 {
+    fill: rgb(35, 35,37,.6);
+    border: solid;
+    border-color: rgb(128 128 128);
+    z-index: 5;
+}
+    .ipc-watchlist-ribbon__bg-ribbon.active, .ipc-watchlist-ribbon__bg-ribbon1.active {
+        fill: rgba(245,197,24)
+    }
+
+#BOOokmark, #BOOokmarkboard, #BOOokmarkRE {
+    fill: rgb(35, 35,37,.6);
+    stroke: rgb(71, 70,72);
+    z-index: 5;
+}
+ 
+    .hangposter > #bookmark {
+        position: absolute;
+        inset: 0 0 0 -82.5%;
+    }
+
+#bookplus {
+    background-color: transparent;
+    height: 6%;
+    width: 5%;
+    color: white;
+    cursor: pointer;
+}
+#bookmarkpluss {
+    font-size: 1.35rem;
+}
+
+#bookmark > #bookplus {
+    position: absolute;
+    inset: 1% 0 0 47.5%;
+}
+
+
+
+#imgposter > #bookmarkboard {
+    position: absolute;
+    inset: 0 0 0 -80.5%;
+}
+
+#bookmarkboard > #bookplusboard {
+    position: absolute;
+    inset: 1% 0 0 47%;
+}
+
+#bookplusboard {
+    background-color: transparent;
+    height: 7%;
+    width: 6%;
+    color: white;
+    cursor: pointer;
+    
+}
+#bookplusboardinner, #bookplusREy, #bookplusboardinner1 {
+    font-size: 2.15rem;
+}

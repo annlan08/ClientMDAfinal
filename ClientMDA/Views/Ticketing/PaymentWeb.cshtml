@@ -1,0 +1,268 @@
+﻿@using ClientMDA.ViewModels
+@model CPaymentAndMovieInfoViewModel
+@{
+    double 手續費 = 20 * Model.count人數;
+    string title = $"{Model.MovieName電影名稱}({Model.MovieVersion電影版本})";
+    string[] arr = Model.seatInfo座位資訊.Split('#');
+    string Seatstring = "";
+    foreach (string item in arr)
+    {
+        string[] arr_seat = item.Split(':');
+        Seatstring += $"{arr_seat[0]}排{arr_seat[1]}列 | ";
+    }
+    decimal totalPrice = 0;
+    foreach (var item in Model.Alltciket)
+    {
+        totalPrice += item.TicketPrice * item.TicketCount;
+    }
+
+    string[] tcikstArr = Model.ticketInfo訂票資訊.Split('#');
+    string movieInfotext = Model.MovieInfo電影介紹;
+    if (string.IsNullOrEmpty(movieInfotext))
+    {
+        movieInfotext = "無電影資訊";
+    }
+    if (movieInfotext.Length >= 200)
+    {
+        movieInfotext = movieInfotext.Remove(200);
+    }
+
+    string _picurl = "http://192.168.36.4:44383/images/MovieImage/" + Model.Movieimage電影照片;
+}
+@section Styles{
+    <link rel="stylesheet" href="~/cyborg/css/fontawesome.css">
+    <link rel="stylesheet" href="~/cyborg/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <style>
+        .main-profile ul .seat {
+            border-bottom: none;
+        }
+
+        .item {
+            height: 425px;
+        }
+
+            .item:hover {
+                background-color: #003060;
+            }
+
+            .item img {
+                height: 300px;
+            }
+
+
+        .pay {
+            text-align: center;
+        }
+
+        body {
+            background-color: #070720;
+        }
+
+        .Gmap {
+            display: block;
+            height: 50vh;
+            width: 100%;
+        }
+    </style>
+}
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div class="pt-4">
+    <div class="main-profile pt-4">
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="@_picurl" alt="無圖片" style="border-radius: 23px;" />
+            </div>
+            <div class="col-lg-4 align-self-center">
+                <div class="main-info header-text">
+                    <h4>@title</h4>
+                    <p>@movieInfotext</p>
+                </div>
+            </div>
+            <div class="col-lg-4 align-self-center">
+                <ul>
+                    <li>影城名稱<span>@Model.theaterName電影院名稱</span></li>
+                    <li>場次日期<span>@Model.Data日期</span></li>
+                    <li>場次時間<span>@Model.Time時間</span></li>
+                    <li>張數<span>@Model.count人數</span></li>
+                    <li class="seat">座位<span>@Seatstring</span></li>
+                    <li></li>
+                    @{
+                        foreach (var item in Model.Alltciket)
+                        {
+                            string PriceInfo = $"{item.TicketPrice.ToString("0.0#")}*{item.TicketCount}";
+                            <li>@item.TicketName<span>@PriceInfo</span></li>
+                        }
+                    }
+                    <li><span>商品價格 : @totalPrice.ToString("0.0#")  (另含手續費 : @手續費.ToString("0.0") )</span></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="clips">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heading-section">
+                                <h4>加購商品</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="item">
+                                <div class="thumb">
+                                    <img src="~/images/Ticketing/f1.jpg" alt="" style="border-radius: 23px;">
+                                </div>
+                                <div class="down-content">
+                                    <h4>超值套餐</h4>
+                                    <span><i class="fa fa-dollar"></i> 120</span>
+                                </div>
+                                <div class="down-content pb-3">
+                                    <button name="prdAdd" class="btn btn-danger mr-2">+</button><span data="0" name="prdcount">0</span><button name="prdSub" class="btn btn-secondary">-</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="item">
+                                <div class="thumb">
+                                    <img src="~/images/Ticketing/f2.jpg" alt="" style="border-radius: 23px;">
+                                </div>
+                                <div class="down-content">
+                                    <h4>豪華套餐</h4>
+                                    <span><i class="fa fa-dollar"></i> 200</span>
+                                </div>
+                                <div class="down-content pb-3">
+                                    <button name="prdAdd" class="btn btn-danger mr-2">+</button><span data="1" name="prdcount">0</span><button name="prdSub" class="btn btn-secondary">-</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="item">
+                                <div class="thumb">
+                                    <img src="~/images/Ticketing/f3.jpg" alt="" style="border-radius: 23px;">
+                                </div>
+                                <div class="down-content">
+                                    <h4>爆米花</h4>
+                                    <span><i class="fa fa-dollar"></i> 80</span>
+                                </div>
+                                <div class="down-content pb-3">
+                                    <button name="prdAdd" class="btn btn-danger mr-2">+</button><span data="2" name="prdcount">0</span><button name="prdSub" class="btn btn-secondary">-</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="item">
+                                <div class="thumb">
+                                    <img src="~/images/Ticketing/f4.jpg" alt="" style="border-radius: 23px;">
+                                </div>
+                                <div class="down-content">
+                                    <h4>造型飲料杯</h4>
+                                    <span><i class="fa fa-dollar"></i> 100</span>
+                                </div>
+                                <div class="down-content pb-3">
+                                    <button name="prdAdd" class="btn btn-danger mr-2">+</button><span data="3" name="prdcount">0</span><button name="prdSub" class="btn btn-secondary">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="clips">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heading-section">
+                                <h4>地點資訊</h4>
+                            </div>
+                            <div id="map" class="Gmap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center pt-5">
+            <div class="pay">
+                <div class="col-lg-12">
+                    <div class="main-button">
+                        <form method="post" id="form" action="~/Ticketing/PaymentWeb2">
+                            <input type="hidden" name="TicketInfo" id="TicketInfo" value="@Model.ticketInfo訂票資訊" />
+                            <input type="hidden" name="SeatInfo" id="SeatInfo" value="@Model.seatInfo座位資訊" />
+                            <input type="hidden" name="ScreenID" id="ScreenID" value="@Model.screenID場次ID" />
+                            <input type="hidden" name="ProductInfo" id="ProductInfo" value="0#0#0#0#" />
+                            <button id="submitbtn" class="btn btn-primary">前往付款</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<input type="hidden" value="@ViewBag.addressInfo " id="addressInfo" />
+@section Scripts{
+    <script>
+        (function ($) {
+            $(window).on('load', function () {
+                $(".loader").fadeOut();
+                $("#preloder").delay(20).fadeOut("slow");
+
+
+            });
+        })(jQuery);
+
+        $('button[name="prdAdd"]').click(function (e) {
+            let value = parseInt($(e.target).parent().find('span').text());
+            $(e.target).parent().find('span').text(value + 1);
+        })
+        $('button[name="prdSub"]').click(function (e) {
+            console.log($(e.target).parent().find('span').text());
+            let value = parseInt($(e.target).parent().find('span').text());
+            if (value <= 0) {
+                $(e.target).parent().find('span').text(0);
+            } else {
+                $(e.target).parent().find('span').text(value - 1);
+            }
+        })
+        $('#submitbtn').click(function () {
+            let str = "";
+            let value = document.getElementById('ProductInfo');
+            let prodect = document.getElementsByName('prdcount');
+            for (let item of prodect) {
+                str += `${item.textContent}#`;
+            }
+            value.setAttribute('value', str);
+            $('#form').submit();
+        })
+        var map;
+        function initMap() {
+            let addressInfo = $('#addressInfo').val();
+            let a = JSON.parse(addressInfo);
+            mylat = a['results'][0]['geometry']['location']['lat'];
+            mylng = a['results'][0]['geometry']['location']['lng'];
+
+
+            const myLatLng = { lat: mylat, lng: mylng };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 18
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "電影院地址",
+            });
+        }
+    </script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiIO_bYPUlozPgpWf3KXtdgZI_xmHLhDg&callback=initMap" async defer></script>
+}
+

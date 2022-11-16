@@ -1,0 +1,233 @@
+﻿@model List<ClientMDA.ViewModels.CCommentViewModel>
+<!-- #region 會員session -->
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json;
+@inject IHttpContextAccessor Accessor
+@{
+    會員member mem = null;
+    if (Accessor.HttpContext.Session.Keys.Contains(ClientMDA.Models.CDictionary.SK_LOGINED_USER))
+    {
+        var a = Accessor.HttpContext.Session.GetString(ClientMDA.Models.CDictionary.SK_LOGINED_USER);
+        mem = JsonSerializer.Deserialize<會員member>(a);
+    }
+}
+<!-- #endregion 會員session -->
+
+@section Styles{
+    <style>
+        .owl-stage-outer { /*輪播框*/
+            /*margin-top: 25px;*/
+            margin-bottom: 25px;
+        }
+
+        .mem_info {
+            float: left;
+            line-height: 30px
+        }
+
+        /*        .mem_img {
+                    height: 30px;
+                    width: 30px;
+                    float: left;
+                }
+        */
+        .card-columns {
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
+            column-count: 2;
+            -webkit-column-gap: 1.25rem;
+            -moz-column-gap: 1.25rem;
+            column-gap: 1.25rem;
+            orphans: 1;
+            widows: 1;
+            /*border: dotted 1px red;*/
+        }
+
+        .card {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: rgba(255, 255, 255, 0.05);
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+            border-radius: 15px; /*圓角*/
+            overflow: hidden; /*海報圖裁切圓角*/
+        }
+
+        .mb-3,
+        .my-3 {
+            margin-bottom: 2rem !important;
+        }
+
+        .text-muted {
+            float: right;
+        }
+
+        .hero {
+            padding-top: 0;
+        }
+
+        .hero__items {
+            /*height:450px;*/
+        }
+
+        .memImg {
+            clip-path: circle(45% at 50% 50%);
+            height: 35px;
+            width: 35px;
+            margin-right: 5px;
+        }
+
+        .card-text {
+            overflow: hidden !important; /*溢位*/
+            text-overflow: ellipsis !important; /*文字溢位ellipsis... */
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /*限制元素顯示文字行數*/
+            -webkit-box-orient: vertical; /*垂直排列*/
+            word-break: break-all;
+        }
+
+        .card-title {
+            overflow: hidden !important; /*溢位*/
+            text-overflow: ellipsis !important; /*文字溢位ellipsis... */
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /*限制元素顯示文字行數*/
+            -webkit-box-orient: vertical; /*垂直排列*/
+            word-break: break-all;
+        }
+
+        .mComment-text {
+            overflow: hidden !important; /*溢位*/
+            text-overflow: ellipsis !important; /*文字溢位ellipsis... */
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /*限制元素顯示文字行數*/
+            -webkit-box-orient: vertical; /*垂直排列*/
+            word-break: break-all;
+        }
+
+        .set-comImg-bg { /*最新評論背景圖片設定*/
+            height: 220px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top center;
+            overflow: hidden;
+        }
+
+            .set-comImg-bg div img { /*海報大小*/
+                height: 220px;
+                width: 230px;
+            }
+
+        .col-md-8 { /*海報與評論間距*/
+            padding-left: 0;
+        }
+    </style>
+    <link href="~/css/Comment/評論首頁.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/Comment/style.css" rel="stylesheet" />
+}
+
+
+<body class="text-white">
+    <hr />
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h5>熱門評論</h5>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="btn__all">
+                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                <!--/Comment/熱門評論list-->
+            </div>
+        </div>
+    </div>
+
+    <!--#region 評論輪播 Start-->
+    <div class="container">
+        <div class="hero__slider owl-carousel">
+
+            @await Component.InvokeAsync("評論輪播", new { datas = Model })
+
+        </div>
+    </div>
+    <!--#endregion 評論輪播 End-->
+
+    <hr />
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h5>最新評論</h5>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="btn__all">
+                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                <!--/Comment/最新評論list-->
+            </div>
+        </div>
+    </div>
+
+    <!-- #region 最新評論 -->
+    <div class="card-columns">
+
+        @await Component.InvokeAsync("最新評論", new { datas = Model })
+
+    </div>
+    <!-- #endregion 最新評論 -->
+
+    <hr />
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="section-title">
+                <h5>關注評論</h5>
+            </div>
+        </div>
+        @if (mem == null) { } //非會員
+        else //會員
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="btn__all">
+                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                    <!--/Comment/關注評論list-->
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (mem == null) //非會員
+    {
+        <h4 style="text-align:center">@Html.ActionLink("快來登入看看你追蹤的最新評論!", "checkLogin", new { page = "評論首頁" })</h4>
+
+        <br />
+        <br />
+    }
+    else //會員
+    {
+        <div class="card-columns">
+
+            @await Component.InvokeAsync("關注評論", new { datas = Model @*id = mem.會員編號memberId*@ })
+
+        </div>
+        <!-- #region 關注評論 -->
+    }
+
+    <!-- #endregion 關注評論 -->
+
+</body>
+
+<!-- Js Plugins -->
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+@*<script src="~/js/player.js"></script>*@
+<script src="~/js/jquery.nice-select.min.js"></script>
+<script src="~/js/mixitup.min.js"></script>
+<script src="~/js/jquery.slicknav.js"></script>
+<script src="~/js/owl.carousel.min.js"></script> @*評論輪播*@
+<script src="~/js/main.js"></script>

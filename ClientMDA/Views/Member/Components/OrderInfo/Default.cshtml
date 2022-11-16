@@ -1,0 +1,77 @@
+﻿@using ClientMDA.ViewModels
+@model COrderInfoViewModel
+@{
+    string[] seatArr = Model.SelectSeatInfo.Split('#');
+}
+
+<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+    <div class="w3-center">
+        <br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+        <img src="@Model.MoviePicture  " alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+    </div>
+
+    <form class="w3-container" action="">
+        <div class="w3-section justify-content-center">
+            <div class="border-bottom-0">片名:@Model.MovieName (@Model.MovieVersion)</div>
+            <div class="border-bottom-0">放映日期:@Model.StartTime</div>
+            <div class="border-bottom-0">放映時間:@Model.StartDate</div>
+            <hr />
+            <div class="border-bottom-0">電影院:@Model.TheaterName (地址:@Model.TheaterAddress)</div>
+            <hr />
+            <div class="border-bottom-0">訂票詳情</div>
+            @{
+                foreach (string item in Model.TicketInfo)
+                {
+                    <div class="border-bottom-0">@item</div>
+                }
+                foreach (string item in Model.ProductInfo)
+                {
+                    <div class="border-bottom-0">@item</div>
+                }
+            }
+            <hr />
+            <div class="border-bottom-0 pb-3">座位資訊</div>
+            <div class="row justify-content-center pb-3">
+                <div class="seatMap">
+                    @{
+                        @:<div>
+                            @:<div class="seatrow">
+                                foreach (string seat in seatArr)
+                                {
+                                    if (seat.Contains("NA"))
+                                    {
+                                        @:<div class="dot none"></div>
+                                    }
+                                    else if (seat.Contains("||"))
+                                    {
+                                    @:</div></div><div>
+                                        @:<div class="seatrow">
+                                        }
+                                        else if (seat.Contains("selected"))
+                                        {
+                                            @:<div class="dot selected"></div>
+                                        }
+                                        else if (seat != "")
+                                        {
+                                            @:<div class="dot green"></div>
+                                        }
+                                    }
+                                @:</div></div>
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="border-bottom-0">已付金額:NT$@Model.fullprice</div>
+        </div>
+    </form>
+
+    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <form method="get" action="~/Ticketing/refund">
+            <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">關閉</button>
+            <button type="button" class="w3-button w3-red" value="@Model.OrderId" name="refundbtn">取消訂票</button>
+            <input type="hidden" name="orderID" value="@Model.OrderId" />
+        </form>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@using ClientMDA.ViewModels
+@model List<CTheater>
+@{
+    ViewData["Title"] = "Default";
+}
+@{
+
+    for (var i = 0; i < 12; i++)
+    {
+
+        <a href="@Url.Action("快定頁面測試", "Theater", new { id = Model[i].電影編號movieId })">
+            <div class="post-box">
+
+
+                @{ string urlpic = "";
+                    if (Model[i].MPimg.Count > 0)
+                        urlpic = "http://192.168.36.4:44383/images/MovieImage/" + Model[i].MPimg[0];
+                    //urlpic = Model[i].MPimg[0];
+
+
+                    else
+                    {
+                        urlpic = "../../images/Theater/common/poster.png";
+
+
+                    }
+
+
+                }
+
+                <div class="post" style="background-image: url('@urlpic');"></div>
+
+                <div class="coming">
+                    上映日期<span>@Model[i].上映日期releaseDate.Value.ToString("D")</span>
+                </div>
+                <div class="title" title="@Model[i].中文標題titleCht">
+                    <input class="mov" type="hidden" value="@Model[i].電影編號movieId" />
+
+                    @Model[i].中文標題titleCht
+                </div>
+                <div class="en" title="@Model[i].英文標題titleEng">
+                    @Model[i].英文標題titleEng
+                </div>
+                <div class="grade">
+                    @Model[i].分級級數ratingLevel
+                </div>
+            </div>
+
+        </a>
+    }
+
+
+}
+
+
+
+<script>
+  
+</script>
